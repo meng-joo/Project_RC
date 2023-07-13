@@ -9,15 +9,17 @@ public class BattleManager : MonoBehaviour
     private Dictionary<string, AbCard> enemyCard;
 
     public UnityEvent turnEndEffect;
-
-    private int activeSlotCount = 3;
-
+    
+    
+    [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private int activeSlotCount = 3;
 
     private void PickUpCard()
     {
-        int a = Random.Range(0, InventoryManager.instance.deckCards.Count + 1);
+        var a = Random.Range(0, InventoryManager.instance.deckCards.Count);
 
-        
+        var _card = Instantiate(cardPrefab);
+        _card.GetComponent<AbCard>().SetCardInfo(InventoryManager.instance.deckCards[a]);
     }
     
     private void TurnEnd()

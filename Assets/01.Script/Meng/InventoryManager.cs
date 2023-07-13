@@ -7,8 +7,8 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager instance;
 
-    public List<AbCard> inventoryCards;
-    public List<AbCard> deckCards;
+    public List<CardSO> inventoryCards;
+    public List<CardSO> deckCards;
 
     private void Awake()
     {
