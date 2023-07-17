@@ -11,13 +11,16 @@ public abstract class AbCard : MonoBehaviour , IPointerEnterHandler, IPointerExi
 {
     public CardInfo CardInfo { get; set; }
 
+    public CardSO cardSO;
+    
     private Image cardIconImage;
     private Image cardBackImage;
     private Image cardBorderImage;
+    private TextMeshProUGUI cardExp;
 
     private void Start()
     {
-        SetCashing();
+        SetCardInfo(cardSO);
     }
 
     #region Card Setting
@@ -26,6 +29,7 @@ public abstract class AbCard : MonoBehaviour , IPointerEnterHandler, IPointerExi
         cardIconImage ??= transform.Find("Image").GetComponent<Image>();
         cardBackImage ??= GetComponent<Image>();
         cardBorderImage ??= transform.Find("Border").GetComponent<Image>();
+        cardExp ??= transform.Find("Exp").GetComponent<TextMeshProUGUI>();
     }
     
     public void SetCardInfo(CardSO _cardSO)
@@ -37,6 +41,8 @@ public abstract class AbCard : MonoBehaviour , IPointerEnterHandler, IPointerExi
         cardIconImage.sprite = _cardSO.cardIconImage;
         cardBackImage.color = SetColor(CardInfo.cardType);
         cardBorderImage.color = SetColor(CardInfo.cardTier);
+
+        cardExp.text = _cardSO.cardExp;
     }
 
     public void SetNextCard()

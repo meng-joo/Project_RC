@@ -8,4 +8,10 @@ public class CardSO : ScriptableObject
     public CardInfo cardInfo;
     
     public Sprite cardIconImage;
+
+    public GameObject effect;
+    public Vector2 effectPosition;
+
+    [TextArea]
+    public string cardExp;
 }

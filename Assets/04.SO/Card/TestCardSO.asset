@@ -17,3 +17,6 @@ MonoBehaviour:
     cardTier: 3
     cardType: 3
   cardIconImage: {fileID: 21300000, guid: 1015512b5bcd9ff4ab9f21a2235164e4, type: 3}
+  effect: {fileID: 0}
+  effectPosition: {x: 0, y: 0}
+  cardExp: "\uD14C\uC2A4\uD2B8\uC6A9 \uCE74\uB4DC\uC785\uB2C8\uB2E4."
