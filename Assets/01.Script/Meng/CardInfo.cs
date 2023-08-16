@@ -24,6 +24,8 @@ public class CardInfo
 {
     public string name;
 
+    public PoolType cardPoolType;
+    
     public CardTier cardTier;
     public CardType cardType;
 }

@@ -9,11 +9,11 @@ public class LocalPoolManager : MonoBehaviour
     Queue<PoolAbleObject> poolQueue = new Queue<PoolAbleObject>();
     PoolType type;
     /// <summary>
-    /// ÃÊ±â ÁöÁ¤ °¹¼ö¸¸Å­ ¿ÀºêÁ§Æ® ÀÎ½ºÅÏ½ºÈ­
+    /// ì´ˆê¸° ì§€ì • ê°¯ìˆ˜ë§Œí¼ ì˜¤ë¸Œì íŠ¸ ì¸ìŠ¤í„´ìŠ¤í™”
     /// </summary>
-    /// <param name="°¹¼ö"></param>
-    /// <param name="¿ÀºêÁ§Æ®"></param>
-    /// <param name="Ç® Å¸ÀÔ"></param>
+    /// <param name="ê°¯ìˆ˜"></param>
+    /// <param name="ì˜¤ë¸Œì íŠ¸"></param>
+    /// <param name="í’€ íƒ€ì…"></param>
     public void Init(int count, PoolAbleObject targetObj, PoolType poolType)
     {
         type = poolType;
@@ -28,7 +28,7 @@ public class LocalPoolManager : MonoBehaviour
         }
     }
     /// <summary>
-    /// ²¨³»¿À±â
+    /// êº¼ë‚´ì˜¤ê¸°
     /// </summary>
     /// <returns></returns>
     public PoolAbleObject Pop()
@@ -49,7 +49,7 @@ public class LocalPoolManager : MonoBehaviour
         return obj;
     }
     /// <summary>
-    /// ³Ö±â
+    /// ë„£ê¸°
     /// </summary>
     /// <param name="obj"></param>
     public void Push(PoolAbleObject obj)

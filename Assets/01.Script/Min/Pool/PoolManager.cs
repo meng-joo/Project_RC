@@ -6,8 +6,8 @@ using System.Resources;
 
 public static class PoolManager
 {
-    private static PoolDataSO poolData = null;//Ç®¸µ µ¥ÀÌÅÍ
-    private static Dictionary<PoolType, LocalPoolManager> localPoolDic = new();//PoolTypeÀ¸·Î °Ë»öÇÏ±â À§ÇÑ µñ¼Å³Ê¸®
+    private static PoolDataSO poolData = null;//Ç®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private static Dictionary<PoolType, LocalPoolManager> localPoolDic = new();//PoolTypeï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³Ê¸ï¿½
     private static GameObject root = null;
 
     private static void Init()
@@ -18,7 +18,7 @@ public static class PoolManager
         }
         localPoolDic.Clear();
 
-        poolData = ResourceManager.Load<PoolDataSO>("Core/Data/PoolData");
+        poolData = ResourceManager.Load<PoolDataSO>("Pool/PoolDataSO");
 
         GameObject newRoot = new();
         newRoot.name = "@POOL_ROOT";
@@ -37,7 +37,7 @@ public static class PoolManager
     }
 
     /// <summary>
-    /// Type¿¡ ¸Â´Â ¿ÀºêÁ§Æ® ²¨³»¿À±â
+    /// Typeï¿½ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     /// <param name="type"></param>
     /// <returns></returns>
@@ -47,7 +47,7 @@ public static class PoolManager
         return localPoolDic[type].Pop().gameObject;
     }
     /// <summary>
-    /// Type¿¡ ¸Â°Ô ¿ÀºêÁ§Æ® ³Ö±â
+    /// Typeï¿½ï¿½ ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ö±ï¿½
     /// </summary>
     /// <param name="type"></param>
     /// <param name="obj"></param>

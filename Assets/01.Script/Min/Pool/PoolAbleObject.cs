@@ -7,11 +7,11 @@ public abstract class PoolAbleObject : MonoBehaviour
     protected PoolType poolType;
     public PoolType PoolType { get { return poolType; } set { poolType = value; } }
     /// <summary>
-    /// ²¨³»¿Ã¶§ ÃÊ±âÈ£
+    /// êº¼ë‚´ì˜¬ë•Œ ì´ˆê¸°í˜¸
     /// </summary>
     public abstract void Init_Pop();
     /// <summary>
-    /// ³ÖÀ»¶§ ÃÊ±âÈ­
+    /// ë„£ì„ë•Œ ì´ˆê¸°í™”
     /// </summary>
     public abstract void Init_Push();
 }

@@ -1,4 +1,7 @@
-public enum PoolType/*Ç®¸µ Å¸ÀÔ(Ç®¸µÇÒ ¿¡µéÀÌ ¸¹¾ÆÁö¸é °è¼Ó Ãß°¡*/
+public enum PoolType/*í’€ë§ íƒ€ì…(í’€ë§í•  ì—ë“¤ì´ ë§ì•„ì§€ë©´ ê³„ì† ì¶”ê°€*/
 {
-  Card
+  Card,
+  TestCard,
+  AttackCard,
+  NONE
 }

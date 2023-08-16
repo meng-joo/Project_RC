@@ -7,7 +7,7 @@ public class PoolDataSO : ScriptableObject
     public PoolData[] poolDatas;
 
     [Serializable]
-    public class PoolData/*Ç®¸µ µ¥ÀÌÅÍ*/
+    public class PoolData/*í’€ë§ ë°ì´í„°*/
     {
         [SerializeField] private PoolType poolType;
         [SerializeField] private int initCount;
