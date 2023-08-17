@@ -10,10 +10,13 @@ public class TestCard : AbCard
         Sequence _seq = DOTween.Sequence();
 
         _seq.Append(transform.DOLocalMoveY(transform.position.y + 90, 1f));
-        _seq.Insert(0f,screenImage.DOFade(1, 0.8f));
-        _seq.AppendInterval(0.1f);
+        _seq.Insert(0f,screenImage.DOFade(1, 1f));
+
+        _seq.Append(transform.DOScale(0, 0.4f).SetEase(Ease.InBack));
+        
         _seq.AppendCallback(() =>
         {
+            FindObjectOfType<Player>().Attack(0);
             DiscardCard(gameObject);
         });
 

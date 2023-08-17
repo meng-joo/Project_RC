@@ -53,6 +53,8 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
 
         SetCashing();
 
+        transform.localScale = Vector3.one;
+
         cardName.text = CardInfo.name;
         cardIconImage.sprite = _cardSO.cardIconImage;
         cardBackImage.color = SetColor(CardInfo.cardType);

@@ -76,15 +76,15 @@ public class BattleManager : MonoBehaviour
 
     public void ClickTurnEndBTN()
     {
-        StartCoroutine(UsePlayerCard());
+        StartCoroutine(UsePlayerCard("Player"));
     }
 
-    public void TurnEnd()
+    public void TurnEnd(string _name)
     {
         
     }
 
-    IEnumerator UsePlayerCard()
+    IEnumerator UsePlayerCard(string _name)
     {
         int _activeCount = CurrentActiveSlotCount >= currentSlotCount ? currentSlotCount : CurrentActiveSlotCount;
 
@@ -99,6 +99,8 @@ public class BattleManager : MonoBehaviour
         }
         
         yield return new WaitForSeconds(1f);
+
+        TurnEnd(_name);
     }
 
     private void UpdatePickUpCountUI()
