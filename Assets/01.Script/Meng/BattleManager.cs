@@ -20,6 +20,8 @@ public class BattleManager : MonoBehaviour
     public TextMeshProUGUI cardPickUpCountText;
     public Image cardPickUpCountGageBar;
 
+    public TextMeshProUGUI activeSlotCountText;
+
     public UnityEvent turnEndEffect;
     
     [SerializeField] private int activeSlotCount = 3;
@@ -27,6 +29,20 @@ public class BattleManager : MonoBehaviour
     [SerializeField] public int currentSlotCount = 0;
     [SerializeField] private int cardPickUpCount = 3;
     private int currentCardPickUpCount = 3;
+    private int currentActiveSlotCount;
+    public int CurrentActiveSlotCount
+    {
+        get
+        {
+            activeSlotCountText.text = $"{currentActiveSlotCount}";
+            return currentActiveSlotCount;
+        }
+        set
+        {
+            currentActiveSlotCount = value;
+            activeSlotCountText.text = $"{currentActiveSlotCount}";
+        }
+    }
 
     public Arrange arrange;
 
@@ -34,6 +50,7 @@ public class BattleManager : MonoBehaviour
     {
         arrange = FindObjectOfType<Arrange>();
         currentCardPickUpCount = cardPickUpCount;
+        CurrentActiveSlotCount = activeSlotCount;
     }
 
     public void ClickPickUpBTN()
@@ -69,14 +86,16 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator UsePlayerCard()
     {
-        int _activeCount = activeSlotCount >= currentSlotCount ? currentSlotCount : activeSlotCount;
+        int _activeCount = CurrentActiveSlotCount >= currentSlotCount ? currentSlotCount : CurrentActiveSlotCount;
+
+        yield return new WaitForSecondsRealtime(0.3f);
         
         for (int i = 0; i < _activeCount; i++)
         {
             if (currentSlotCount < 0) yield return null;
             float _delay = arrange.Children[0].GetComponent<AbCard>().CardSkill();
 
-            yield return new WaitForSeconds(_delay);
+            yield return new WaitForSecondsRealtime(_delay);
         }
         
         yield return new WaitForSeconds(1f);

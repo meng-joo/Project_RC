@@ -17,6 +17,7 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
     private Image cardIconImage;
     private Image cardBackImage;
     private Image cardBorderImage;
+    public Image screenImage;
     private TextMeshProUGUI cardExp;
     private GameObject cardTierEffect;
 
@@ -43,6 +44,7 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
         cardBackImage ??= GetComponent<Image>();
         cardBorderImage ??= transform.Find("Border").GetComponent<Image>();
         cardExp ??= transform.Find("Exp").GetComponent<TextMeshProUGUI>();
+        screenImage ??= transform.Find("Screen").GetComponent<Image>();
     }
     
     public void SetCardInfo(CardSO _cardSO)
@@ -55,6 +57,7 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
         cardIconImage.sprite = _cardSO.cardIconImage;
         cardBackImage.color = SetColor(CardInfo.cardType);
         cardBorderImage.color = SetColor(CardInfo.cardTier);
+        screenImage.color = new Color(1, 1, 1, 0);
 
         if (cardTierEffect == null)
         {
@@ -138,7 +141,7 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
 
             BattleManager _battleManager = FindObjectOfType<BattleManager>();
             _battleManager.arrange.Children.Remove(VARIABLE.transform);
-            _battleManager.currentSlotCount--;
+            _battleManager.CurrentActiveSlotCount--;
         }
     }
 
