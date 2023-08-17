@@ -5,6 +5,9 @@ using UnityEngine;
 public class Arrange : MonoBehaviour
 {
     [SerializeField] List<Transform> children;
+
+    public List<Transform> Children => children;
+
     void Start()
     {
         children = new List<Transform>();

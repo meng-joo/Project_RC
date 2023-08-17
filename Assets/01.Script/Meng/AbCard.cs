@@ -18,6 +18,7 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
     private Image cardBackImage;
     private Image cardBorderImage;
     private TextMeshProUGUI cardExp;
+    private GameObject cardTierEffect;
 
     private Transform root;
     
@@ -50,11 +51,18 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
 
         SetCashing();
 
-
         cardName.text = CardInfo.name;
         cardIconImage.sprite = _cardSO.cardIconImage;
         cardBackImage.color = SetColor(CardInfo.cardType);
         cardBorderImage.color = SetColor(CardInfo.cardTier);
+
+        if (cardTierEffect == null)
+        {
+            cardTierEffect = SetTierEffect(CardInfo.cardTier);
+            cardTierEffect.transform.SetParent(transform);
+            cardTierEffect.transform.localPosition = Vector3.zero;
+            cardTierEffect.transform.localScale = new Vector3(95, 95, 95);
+        }
 
         cardExp.text = _cardSO.cardExp;
     }
@@ -77,6 +85,14 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
         CardTier.SR => Color.blue,
         CardTier.SSR => Color.green,
         CardTier.NONE => Color.white
+    };
+
+    private GameObject SetTierEffect(CardTier _cardTier) => _cardTier switch
+    {
+        CardTier.R => PoolManager.Pop(PoolType.REffect),
+        CardTier.SR => PoolManager.Pop(PoolType.SREffect),
+        CardTier.SSR => PoolManager.Pop(PoolType.SSREffect),
+        CardTier.NONE => PoolManager.Pop(PoolType.CEffect)
     };
     
     #endregion
@@ -111,8 +127,20 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
     #endregion
     
     #region Card Function
-    public abstract void CardSkill();
+    public abstract float CardSkill();
     public abstract void Passive();
-    
+
+    protected void DiscardCard(params GameObject[] _card)
+    {
+        foreach (var VARIABLE in _card)
+        {
+            PoolManager.Push(VARIABLE.GetComponent<AbCard>().CardInfo.cardPoolType, VARIABLE);
+
+            BattleManager _battleManager = FindObjectOfType<BattleManager>();
+            _battleManager.arrange.Children.Remove(VARIABLE.transform);
+            _battleManager.currentSlotCount--;
+        }
+    }
+
     #endregion
 }

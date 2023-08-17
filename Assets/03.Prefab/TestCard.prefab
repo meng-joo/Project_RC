@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &555127832656073274
+--- !u!1001 &2888105457030763543
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,22 +11,6 @@ PrefabInstance:
     - target: {fileID: 1540427219442505890, guid: b46ace293a06ff844bb874f00ad1eaa0, type: 3}
       propertyPath: m_Name
       value: TestCard
-      objectReference: {fileID: 0}
-    - target: {fileID: 2445932560517733429, guid: b46ace293a06ff844bb874f00ad1eaa0, type: 3}
-      propertyPath: m_text
-      value: "\uD14C\uC2A4\uD2B8 \uCE74\uB4DC"
-      objectReference: {fileID: 0}
-    - target: {fileID: 2445932560517733429, guid: b46ace293a06ff844bb874f00ad1eaa0, type: 3}
-      propertyPath: m_fontSize
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 2445932560517733429, guid: b46ace293a06ff844bb874f00ad1eaa0, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 4498769809881016354, guid: b46ace293a06ff844bb874f00ad1eaa0, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 104.1
       objectReference: {fileID: 0}
     - target: {fileID: 6150408990400935230, guid: b46ace293a06ff844bb874f00ad1eaa0, type: 3}
       propertyPath: m_Pivot.x
@@ -112,26 +96,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7024743345644925187, guid: b46ace293a06ff844bb874f00ad1eaa0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7024743345661892245, guid: b46ace293a06ff844bb874f00ad1eaa0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7024743345661892247, guid: b46ace293a06ff844bb874f00ad1eaa0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7024743346399822541, guid: b46ace293a06ff844bb874f00ad1eaa0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7024743346987184094, guid: b46ace293a06ff844bb874f00ad1eaa0, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1540427219442505890, guid: b46ace293a06ff844bb874f00ad1eaa0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -1545690230329430715}
+      addedObject: {fileID: 6623615279257522299}
   m_SourcePrefab: {fileID: 100100000, guid: b46ace293a06ff844bb874f00ad1eaa0, type: 3}
---- !u!1 &1356858610332945048 stripped
+--- !u!1 &4428215982759677109 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1540427219442505890, guid: b46ace293a06ff844bb874f00ad1eaa0, type: 3}
-  m_PrefabInstance: {fileID: 555127832656073274}
+  m_PrefabInstance: {fileID: 2888105457030763543}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-1545690230329430715
+--- !u!114 &6623615279257522299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1356858610332945048}
+  m_GameObject: {fileID: 4428215982759677109}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22c7726a65e07b34591932986b28d527, type: 3}

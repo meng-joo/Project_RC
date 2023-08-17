@@ -59,6 +59,7 @@ public class CanvasCentral : MonoBehaviour
     void BeginDrag(Transform _card)
     {
         SwapCardsInHierarchy(invisibleCard, _card);
+        ActiveInvisibleCard(true);
     }
     void Drag(Transform _card)
     {
@@ -82,5 +83,11 @@ public class CanvasCentral : MonoBehaviour
     void EndDrag(Transform _card)
     {
         SwapCardsInHierarchy(invisibleCard, _card);
+        ActiveInvisibleCard(false);
+    }
+
+    void ActiveInvisibleCard(bool _isOn)
+    {
+        invisibleCard.gameObject.SetActive(_isOn);
     }
 }

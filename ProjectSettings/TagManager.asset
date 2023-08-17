@@ -50,3 +50,6 @@ TagManager:
   - name: UI
     uniqueID: 1006364543
     locked: 0
+  - name: UIParticle
+    uniqueID: 355697633
+    locked: 0

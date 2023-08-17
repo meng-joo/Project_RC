@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000917a8f7f67ef1cc77fe7fb3b
+  m_ApplyToSortingLayers: 00000000917a8f7f67ef1cc77fe7fb3be1833315
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -3849,7 +3849,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1044342654}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1138805249}
+        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
+        m_MethodName: ClickTurnEndBTN
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1044342654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4240,7 +4252,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1138805249}
         m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
-        m_MethodName: PickUpCard
+        m_MethodName: ClickPickUpBTN
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4333,11 +4345,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deckUI: {fileID: 1076940953}
+  cardPickUpCountText: {fileID: 158883979}
+  cardPickUpCountGageBar: {fileID: 96744344}
   turnEndEffect:
     m_PersistentCalls:
       m_Calls: []
-  cardPrefab: {fileID: 0}
   activeSlotCount: 3
+  cardSlotCount: 9
+  currentSlotCount: 0
+  cardPickUpCount: 4
 --- !u!1 &1195073856
 GameObject:
   m_ObjectHideFlags: 0
@@ -6565,4 +6581,4 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0

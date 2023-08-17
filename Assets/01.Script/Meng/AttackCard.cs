@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class AttackCard : AbCard
 {
-    public override void CardSkill()
+    public override float CardSkill()
     {
+        return 0;
     }
 
     public override void Passive()

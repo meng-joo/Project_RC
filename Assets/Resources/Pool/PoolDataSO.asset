@@ -15,4 +15,16 @@ MonoBehaviour:
   poolDatas:
   - poolType: 1
     initCount: 10
-    poolAbleObject: {fileID: -1545690230329430715, guid: 30834d5516bce2747a761323b862838b, type: 3}
+    poolAbleObject: {fileID: 6623615279257522299, guid: 30834d5516bce2747a761323b862838b, type: 3}
+  - poolType: 3
+    initCount: 10
+    poolAbleObject: {fileID: 2870448583266778837, guid: 63acbaf65b246d9448857240235b96f8, type: 3}
+  - poolType: 4
+    initCount: 10
+    poolAbleObject: {fileID: 8476838296518304309, guid: b035360e29510c840801fb799ba268f5, type: 3}
+  - poolType: 5
+    initCount: 10
+    poolAbleObject: {fileID: -7150960214146492421, guid: 415f7b601acd220478fd32b5ac58529f, type: 3}
+  - poolType: 6
+    initCount: 10
+    poolAbleObject: {fileID: 3403092506014483323, guid: 7fd2e67efbf65e146a8771553ca0ad48, type: 3}

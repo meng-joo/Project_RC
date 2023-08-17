@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class TestCard : AbCard
 {
-    public override void CardSkill()
+    public override float CardSkill()
     {
+        DiscardCard(gameObject);
+        return 0;
     }
 
     public override void Passive()
     {
+        
     }
 }
