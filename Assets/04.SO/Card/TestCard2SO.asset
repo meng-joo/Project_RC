@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3effbf26fd4c47549a3dfddcc178d128, type: 3}
+  m_Name: TestCard2SO
+  m_EditorClassIdentifier: 
+  cardInfo:
+    name: "\uD14C\uC2A4\uD2B82\uCE74\uB4DC"
+    cardPoolType: 2
+    cardTier: 2
+    cardType: 3
+    cardExp: "\uD14C\uC2A4\uD2B8\uC6A9 \uCE74\uB4DC\uC785\uB2C8\uB2E4. \uC804\uAC1C\uC2DC
+      \uC18C\uBAA8\uB418\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4."
+  upgradeCardInfo:
+    name: "\uAC15\uD654\uB41C \uD14C\uC2A4\uD2B82\uCE74\uB4DC"
+    cardPoolType: 2
+    cardTier: 2
+    cardType: 3
+    cardExp: "\uAC15\uD654\uB41C \uD14C\uC2A4\uD2B8\uC6A9 \uCE74\uB4DC\uC785\uB2C8\uB2E4.
+      \uC0AC\uC2E4 \uB2EC\uB77C\uC9C4\uAC74 \uC5C6\uC2B5\uB2C8\uB2E4.  \uC804\uAC1C\uC2DC
+      \uC18C\uBAA8\uB418\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4."
+  transcendenceCardInfo:
+    name: "\uCD08\uC6D4\uB41C \uD14C\uC2A4\uD2B82\uCE74\uB4DC"
+    cardPoolType: 2
+    cardTier: 2
+    cardType: 3
+    cardExp: "\uCD08\uC6D4\uB41C \uD14C\uC2A4\uD2B8\uC6A9 \uCE74\uB4DC\uC785\uB2C8\uB2E4. 
+      \uC804\uAC1C\uC2DC \uC18C\uBAA8\uB418\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4."
+  cardIconImage: {fileID: 21300000, guid: 1015512b5bcd9ff4ab9f21a2235164e4, type: 3}
+  effect: {fileID: 0}
+  effectPosition: {x: 0, y: 0}

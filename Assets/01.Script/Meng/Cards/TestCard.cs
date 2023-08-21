@@ -17,6 +17,7 @@ public class TestCard : AbCard
         _seq.AppendCallback(() =>
         {
             FindObjectOfType<Player>().Attack(0);
+            battleManager.CurrentActiveSlotCount--;
             DiscardCard(gameObject);
         });
 
@@ -24,6 +25,11 @@ public class TestCard : AbCard
     }
 
     public override void Passive()
+    {
+        
+    }
+
+    public override void Upgrade()
     {
         
     }

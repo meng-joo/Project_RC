@@ -28,4 +28,7 @@ public class CardInfo
     
     public CardTier cardTier;
     public CardType cardType;
+    
+    [TextArea]
+    public string cardExp;
 }
