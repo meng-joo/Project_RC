@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 1Chapter
   m_EditorClassIdentifier: 
   mapCnt: 8
-  battleMapCnt: 5
-  eventMapCnt: 2
+  battleMapCnt: 4
+  eventMapCnt: 3
   shopMapCnt: 1

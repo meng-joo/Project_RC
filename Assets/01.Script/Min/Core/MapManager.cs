@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-
+    public Stack<Node> nodeStack;
     void Start()
     {
+
     }
 
     void Update()
