@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,28 +7,53 @@ using UnityEngine.UI;
 public class PlayerTracker : MonoSingleTon<PlayerTracker>
 {
     public int currentNodeIndex = 0;
+    public float enterNodeDelay = 1f;
 
-    public bool Locked { get; set; }
+    public bool Locked = false;   
+    private void Start()
+    {
+    }
 
-    public void SelectNode(Node node)
+    public void SelectNode(MapNode node)
     {
         if (Locked)
         {
-            PlayWarningThatNodeCannotBeAccessed();
             return;
         }
 
+        if (node.nodeStates == NodeStates.Locked || node.nodeStates == NodeStates.Visited)
+        {
+            Debug.Log("Selected node cannot be accessed");
+            return;
+        }
+
+        Locked = true;
         SendPlayerToNode(node);
 
         //     EnterNode();
     }
-    public void SendPlayerToNode(Node node)
+    public void SendPlayerToNode(MapNode node)
     {
+        Debug.Log("ÀÏ´ÜOK");
         currentNodeIndex++;
+
+        node.nodeStates = NodeStates.Visited;
+        Debug.Log(node.nodeStates);
+        node.SetState(node.nodeStates);
+
+        MapNode nextNode = MapViewUI.Instance.mapNodeList[currentNodeIndex];
+        nextNode.nodeStates = NodeStates.Attainable;
+        nextNode.SetState(nextNode.nodeStates);
+
+
+        node.ShowSwirlAnimation();
+        DOTween.Sequence().AppendInterval(enterNodeDelay).OnComplete(() => EnterNode(node)) ;
+        DOTween.Sequence().AppendInterval(enterNodeDelay).OnComplete(() => Locked = false);
+    
     }
-    public void EnterNode(Node node)
+    public void EnterNode(MapNode node)
     {
-        switch (node.mapSO.mapType)
+        switch (node.Node.mapSO.mapType)
         {
             case MapType.Battle:
                 Debug.Log("¸ÂÂ¯");
@@ -44,8 +70,5 @@ public class PlayerTracker : MonoSingleTon<PlayerTracker>
                 break;
         }
     }
-    private void PlayWarningThatNodeCannotBeAccessed()
-    {
-        Debug.Log("Selected node cannot be accessed");
-    }
+
 }

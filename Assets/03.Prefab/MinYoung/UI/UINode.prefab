@@ -129,7 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859748306ffb19b4e9e0362b7f86d64b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sr: {fileID: 0}
   nodeimage: {fileID: 3471094682253595257}
   visitedCircle: {fileID: 0}
   circleImage: {fileID: 3998712403426249670}
@@ -155,7 +154,7 @@ GameObject:
   - component: {fileID: 928965413454293632}
   - component: {fileID: 3471094682253595257}
   m_Layer: 0
-  m_Name: NodeGrapich
+  m_Name: Grapich
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
