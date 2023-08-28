@@ -5,18 +5,17 @@ using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.UI.Extensions;
 using Unity.VisualScripting;
+using UnityEngine.Profiling.Memory.Experimental;
 
-public class MapViewUI : MonoBehaviour
+public class MapViewUI : MonoSingleTon<MapViewUI>
 {
     public GameObject uiNode;
 
-    public List<MapNode> MapNodes = new List<MapNode>();
+    public List<MapNode> mapNodeList = new List<MapNode>();
+    public List<Vector2> nodePosList = new List<Vector2>();
 
-    public MapGenerator mapGenerator;
 
     public Transform parentTrm;
-    public Transform startTrm;
-
 
     [SerializeField] private float minHeight;
     [SerializeField] private float maxHeight;
@@ -24,17 +23,22 @@ public class MapViewUI : MonoBehaviour
 
     [SerializeField] private float spacing;
 
-    public UILineRenderer xss;
+    public UILineRenderer lineRenderer;
+
+    [Tooltip("Node Visited or Attainable color")]
+    public Color32 visitedColor = Color.white;
+    [Tooltip("Locked node color")]
+    public Color32 lockedColor = Color.gray;
 
     void Start()
     {
-        CreateNodes(mapGenerator.mapKinList);
+        CreateNodes(MapGenerator.Instance.mapKinList);
+        SetData();
     }
     private void Update()
     {
     }
 
-    public List<Vector2> s = new List<Vector2>();
     public void CreateNodes(IEnumerable<Node> nodes)
     {
         foreach (var node in nodes.Select((value, index) => (value, index)))
@@ -46,41 +50,35 @@ public class MapViewUI : MonoBehaviour
             mapNode.GetComponent<RectTransform>().localPosition = new Vector2(200 + spacing * node.index , randomY);
             Debug.Log(mapNode.GetComponent<RectTransform>().anchoredPosition);
 
-            s.Add(mapNode.GetComponent<RectTransform>().localPosition);
-
-            Debug.Log(xss);
-            xss.Points = s.ToArray();
-
-         //   uILineRenderer.Points.AddRange(v);
-            MapNodes.Add(mapNode);
-
-
-            //  mapNode.GetComponent<RectTransform>().anchoredPosition.Set() = new Vector2(3, 0);
-
-            //mapNode.GetComponent<RectTransform>().anchoredPosition =new Vector2()
-
-            //float mapNodePosX = mapNode.GetComponent<RectTransform>().localPosition.x;
-            //float mapNodePosY = mapNode.GetComponent<RectTransform>().localPosition.y;
-
-            //mapNodePosX = mapNodePosX + randomX;
-            //mapNodePosY = mapNodePosY + randomY;
-
-            //mapNode.GetComponent<RectTransform>().localPosition = new Vector3(mapNodePosX, mapNodePosY);
-
-            //위치 + 패딩
-            //mapNode.GetComponent<RectTransform>().localPosition.y + randomY;
-            //mapNode.GetComponent<RectTransform>().localPosition.x + randomX;
+            nodePosList.Add(mapNode.GetComponent<RectTransform>().localPosition);
+            lineRenderer.Points = nodePosList.ToArray();
+            mapNodeList.Add(mapNode);
         }
     }
 
     public MapNode CreateMapNode(Node node)
     {
-        var mapNodeObject = Instantiate(uiNode, startTrm);
+        var mapNodeObject = Instantiate(uiNode, transform);
         mapNodeObject.transform.SetParent(parentTrm);
         mapNodeObject.transform.localScale = Vector3.one;
         var mapNode = mapNodeObject.GetComponent<MapNode>();
-        //var blueprint = GetBlueprint(node.blueprintName);
-      //  mapNode.SetUp(node, blueprint);
+        mapNode.SetUp(node);
         return mapNode;
+    }
+
+    public void SetData()
+    {
+        List<Image> imageList = new();
+
+        foreach (var item in mapNodeList)
+        {
+            imageList.Add(item.transform.GetChild(0).GetComponent<Image>());
+        }
+
+        foreach (var item in mapNodeList.Select((value, index) => (value, index)))
+        {
+            imageList[item.index].sprite =  item.value.Node.mapSO.mapSprite;
+            imageList.Add(item.value.transform.GetChild(0).GetComponent<Image>()); //GeC GetComponent<Image>());
+        }
     }
 }

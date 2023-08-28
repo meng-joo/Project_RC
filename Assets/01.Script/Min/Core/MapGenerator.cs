@@ -5,7 +5,7 @@ using System.Linq;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
-public class MapGenerator : MonoBehaviour
+public class MapGenerator : MonoSingleTon<MapGenerator>
 {
     public List<Node> mapKinList = new List<Node>();
 
