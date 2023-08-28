@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,6 +12,8 @@ using Random = UnityEngine.Random;
 
 public class BattleManager : MonoBehaviour
 {
+    [SerializeField] private bool isPlayerTurn;
+    
     private Dictionary<string, AbCard> playerCard;
     private Dictionary<string, AbCard> enemyCard;
     private List<AbCard> activeSlot = new List<AbCard>();
@@ -45,7 +48,14 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    public bool IsPlayerTurn
+    {
+        get => isPlayerTurn;
+        set => isPlayerTurn = value;
+    }
+
     public Arrange arrange;
+    public TurnChangeEffect turnChangeEffect;
 
     private void Start()
     {
@@ -53,6 +63,7 @@ public class BattleManager : MonoBehaviour
         currentCardPickUpCount = cardPickUpCount;
         CurrentActiveSlotCount = activeSlotCount;
         UpdatePickUpCountUI();
+        IsPlayerTurn = true;
     }
 
     public void ClickPickUpBTN()
@@ -72,12 +83,15 @@ public class BattleManager : MonoBehaviour
         var a = Random.Range(0, InventoryManager.instance.deckCards.Count);
         var _card = PoolManager.Pop(InventoryManager.instance.deckCards[a].cardInfo.cardPoolType);
         _card.transform.SetParent(deckUI.transform);
-            
+        _card.transform.localScale = Vector3.one;
+        _card.GetComponentInChildren<AbCard>().PickEffect();
+
         arrange.UpdateChildren();
     }
 
     public void ClickTurnEndBTN()
     {
+        IsPlayerTurn = false;
         StartCoroutine(UsePlayerCard("Player"));
     }
 
@@ -86,12 +100,13 @@ public class BattleManager : MonoBehaviour
         
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     IEnumerator UsePlayerCard(string _name)
     {
         //현재 풀에있는 카드 수와 전개 카드 수 비교하고 최소값 비교
         int _activeCount = Mathf.Min(CurrentActiveSlotCount, currentSlotCount);
 
-        yield return new WaitForSecondsRealtime(0.3f);
+        yield return new WaitForSecondsRealtime(turnChangeEffect.ChangingEffect(_name));
 
         //지금 보고 있는 카드 번호 (0부터)
         int cardNum = 0;
@@ -103,21 +118,24 @@ public class BattleManager : MonoBehaviour
         for (int i = 0; i < cardCount; i++)
         {
             //현재 카드번호와 전개 카드 수 비교
-            if (cardNum <= _activeCount - 2)
+            if (cardNum <= arrange.Children.Count - 2)
             {
                 //혹시 현재 카드가 3레벨인가? 그럼 건너뛰기
-                if (arrange.Children[cardNum].GetComponent<AbCard>().Level >= 3 || arrange.Children.Count <= 1)
+                if (arrange.Children[cardNum].GetComponentInChildren<AbCard>().Level >= 3 || arrange.Children.Count <= 1)
                 {
                     cardNum++;
                     continue;
                 }
                 //현재카드와 다음카드가 같은 종류라면...? 뒤에카드 업그레이드 후 현재카드 지우기
-                if (arrange.Children[cardNum].GetComponent<AbCard>().CardInfo.cardPoolType == arrange.Children[cardNum + 1].GetComponent<AbCard>().CardInfo.cardPoolType)
+                if (arrange.Children[cardNum].GetComponentInChildren<AbCard>().CardInfo.cardPoolType == arrange.Children[cardNum + 1].GetComponentInChildren<AbCard>().CardInfo.cardPoolType)
                 {
-                    arrange.Children[cardNum + 1].GetComponent<AbCard>()
-                        .BreakthroughCard(arrange.Children[cardNum].GetComponent<AbCard>().Level);
-                    
-                    arrange.Children[cardNum].GetComponent<AbCard>().DiscardCard(arrange.Children[cardNum].gameObject);
+                   yield return new WaitForSecondsRealtime(arrange.Children[cardNum].GetComponentInChildren<AbCard>().ConsumptionEffect());
+                   yield return new WaitForSecondsRealtime(arrange.Children[cardNum + 1].GetComponentInChildren<AbCard>()
+                       .BreakthroughCard(arrange.Children[cardNum].GetComponentInChildren<AbCard>().Level));
+                   
+                   arrange.Children[cardNum].GetComponentInChildren<AbCard>().DiscardCard(arrange.Children[cardNum].gameObject);
+                    yield return new WaitForSecondsRealtime(0.3f);
+                    //_activeCount;
                 }
                 //아니면 다음카드 보기
                 else
@@ -129,7 +147,7 @@ public class BattleManager : MonoBehaviour
 
         foreach (var VARIABLE in arrange.Children)
         {
-            activeSlot.Add(VARIABLE.GetComponent<AbCard>());
+            activeSlot.Add(VARIABLE.GetComponentInChildren<AbCard>());
         }
 
         foreach (var VARIABLE in activeSlot)
