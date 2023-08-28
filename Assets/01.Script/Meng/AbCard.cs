@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
+using DG.Tweening;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -34,11 +36,22 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
     private Transform root;
     
     private Camera mainCam;
-    protected BattleManager battleManager;
+    private BattleManager battleManager;
+    private ExpUI expUI;
+
+    protected BattleManager BattleManager
+    {
+        get
+        {
+            battleManager ??= FindObjectOfType<BattleManager>();
+            return battleManager;
+        }
+    }
     
     public override void Init_Pop()
     {
-        mainCam = Camera.main;
+        transform.localScale = Vector3.zero;
+        mainCam ??= Camera.main;
         SetCardInfo(cardSO);
     }
 
@@ -56,8 +69,13 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
         cardBorderImage ??= transform.Find("Border").GetComponent<Image>();
         cardExp ??= transform.Find("Exp").GetComponent<TextMeshProUGUI>();
         screenImage ??= transform.Find("Screen").GetComponent<Image>();
+        expUI ??= FindObjectOfType<ExpUI>();
+    }
 
-        battleManager ??= FindObjectOfType<BattleManager>();
+    public void SetFontSize(float _size)
+    {
+        cardExp.fontSize = _size;
+        SetCardInfo(CardInfo);
     }
     
     public void SetCardInfo(CardSO _cardSO)
@@ -70,7 +88,6 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
 
         SetCardInfo(CardInfo);
 
-        transform.localScale = Vector3.one;
         cardIconImage.sprite = _cardSO.cardIconImage;
         
         screenImage.color = new Color(1, 1, 1, 0);
@@ -92,7 +109,12 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
         cardExp.text = _cardInfo.cardExp;
     }
 
-    public void BreakthroughCard(int _upLevel)
+    public void SetNextCard()
+    {
+        
+    }
+
+    private void UpgradeCard(int _upLevel)
     {
         switch (_upLevel)
         {
@@ -107,18 +129,18 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
                         SetCardInfo(cardSO.transcendenceCardInfo);
                         level = 3;
                         break;
+                    default:
+                        break;
                 }
+
                 break;
             case 2:
                 SetCardInfo(cardSO.transcendenceCardInfo);
                 level = 3;
                 break;
+            default:
+                break;
         }
-    }
-
-    public void SetNextCard()
-    {
-        
     }
 
     private Color SetColor(CardType _cardType) => _cardType switch
@@ -150,19 +172,30 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        if (BattleManager.IsPlayerTurn)
+        {
+            transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+
+            expUI.PopupCardInfo(CardInfo.cardPoolType);
+        }
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.localScale = Vector3.one;
+        if (BattleManager.IsPlayerTurn)
+        {
+            transform.localScale = Vector3.one;
+            expUI.FoldPopupCardInfo(CardInfo.cardPoolType);
+        }
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!BattleManager.IsPlayerTurn) return;
         root ??= transform.root;
         root.BroadcastMessage("BeginDrag", transform, SendMessageOptions.DontRequireReceiver);
     }
     public void OnDrag(PointerEventData eventData)
     {
+        if (!BattleManager.IsPlayerTurn) return;
         var screenPoint = Input.mousePosition;
         screenPoint.z = 10.0f;
         transform.position = mainCam.ScreenToWorldPoint(screenPoint);
@@ -170,7 +203,21 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        root.BroadcastMessage("EndDrag", transform, SendMessageOptions.DontRequireReceiver);
+        if (BattleManager.IsPlayerTurn)
+        {
+            root.BroadcastMessage("EndDrag", transform, SendMessageOptions.DontRequireReceiver);
+        }
+    }
+    
+    public float ConsumptionEffect()
+    {
+        var _seq = DOTween.Sequence();
+
+        _seq.Append(transform.DOLocalMoveX(transform.localPosition.x + 170f, 1f).SetEase(Ease.InBack));
+        _seq.Join(transform.DOScale(0, 1f).SetEase(Ease.InBack));
+        _seq.Join(screenImage.DOFade(1, 0.2f));
+
+        return _seq.Duration();
     }
 
     #endregion
@@ -178,14 +225,36 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
     #region Card Function
     public abstract float CardSkill();
     public abstract void Passive();
-    public abstract void Upgrade();
+
+    public float BreakthroughCard(int _upLevel, bool _isEffectOn = true)
+    {
+        if (_isEffectOn)
+        {
+            Sequence _seq = DOTween.Sequence();
+
+            _seq.Append(transform.DOScale(1.2f, 0.4f).SetEase(Ease.InOutBack));
+            _seq.Join(screenImage.DOFade(1, 0.3f));
+            _seq.AppendCallback(() => UpgradeCard(_upLevel));
+
+            _seq.Append(transform.DOScale(1, 1.5f));
+            _seq.Join(screenImage.DOFade(0, 0.2f));
+
+            return _seq.Duration();
+        }
+        else
+        {
+            UpgradeCard(_upLevel);
+            return 0.5f;
+        }
+    }
+
     public void DiscardCard(params GameObject[] _card)
     {
         foreach (var VARIABLE in _card)
         {
             PoolManager.Push(VARIABLE.GetComponent<AbCard>().CardInfo.cardPoolType, VARIABLE);
-            battleManager.arrange.Children.Remove(VARIABLE.transform);
-            battleManager.currentSlotCount--;
+            BattleManager.arrange.Children.Remove(VARIABLE.transform);
+            BattleManager.currentSlotCount--;
         }
     }
 
