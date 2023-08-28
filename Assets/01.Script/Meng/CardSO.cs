@@ -13,4 +13,6 @@ public class CardSO : ScriptableObject
 
     public GameObject effect;
     public Vector2 effectPosition;
+
+    public int randomWeight;
 }
