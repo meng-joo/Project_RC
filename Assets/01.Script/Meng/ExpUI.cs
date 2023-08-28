@@ -35,11 +35,12 @@ public class ExpUI : MonoBehaviour
             {
                 var _card = PoolManager.Pop(_cardType);
 
-                _card.GetComponent<AbCard>().SetFontSize(12f);
-                _card.GetComponent<AbCard>().BreakthroughCard(i, false);
+                _card.GetComponentInChildren<AbCard>().SetFontSize(12f);
+                _card.GetComponentInChildren<AbCard>().BreakthroughCard(i, false);
 
                 _card.transform.SetParent(expImage);
-                _card.transform.DOScale(1.5f, 0.2f);
+                _card.transform.localScale = Vector3.one;
+                _card.GetComponentInChildren<AbCard>().PickEffect(1.5f);
             }
         });
     }
@@ -52,7 +53,7 @@ public class ExpUI : MonoBehaviour
         
         for (int i = _count - 1; i >= 0; i--)
         {
-            expImage.GetChild(i).GetComponent<AbCard>().SetFontSize(18);
+            expImage.GetChild(i).GetComponentInChildren<AbCard>().SetFontSize(18);
             PoolManager.Push(_cardType, expImage.GetChild(i).gameObject);
         }
 

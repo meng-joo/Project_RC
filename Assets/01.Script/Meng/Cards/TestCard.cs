@@ -18,7 +18,7 @@ public class TestCard : AbCard
         {
             FindObjectOfType<Player>().Attack(0);
             BattleManager.CurrentActiveSlotCount--;
-            DiscardCard(gameObject);
+            DiscardCard(transform.parent.gameObject);
         });
 
         return 2;
