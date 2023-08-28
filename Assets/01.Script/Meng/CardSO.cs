@@ -6,12 +6,11 @@ using UnityEngine;
 public class CardSO : ScriptableObject
 {
     public CardInfo cardInfo;
+    public CardInfo upgradeCardInfo;
+    public CardInfo transcendenceCardInfo;
     
     public Sprite cardIconImage;
 
     public GameObject effect;
     public Vector2 effectPosition;
-
-    [TextArea]
-    public string cardExp;
 }

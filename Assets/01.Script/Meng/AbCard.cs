@@ -13,16 +13,28 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
 
     public CardSO cardSO;
 
+    private int level = 1;
+
+    public int Level
+    {
+        get
+        {
+            return level;
+        }
+    }
+
     private TextMeshProUGUI cardName;
     private Image cardIconImage;
     private Image cardBackImage;
     private Image cardBorderImage;
+    public Image screenImage;
     private TextMeshProUGUI cardExp;
     private GameObject cardTierEffect;
 
     private Transform root;
     
     private Camera mainCam;
+    protected BattleManager battleManager;
     
     public override void Init_Pop()
     {
@@ -43,28 +55,65 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
         cardBackImage ??= GetComponent<Image>();
         cardBorderImage ??= transform.Find("Border").GetComponent<Image>();
         cardExp ??= transform.Find("Exp").GetComponent<TextMeshProUGUI>();
+        screenImage ??= transform.Find("Screen").GetComponent<Image>();
+
+        battleManager ??= FindObjectOfType<BattleManager>();
     }
     
     public void SetCardInfo(CardSO _cardSO)
     {
         CardInfo = _cardSO.cardInfo;
 
+        level = 1;
+
         SetCashing();
 
-        cardName.text = CardInfo.name;
-        cardIconImage.sprite = _cardSO.cardIconImage;
-        cardBackImage.color = SetColor(CardInfo.cardType);
-        cardBorderImage.color = SetColor(CardInfo.cardTier);
+        SetCardInfo(CardInfo);
 
+        transform.localScale = Vector3.one;
+        cardIconImage.sprite = _cardSO.cardIconImage;
+        
+        screenImage.color = new Color(1, 1, 1, 0);
+    }
+
+    public void SetCardInfo(CardInfo _cardInfo)
+    {
+        cardName.text = _cardInfo.name;
+        
+        cardBackImage.color = SetColor(_cardInfo.cardType);
+        cardBorderImage.color = SetColor(_cardInfo.cardTier);
         if (cardTierEffect == null)
         {
-            cardTierEffect = SetTierEffect(CardInfo.cardTier);
+            cardTierEffect = SetTierEffect(_cardInfo.cardTier);
             cardTierEffect.transform.SetParent(transform);
             cardTierEffect.transform.localPosition = Vector3.zero;
             cardTierEffect.transform.localScale = new Vector3(95, 95, 95);
         }
+        cardExp.text = _cardInfo.cardExp;
+    }
 
-        cardExp.text = _cardSO.cardExp;
+    public void BreakthroughCard(int _upLevel)
+    {
+        switch (_upLevel)
+        {
+            case 1:
+                switch (level)
+                {
+                    case 1:
+                        SetCardInfo(cardSO.upgradeCardInfo);
+                        level = 2;
+                        break;
+                    case 2:
+                        SetCardInfo(cardSO.transcendenceCardInfo);
+                        level = 3;
+                        break;
+                }
+                break;
+            case 2:
+                SetCardInfo(cardSO.transcendenceCardInfo);
+                level = 3;
+                break;
+        }
     }
 
     public void SetNextCard()
@@ -129,16 +178,14 @@ public abstract class AbCard : PoolAbleObject , IPointerEnterHandler, IPointerEx
     #region Card Function
     public abstract float CardSkill();
     public abstract void Passive();
-
-    protected void DiscardCard(params GameObject[] _card)
+    public abstract void Upgrade();
+    public void DiscardCard(params GameObject[] _card)
     {
         foreach (var VARIABLE in _card)
         {
             PoolManager.Push(VARIABLE.GetComponent<AbCard>().CardInfo.cardPoolType, VARIABLE);
-
-            BattleManager _battleManager = FindObjectOfType<BattleManager>();
-            _battleManager.arrange.Children.Remove(VARIABLE.transform);
-            _battleManager.currentSlotCount--;
+            battleManager.arrange.Children.Remove(VARIABLE.transform);
+            battleManager.currentSlotCount--;
         }
     }
 

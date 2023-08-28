@@ -12,4 +12,9 @@ public class AttackCard : AbCard
     public override void Passive()
     {
     }
+
+    public override void Upgrade()
+    {
+        
+    }
 }
