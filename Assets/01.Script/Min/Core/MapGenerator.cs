@@ -1,18 +1,70 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
-public class MapGenerator : MonoBehaviour
+public class MapGenerator : MonoSingleTon<MapGenerator>
 {
-   private List<MapSO> mapKinList = new List<MapSO>();
+    public List<Node> mapKinList = new List<Node>();
 
-    void Start()
+    [SerializeField] private ChaterSO currentChapter;
+
+    public MapManager mapManager;
+
+    [SerializeField] private Node battleNode;
+    [SerializeField] private Node eventNode;
+    [SerializeField] private Node shopNode;
+    [SerializeField] private Node bossNode;
+
+    
+    void Awake()
     {
-        
+        CreateMap();
     }
 
     void Update()
     {
         
     }
+    public void CreateMap()
+    {
+        CreateNode(battleNode, eventNode, shopNode);
+        ShuffleMapNodeList();
+    }
+
+    public void CreateNode(Node battleNode, Node shopNode, Node eventNode)
+    {
+        for (int i = 0; i < currentChapter.battleMapCnt; i++)
+        {
+           // mapManager.nodeStack.Push(battleNode);
+            mapKinList.Add(battleNode);
+        }
+        for (int i = 0; i < currentChapter.shopMapCnt; i++)
+        {
+          //  mapManager.nodeStack.Push(shopNode);
+            mapKinList.Add(shopNode);
+
+        }
+        for (int i = 0; i < currentChapter.eventMapCnt; i++)
+        {
+         //   mapManager.nodeStack.Push(eventNode);
+            mapKinList.Add(eventNode);
+
+        }
+    }
+    public void ShuffleMapNodeList() 
+    {
+        var shuffle = mapKinList.OrderBy(a => Guid.NewGuid()).ToList();
+        mapKinList = shuffle;
+        AddBossNode();
+        Debug.Log("suffle");
+    }
+    public void AddBossNode()
+    {
+        mapKinList.Add(bossNode);
+    }
+
+
 }

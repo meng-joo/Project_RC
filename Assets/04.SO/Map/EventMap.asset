@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b738ca8754828584f86d8dac3dd4745a, type: 3}
   m_Name: EventMap
   m_EditorClassIdentifier: 
-  mapSprite: {fileID: 21300000, guid: b1698ce191a2c704cbbe4d813e07db2f, type: 3}
+  mapSprite: {fileID: 21300000, guid: a88a7563a359bf040bf8b38cf3c91411, type: 3}
   mapType: 0
