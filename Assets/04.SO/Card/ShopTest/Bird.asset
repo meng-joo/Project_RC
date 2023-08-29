@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: Bird
   m_EditorClassIdentifier: 
   cardInfo:
-    name: "\uC0AC\uC790\uCE74\uB4DC"
+    name: "\uC0C8 \uCE74\uB4DC"
     cardPoolType: 0
     cardTier: 2
     cardType: 0
     cardExp: 
   upgradeCardInfo:
-    name: "\uAC15\uD654\uB41C \uC0AC\uC790 \uCE74\uB4DC"
+    name: "\uAC15\uD654\uB41C \uC0C8 \uCE74\uB4DC"
     cardPoolType: 0
     cardTier: 2
     cardType: 0
     cardExp: 
   transcendenceCardInfo:
-    name: "\uCD08\uC6D4\uB41C \uC0AC\uC790 \uCE74\uB4DC"
+    name: "\uCD08\uC6D4\uB41C \uC0C8 \uCE74\uB4DC"
     cardPoolType: 0
     cardTier: 2
     cardType: 0

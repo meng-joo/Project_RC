@@ -7,9 +7,10 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 using Random = UnityEngine.Random;
 
-public class WeightRandomManger : MonoBehaviour
+public class WeightRandomManger : MonoSingleTon<WeightRandomManger>
 {
-    public List<CardSO> testList = new List<CardSO>();
+    public CardTierListSO testList;// = new List<CardSO>();
+    //public List<CardSO> testList = new List<CardSO>();
     //public List<double> WeightList = new List<double>();
 
     private void Update()
@@ -20,11 +21,18 @@ public class WeightRandomManger : MonoBehaviour
         }
     }
 
-    public CardSO WeightRandom(List<CardSO> target)
+    public CardSO WeightRandom(CardTierListSO target)//List<CardSO> target)
     {
+        if (target == null)
+        {
+            Debug.Log("The tier list is empty");
+            return null;
+        }
+
+
         double totalWeight = 0;
 
-        foreach (var item in target)
+        foreach (var item in target.tierCardList)
         {
             totalWeight += item.randomWeight;
         }
@@ -38,7 +46,7 @@ public class WeightRandomManger : MonoBehaviour
         randomValue *= totalWeight;
 
 
-        foreach (var item in target)
+        foreach (var item in target.tierCardList)
         {
             randomValue -= item.randomWeight;
 

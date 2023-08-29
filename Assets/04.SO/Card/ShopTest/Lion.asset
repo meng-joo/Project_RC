@@ -33,4 +33,4 @@ MonoBehaviour:
   cardIconImage: {fileID: 0}
   effect: {fileID: 0}
   effectPosition: {x: 0, y: 0}
-  randomWeight: 1
+  randomWeight: 3
