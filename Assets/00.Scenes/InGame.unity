@@ -1185,10 +1185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09cb8f618e62b4c45809cc995d86405e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testList:
-  - {fileID: 11400000, guid: 8e85518fd164cfe4a8e5db13a1defef6, type: 2}
-  - {fileID: 11400000, guid: 0c00f4ec6689f6142a48f4c0a1753213, type: 2}
-  - {fileID: 11400000, guid: ee7166c8ef1e9934c9acd0448c407fbe, type: 2}
+  testList: {fileID: 11400000, guid: 84ecddf8e322819429aedae0570fd43b, type: 2}
 --- !u!1 &1884254530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,3 +1278,6 @@ MonoBehaviour:
   cardTierList: 030000000300000003000000030000000300000003000000
   shopCardPrefab: {fileID: 9013861427233523733, guid: 4c2ced8135f78d44f96b91f188221c21, type: 3}
   shopCardParentTrm: {fileID: 517951294}
+  SSRTierList: {fileID: 11400000, guid: d29adec3da035f341b5fa2eeecbf60b8, type: 2}
+  SRTierList: {fileID: 11400000, guid: e988b4a1629594c41a9d81b3ccd5d92a, type: 2}
+  RTierList: {fileID: 11400000, guid: 84ecddf8e322819429aedae0570fd43b, type: 2}
