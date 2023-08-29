@@ -2,55 +2,66 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
+using Random = UnityEngine.Random;
 
 public class WeightRandomManger : MonoBehaviour
 {
-    CardSO so;
-    public  void WeightedRandom(Dictionary<CardSO, int> target)//List<Dictionary<CardSO, int>> target)
+    public List<CardSO> testList = new List<CardSO>();
+    //public List<double> WeightList = new List<double>();
+
+    private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            WeightRandom(testList);
+        }
+    }
 
-        //// 1. 총 가중치 합 계산
-        //double totalWeight = 0;
-        //for (Pair<String, Integer> pair : target)
-        //{
-        //    totalWeight += pair.weight;
-        //}
-
-        //1. 총 가중치 합 계산
-        float totalWeight = 0;
+    public CardSO WeightRandom(List<CardSO> target)
+    {
+        double totalWeight = 0;
 
         foreach (var item in target)
         {
-            totalWeight += item.Key.randomWeight;
+            totalWeight += item.randomWeight;
         }
-        //// 2. 주어진 가중치를 백분율로 치환 (가중치 / 총 가중치)
-        Dictionary<CardSO, float> candidates = new();
+
+        Debug.Log("총 가중치의 합" + totalWeight);
+
+        double randomValue = Random.Range(0f, 1f);
+
+        Debug.Log("랜덤밸류" + randomValue);
+
+        randomValue *= totalWeight;
+
+
         foreach (var item in target)
         {
-            candidates.Add(so, item.Key.randomWeight / totalWeight);
+            randomValue -= item.randomWeight;
+
+            if (randomValue <= 0f)
+            {
+                Debug.Log("반환된 카드값" + item);
+                return item;
+            }
         }
+        return null;
 
+        ////2. 주어진 가중치를 백분율로 치환 (가중치 / 총 가중치)
 
-        //// 2. 주어진 가중치를 백분율로 치환 (가중치 / 총 가중치)
-        //List<Pair<String, Double>> candidates = new ArrayList<>();
-        //for (Pair<String, Integer> pair : target)
+        //List<double> l = new List<double>();
+        //foreach (var item in target)
         //{
-        //    candidates.add(new Pair<>(pair.word, pair.weight / totalWeight));
+        //    l.Add(item.randomWeight / totalWeight);
         //}
 
         //// 3. 가중치의 오름차순으로 정렬
-        //candidates.sort(Comparator.comparingDouble(p->p.weight));
-        //this.candidates = candidates;
-    }
-    void Start()
-    {
-        
-    }
 
-    void Update()
-    {
-        
+        //l.Sort();
+        ////WeightList = l;
+
     }
 }

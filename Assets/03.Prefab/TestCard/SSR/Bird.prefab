@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7860878905119162347
+--- !u!1001 &4940762795950164399
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4551952064919673425, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
       propertyPath: m_Name
-      value: Lion
+      value: Bird
       objectReference: {fileID: 0}
     - target: {fileID: 5916268433779263395, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
       propertyPath: m_Pivot.x
@@ -102,40 +102,40 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4551952064919673425, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4716184187021818192}
+      addedObject: {fileID: 4288651961236426625}
     - targetCorrespondingSourceObject: {fileID: 2702015246092055843, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8354991357528352539}
+      addedObject: {fileID: 8464970328895402196}
   m_SourcePrefab: {fileID: 100100000, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
---- !u!1 &5217436917623982792 stripped
+--- !u!1 &7056684426223352972 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2702015246092055843, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
-  m_PrefabInstance: {fileID: 7860878905119162347}
+  m_PrefabInstance: {fileID: 4940762795950164399}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8354991357528352539
+--- !u!114 &8464970328895402196
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5217436917623982792}
+  m_GameObject: {fileID: 7056684426223352972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c4a23414f769b04b9194b3d0b297872, type: 3}
+  m_Script: {fileID: 11500000, guid: c8ed027acdd765640a256da2cb73722b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &5925817909339858362 stripped
+--- !u!1 &8915673556494832638 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4551952064919673425, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
-  m_PrefabInstance: {fileID: 7860878905119162347}
+  m_PrefabInstance: {fileID: 4940762795950164399}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4716184187021818192
+--- !u!114 &4288651961236426625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5925817909339858362}
+  m_GameObject: {fileID: 8915673556494832638}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb3eed3bc4801614fa0bc9333ebea47a, type: 3}

@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3effbf26fd4c47549a3dfddcc178d128, type: 3}
-  m_Name: New Card SO
+  m_Name: Bird
   m_EditorClassIdentifier: 
   cardInfo:
-    name: "\uD638\uB791\uC774\uCE74\uB4DC"
+    name: "\uC0AC\uC790\uCE74\uB4DC"
     cardPoolType: 0
     cardTier: 2
     cardType: 0
     cardExp: 
   upgradeCardInfo:
-    name: "\uAC15\uD654\uB41C \uD638\uB791\uC774 \uCE74\uB4DC"
+    name: "\uAC15\uD654\uB41C \uC0AC\uC790 \uCE74\uB4DC"
     cardPoolType: 0
     cardTier: 2
     cardType: 0
     cardExp: 
   transcendenceCardInfo:
-    name: "\uCD08\uC6D4\uB41C \uD638\uB791\uC774 \uCE74\uB4DC"
+    name: "\uCD08\uC6D4\uB41C \uC0AC\uC790 \uCE74\uB4DC"
     cardPoolType: 0
     cardTier: 2
     cardType: 0
@@ -33,4 +33,4 @@ MonoBehaviour:
   cardIconImage: {fileID: 0}
   effect: {fileID: 0}
   effectPosition: {x: 0, y: 0}
-  randomWeight: 5
+  randomWeight: 1

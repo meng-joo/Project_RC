@@ -67,7 +67,7 @@ public class MapViewUI : MonoSingleTon<MapViewUI>
     {
         foreach (var item in mapNodeList)
         {
-            Debug.Log(item.Node.mapSO.mapSprite);
+           // Debug.Log(item.Node.mapSO.mapSprite);
             item.nodeimage.sprite = item.Node.mapSO.mapSprite;
         }
 
