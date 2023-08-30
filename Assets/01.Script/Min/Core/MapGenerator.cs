@@ -24,10 +24,6 @@ public class MapGenerator : MonoSingleTon<MapGenerator>
         CreateMap();
     }
 
-    void Update()
-    {
-        
-    }
     public void CreateMap()
     {
         CreateNode(battleNode, eventNode, shopNode);

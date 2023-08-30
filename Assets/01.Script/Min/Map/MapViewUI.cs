@@ -34,11 +34,8 @@ public class MapViewUI : MonoSingleTon<MapViewUI>
     {
         CreateNodes(MapGenerator.Instance.mapKinList);
         SetData();
+ 
     }
-    private void Update()
-    {
-    }
-
     public void CreateNodes(IEnumerable<Node> nodes)
     {
         foreach (var node in nodes.Select((value, index) => (value, index)))
@@ -48,7 +45,7 @@ public class MapViewUI : MonoSingleTon<MapViewUI>
             var mapNode = CreateMapNode(node.value);
 
             mapNode.GetComponent<RectTransform>().localPosition = new Vector2(200 + spacing * node.index , randomY);
-            Debug.Log(mapNode.GetComponent<RectTransform>().anchoredPosition);
+           // Debug.Log(mapNode.GetComponent<RectTransform>().anchoredPosition);
 
             nodePosList.Add(mapNode.GetComponent<RectTransform>().localPosition);
             lineRenderer.Points = nodePosList.ToArray();
@@ -68,17 +65,13 @@ public class MapViewUI : MonoSingleTon<MapViewUI>
 
     public void SetData()
     {
-        List<Image> imageList = new();
-
         foreach (var item in mapNodeList)
         {
-            imageList.Add(item.transform.GetChild(0).GetComponent<Image>());
+            Debug.Log(item.Node.mapSO.mapSprite);
+            item.nodeimage.sprite = item.Node.mapSO.mapSprite;
         }
 
-        foreach (var item in mapNodeList.Select((value, index) => (value, index)))
-        {
-            imageList[item.index].sprite =  item.value.Node.mapSO.mapSprite;
-            imageList.Add(item.value.transform.GetChild(0).GetComponent<Image>()); //GeC GetComponent<Image>());
-        }
+        mapNodeList[0].nodeStates = NodeStates.Attainable;
+        mapNodeList[0].SetState(mapNodeList[0].nodeStates);
     }
 }
