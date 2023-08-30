@@ -11,7 +11,7 @@ public class MapGenerator : MonoSingleTon<MapGenerator>
 
     [SerializeField] private ChaterSO currentChapter;
 
-    public MapManager mapManager;
+   // public MapManager mapManager;
 
     [SerializeField] private Node battleNode;
     [SerializeField] private Node eventNode;
@@ -34,18 +34,15 @@ public class MapGenerator : MonoSingleTon<MapGenerator>
     {
         for (int i = 0; i < currentChapter.battleMapCnt; i++)
         {
-           // mapManager.nodeStack.Push(battleNode);
             mapKinList.Add(battleNode);
         }
         for (int i = 0; i < currentChapter.shopMapCnt; i++)
         {
-          //  mapManager.nodeStack.Push(shopNode);
             mapKinList.Add(shopNode);
 
         }
         for (int i = 0; i < currentChapter.eventMapCnt; i++)
         {
-         //   mapManager.nodeStack.Push(eventNode);
             mapKinList.Add(eventNode);
 
         }

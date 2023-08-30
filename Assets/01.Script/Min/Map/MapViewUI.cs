@@ -34,7 +34,11 @@ public class MapViewUI : MonoSingleTon<MapViewUI>
     {
         CreateNodes(MapGenerator.Instance.mapKinList);
         SetData();
- 
+        A();
+    }
+    public void A()
+    {
+        SaveDataManager.Instance.SetMapData(mapNodeList);
     }
     public void CreateNodes(IEnumerable<Node> nodes)
     {
