@@ -34,7 +34,11 @@ public class MapViewUI : MonoSingleTon<MapViewUI>
     {
         CreateNodes(MapGenerator.Instance.mapKinList);
         SetData();
- 
+        A();
+    }
+    public void A()
+    {
+        SaveDataManager.Instance.SetMapData(mapNodeList);
     }
     public void CreateNodes(IEnumerable<Node> nodes)
     {
@@ -67,7 +71,7 @@ public class MapViewUI : MonoSingleTon<MapViewUI>
     {
         foreach (var item in mapNodeList)
         {
-            Debug.Log(item.Node.mapSO.mapSprite);
+           // Debug.Log(item.Node.mapSO.mapSprite);
             item.nodeimage.sprite = item.Node.mapSO.mapSprite;
         }
 
