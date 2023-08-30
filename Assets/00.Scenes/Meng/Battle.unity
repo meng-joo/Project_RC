@@ -4719,6 +4719,7 @@ GameObject:
   - component: {fileID: 1076940953}
   - component: {fileID: 1076940955}
   - component: {fileID: 1076940956}
+  - component: {fileID: 1076940957}
   m_Layer: 5
   m_Name: DeckImage
   m_TagString: Untagged
@@ -4743,7 +4744,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -135.24496, y: 0}
+  m_AnchoredPosition: {x: -135.245, y: 0}
   m_SizeDelta: {x: -270.49005, y: 292.55}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1076940953
@@ -4823,6 +4824,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   children: []
+--- !u!114 &1076940957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076940951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &1102003926
 GameObject:
   m_ObjectHideFlags: 0

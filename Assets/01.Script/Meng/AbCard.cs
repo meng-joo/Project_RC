@@ -242,9 +242,9 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
         outLineImage.gameObject.SetActive(_isOn);
     }
 
-    public void PickEffect(float _size = 1)
+    public void PickEffect(float _size = 1, float _time = 0.2f)
     {
-        transform.DOScale(_size, 0.4f);
+        transform.DOScale(_size, _time);
     }
 
     #endregion

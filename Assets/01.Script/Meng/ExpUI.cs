@@ -25,7 +25,7 @@ public class ExpUI : MonoBehaviour
             FoldPopupCardInfo(poolType)
         );
 
-        poolType = _cardType;
+        _seq.AppendCallback(() => poolType = _cardType);
 
         _seq.Append(expImage.DOScale(1, 0.2f));
 
@@ -35,10 +35,11 @@ public class ExpUI : MonoBehaviour
             {
                 var _card = PoolManager.Pop(_cardType);
 
+                _card.transform.SetParent(expImage);
+
                 _card.GetComponentInChildren<AbCard>().SetFontSize(12f);
                 _card.GetComponentInChildren<AbCard>().BreakthroughCard(i, false);
 
-                _card.transform.SetParent(expImage);
                 _card.transform.localScale = Vector3.one;
                 _card.GetComponentInChildren<AbCard>().PickEffect(1.5f);
             }
