@@ -11,7 +11,7 @@ public class CardSO : ScriptableObject
     
     public Sprite cardIconImage;
 
-    public GameObject effect;
+    public PoolType effect;
     public Vector2 effectPosition;
 
     public int randomWeight;

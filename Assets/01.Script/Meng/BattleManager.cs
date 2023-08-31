@@ -51,7 +51,7 @@ public class BattleManager : MonoBehaviour
     public bool IsPlayerTurn
     {
         get => isPlayerTurn;
-        set => isPlayerTurn = value;
+        private set => isPlayerTurn = value;
     }
 
     public Arrange arrange;
@@ -69,6 +69,7 @@ public class BattleManager : MonoBehaviour
     public void ClickPickUpBTN()
     {
         if (currentCardPickUpCount <= 0) return;
+        if (!IsPlayerTurn) return;
         currentCardPickUpCount--;
         PickUpCard();
         UpdatePickUpCountUI();
@@ -91,22 +92,50 @@ public class BattleManager : MonoBehaviour
 
     public void ClickTurnEndBTN()
     {
+        if (!IsPlayerTurn) return;
         IsPlayerTurn = false;
-        StartCoroutine(UsePlayerCard("Player"));
+        StartCoroutine(UsePlayerCard());
     }
 
     public void TurnEnd(string _name)
     {
-        
+        switch (_name)
+        {
+            case "Player":
+                StartCoroutine(PlayerTurn());
+                break;
+            case "Enemy":
+                StartCoroutine(EnemyTurn());
+                break;
+        }
     }
 
-    // ReSharper disable Unity.PerformanceAnalysis
-    IEnumerator UsePlayerCard(string _name)
+    IEnumerator EnemyTurn()
+    {
+        yield return new WaitForSeconds(turnChangeEffect.ChangingEffect("적", "턴"));
+
+        yield return new WaitForSeconds(FindObjectOfType<Enemy>().Skill());
+        
+        TurnEnd("Player");
+    }
+
+    IEnumerator PlayerTurn()
+    {
+        yield return new WaitForSeconds(turnChangeEffect.ChangingEffect("내", "턴"));
+        
+        IsPlayerTurn = true;
+        CurrentActiveSlotCount = activeSlotCount;
+        currentCardPickUpCount = cardPickUpCount;
+        UpdatePickUpCountUI();
+    }
+
+
+    IEnumerator UsePlayerCard()
     {
         //현재 풀에있는 카드 수와 전개 카드 수 비교하고 최소값 비교
         int _activeCount = Mathf.Min(CurrentActiveSlotCount, currentSlotCount);
 
-        yield return new WaitForSecondsRealtime(turnChangeEffect.ChangingEffect(_name));
+        yield return new WaitForSeconds(turnChangeEffect.ChangingEffect("전", "개"));
 
         //지금 보고 있는 카드 번호 (0부터)
         int cardNum = 0;
@@ -129,12 +158,12 @@ public class BattleManager : MonoBehaviour
                 //현재카드와 다음카드가 같은 종류라면...? 뒤에카드 업그레이드 후 현재카드 지우기
                 if (arrange.Children[cardNum].GetComponentInChildren<AbCard>().CardInfo.cardPoolType == arrange.Children[cardNum + 1].GetComponentInChildren<AbCard>().CardInfo.cardPoolType)
                 {
-                   yield return new WaitForSecondsRealtime(arrange.Children[cardNum].GetComponentInChildren<AbCard>().ConsumptionEffect());
-                   yield return new WaitForSecondsRealtime(arrange.Children[cardNum + 1].GetComponentInChildren<AbCard>()
+                   yield return new WaitForSeconds(arrange.Children[cardNum].GetComponentInChildren<AbCard>().ConsumptionEffect());
+                   yield return new WaitForSeconds(arrange.Children[cardNum + 1].GetComponentInChildren<AbCard>()
                        .BreakthroughCard(arrange.Children[cardNum].GetComponentInChildren<AbCard>().Level));
                    
                    arrange.Children[cardNum].GetComponentInChildren<AbCard>().DiscardCard(arrange.Children[cardNum].gameObject);
-                    yield return new WaitForSecondsRealtime(0.3f);
+                    yield return new WaitForSeconds(0.3f);
                     //_activeCount;
                 }
                 //아니면 다음카드 보기
@@ -145,21 +174,24 @@ public class BattleManager : MonoBehaviour
             }
         }
 
+        int activeCount = 0;
         foreach (var VARIABLE in arrange.Children)
         {
+            if (activeCount >= _activeCount) break;
             activeSlot.Add(VARIABLE.GetComponentInChildren<AbCard>());
+            activeCount++;
         }
 
         foreach (var VARIABLE in activeSlot)
         {
             float _delay = VARIABLE.CardSkill();
-            yield return new WaitForSecondsRealtime(_delay);
+            yield return new WaitForSeconds(_delay);
         }
 
         yield return new WaitForSeconds(1f);
 
         activeSlot.Clear();
-        TurnEnd(_name);
+        TurnEnd("Enemy");
     }
 
     private void UpdatePickUpCountUI()

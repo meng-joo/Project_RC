@@ -14,12 +14,7 @@ public class TestCard : AbCard
 
         _seq.Append(transform.DOScale(0, 0.4f).SetEase(Ease.InBack));
         
-        _seq.AppendCallback(() =>
-        {
-            FindObjectOfType<Player>().Attack(0);
-            BattleManager.CurrentActiveSlotCount--;
-            DiscardCard(transform.parent.gameObject);
-        });
+        _seq.AppendCallback(AttackEnemy);
 
         return 2;
     }
@@ -27,5 +22,19 @@ public class TestCard : AbCard
     public override void Passive()
     {
         
+    }
+
+    private void AttackEnemy()
+    {
+        FindObjectOfType<Player>().Attack(0);
+        FindObjectOfType<Enemy>().Hit(0);
+
+        var _effect = PoolManager.Pop(cardSO.effect);
+        _effect.transform.position = cardSO.effectPosition;
+
+        DamageTextManager.CreateDamageText(0, Color.red);
+        
+        BattleManager.CurrentActiveSlotCount--;
+        DiscardCard(transform.parent.gameObject);
     }
 }

@@ -263,7 +263,7 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
             _seq.Join(screenImage.DOFade(1, 0.3f));
             _seq.AppendCallback(() => UpgradeCard(_upLevel));
 
-            _seq.Append(transform.DOScale(1, 1.5f));
+            _seq.Append(transform.DOScale(1, 0.8f));
             _seq.Join(screenImage.DOFade(0, 0.2f));
 
             return _seq.Duration();

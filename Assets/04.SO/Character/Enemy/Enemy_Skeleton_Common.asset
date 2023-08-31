@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914a997179771c14fa83b44099d9cebb, type: 3}
+  m_Name: Enemy_Skeleton_Common
+  m_EditorClassIdentifier: 
+  hp: 100
+  cardPoolCount: 1
+  skillName: 
+  dieAnim: {fileID: 7400000, guid: 96ac060fbbe79af4088a64b4e7e40079, type: 2}
+  atkAnim: {fileID: 7400000, guid: 1d78fa29ff1b51942958fc6d2ce8a6ac, type: 2}
+  idleAnim: {fileID: 7400000, guid: b769d53212ada53489e89651b0a84abc, type: 2}
+  skillAnim: {fileID: 7400000, guid: e535297f9122e1f4e97fc011a36226f4, type: 2}
+  blockAnim: {fileID: 7400000, guid: d180d1755be116649bf3bf04adce98d1, type: 2}
+  hitAnim: {fileID: 7400000, guid: 8ebd4005140650a48a2a75dddb5bb56e, type: 2}
+  runAnim: {fileID: 7400000, guid: 876edac8713bf0747994942e37a7ec00, type: 2}

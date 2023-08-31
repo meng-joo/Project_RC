@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914a997179771c14fa83b44099d9cebb, type: 3}
   m_Name: Warrior
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  hp: 10
-  attackPower: 1
+  hp: 100
+  cardPoolCount: 3
+  skillName: WarriorSkill
+  dieAnim: {fileID: 7400000, guid: e866c1f30cb57cd4bb904f9980d91fb9, type: 2}
+  atkAnim: {fileID: 7400000, guid: 0284c7492ecf25e4297cb898d23aab62, type: 2}
+  idleAnim: {fileID: 7400000, guid: 1979f967ae038904f9abbf129daba124, type: 2}
+  skillAnim: {fileID: 7400000, guid: 011341a0b2b908041adb1b60078c8a7d, type: 2}
+  blockAnim: {fileID: 7400000, guid: 490d467f856df7545bebe35e99a14a1f, type: 2}
+  hitAnim: {fileID: 7400000, guid: 9d535186dc717254c81beed3fa81a79c, type: 2}
+  runAnim: {fileID: 7400000, guid: 538f53b466f213c4a9a11e00b4e6aee8, type: 2}

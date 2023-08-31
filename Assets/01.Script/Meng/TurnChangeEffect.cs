@@ -29,9 +29,15 @@ public class TurnChangeEffect : MonoBehaviour
         개.transform.localPosition = new Vector3(1100, 0, 0);
     }
 
-    public float ChangingEffect(string _str)
+    public float ChangingEffect(string _str1, string _str2)
     {
         Sequence _seq = DOTween.Sequence();
+
+        _seq.AppendCallback(() =>
+        {
+            전.text = _str1;
+            개.text = _str2;
+        });
 
         _seq.Append(turnChangePanel.transform.DOLocalMoveY(0, panelDownDeley));
         _seq.Append(전.transform.DOLocalMoveX(-85, 1f));
