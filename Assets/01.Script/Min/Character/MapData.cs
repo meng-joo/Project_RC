@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class MapData 
 {
-    public List<MapNode> mapNodeList = new();
+ //   public List<MapNode> mapNodeList = new();
 
 
 
