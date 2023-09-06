@@ -123,8 +123,12 @@ public class MapGenerator : MonoSingleTon<MapGenerator>
 
         int randomIdx = Random.Range(0, bossIndexList.Count);
 
+        Debug.Log("보스랜덤위치" + randomIdx);
+
+        mapGridNodeList[bossIndexList[randomIdx]].gameObject.SetActive(true);
         mapGridNodeList[bossIndexList[randomIdx]].isVisible = true;
         mapGridNodeList[bossIndexList[randomIdx]].SetGridActive();
+
 
         mapGridNodeList[bossIndexList[randomIdx]].mapSO = bossMap;
         mapGridNodeList[bossIndexList[randomIdx]].SetGridInfo();
