@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Mime;
 using DG.Tweening;
 using UnityEngine;
 using TMPro;
@@ -52,6 +51,7 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void Init_Pop()
     {
         transform.localScale = Vector3.zero;
+        transform.localPosition = Vector3.zero;
         mainCam ??= Camera.main;
         SetCardInfo(cardSO);
     }

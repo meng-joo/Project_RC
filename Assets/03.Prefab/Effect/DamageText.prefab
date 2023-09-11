@@ -185,5 +185,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76c1a4205746a14597ea44a7a9ff1b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 10
+  bojiType: 10
   deley: 1

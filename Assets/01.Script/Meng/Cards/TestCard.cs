@@ -26,13 +26,13 @@ public class TestCard : AbCard
 
     private void AttackEnemy()
     {
-        FindObjectOfType<Player>().Attack(0);
-        FindObjectOfType<Enemy>().Hit(0);
+        FindObjectOfType<Player>().Attack(200);
+        FindObjectOfType<Enemy>().Hit(200);
 
         var _effect = PoolManager.Pop(cardSO.effect);
         _effect.transform.position = cardSO.effectPosition;
 
-        DamageTextManager.CreateDamageText(0, Color.red);
+        DamageTextManager.CreateDamageText(200, Color.red);
         
         BattleManager.CurrentActiveSlotCount--;
         DiscardCard(transform.parent.gameObject);

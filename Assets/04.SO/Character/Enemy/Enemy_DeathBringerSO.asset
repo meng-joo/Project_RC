@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914a997179771c14fa83b44099d9cebb, type: 3}
+  m_Name: Enemy_DeathBringerSO
+  m_EditorClassIdentifier: 
+  hp: 1000
+  cardPoolCount: 1
+  skillName: 
+  dieAnim: {fileID: 7400000, guid: ad55f241b5aeab54eb829e9c0450671c, type: 2}
+  atkAnim: {fileID: 7400000, guid: 4487f210523ba854da338b21c654e05c, type: 2}
+  idleAnim: {fileID: 7400000, guid: a11364888939a724b85222c448650d34, type: 2}
+  skillAnim: {fileID: 7400000, guid: dbf4487c816a4424d8e34af80bd43ed2, type: 2}
+  blockAnim: {fileID: 0}
+  hitAnim: {fileID: 7400000, guid: 5477e9c42b2a5c043ab45bd3fb360e9d, type: 2}
+  runAnim: {fileID: 7400000, guid: 8ea3b27a824e2b642afe908f5c7b691c, type: 2}

@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EffectPool : PoolAbleObject
 {
-    [SerializeField] private PoolType poolType;
     [SerializeField] private float deley;
     public override void Init_Pop()
     {
@@ -13,7 +13,7 @@ public class EffectPool : PoolAbleObject
 
     private void PushObject()
     {
-        PoolManager.Push(poolType, gameObject);
+        PoolManager.Push(PoolType, gameObject);
     }
 
     public override void Init_Push()

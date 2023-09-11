@@ -14,7 +14,7 @@ public class MonoSingleTon<T> : MonoBehaviour where T : MonoBehaviour
                 instance = FindObjectOfType<T>();
                 if (instance == null)
                 {
-                    //Debug.Log($"{typeof(T)} ¿ÀºêÁ§Æ®°¡ ¾øÀ½");
+                    //Debug.Log($"{typeof(T)} ì˜¤ë¸Œì íŠ¸ê°€ ì—†ìŒ");
                 }
             }
             return instance;

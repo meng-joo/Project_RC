@@ -1,17 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Unit
 {
-    public override void Attack(int _damage)
+    public void Start()
     {
-        base.Attack(_damage);
-    }
-
-    public override void Hit(int _damage)
-    {
+        SetInfo();
         
+        enemy = FindObjectOfType<Enemy>();
+    }
+    
+    public override float Attack(int _damage)
+    {
+        return base.Attack(_damage);
     }
 }

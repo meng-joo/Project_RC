@@ -63,7 +63,9 @@ public class BattleManager : MonoBehaviour
         currentCardPickUpCount = cardPickUpCount;
         CurrentActiveSlotCount = activeSlotCount;
         UpdatePickUpCountUI();
-        IsPlayerTurn = true;
+        IsPlayerTurn = false;
+
+        StartCoroutine(PlayerTurn());
     }
 
     public void ClickPickUpBTN()

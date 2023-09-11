@@ -8,8 +8,27 @@ using UnityEngine;
 public abstract class Unit : MonoBehaviour
 {
     [SerializeField] private CharacterInfoSO characterInfoSO;
-    public CharacterInfoSO CharacterInfoSo => characterInfoSO;
+    [SerializeField] private Canvas unitUICanvas;
+
+    public List<BuffDataSO> buffDataList;
+
+    protected int maxHp => characterInfoSO.hp;
+
+    protected int currentHp;
+
+    public int CurrentHP
+    {
+        get => currentHp;
+        set
+        {
+            currentHp = value;
+            unitUICanvas.GetComponentInChildren<UnitHpEffect>().SetHPBar(maxHp, currentHp);
+        }
+    }
     
+    public CharacterInfoSO CharacterInfoSo => characterInfoSO;
+    public Unit enemy;
+
     protected Animator animator;
     protected AnimatorOverrideController animatorOverrideController;
     
@@ -17,15 +36,17 @@ public abstract class Unit : MonoBehaviour
 
     private string anme;
 
-    private void Start()
-    {
-        SetInfo();
-    }
-
-    private void SetInfo()
+    protected void SetInfo()
     {
         animator ??= GetComponentInChildren<Animator>();
         visual ??= transform.Find("Visual").gameObject;
+
+        unitUICanvas = PoolManager.Pop(PoolType.UnitCanvas).GetComponent<Canvas>();
+        unitUICanvas.transform.SetParent(transform);
+        unitUICanvas.transform.localPosition = Vector3.zero;
+        unitUICanvas.transform.localScale = new Vector3(0.0021f, 0.0021f, 0.0021f);
+        
+        CurrentHP = maxHp;
         
         animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
         animator.runtimeAnimatorController = animatorOverrideController;
@@ -49,18 +70,32 @@ public abstract class Unit : MonoBehaviour
         animatorOverrideController["Idle"] = characterInfoSO.idleAnim;
     }
 
-    public virtual void Attack(int _damage)
+    public virtual float Attack(int _damage)
     {
         animator.SetTrigger("Attack");
+        
+        return animatorOverrideController["Attack"].length;
     }
 
-    public virtual void Hit(int _damage)
+    public virtual float Hit(int _damage)
     {
         animator.SetTrigger("Hit");
+        
+        int _hp = CurrentHP - _damage;
+        CurrentHP = Mathf.Max(0, _hp);
+        
+        if (CurrentHP <= 0)
+        {
+            
+        }
+
+        return animatorOverrideController["Hit"].length;
     }
 
-    public virtual void SpecialAbility()
+    public virtual float SpecialAbility()
     {
         animator.SetTrigger("Skill");
+        
+        return animatorOverrideController["Skill"].length;
     }
 }
