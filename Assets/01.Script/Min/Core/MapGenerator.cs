@@ -87,7 +87,7 @@ public class MapGenerator : MonoSingleTon<MapGenerator>
             }
             else
             {
-                Debug.Log("리스트에 추가되는 랜덤넘버 +  " + randomNumber);
+               // Debug.Log("리스트에 추가되는 랜덤넘버 +  " + randomNumber);
                 randomIndexList.Add(randomNumber);
                 i++;
             }
@@ -119,13 +119,13 @@ public class MapGenerator : MonoSingleTon<MapGenerator>
         bossIndexList.Add(0);
         bossIndexList.Add(0 + mapSettingSO.seroCnt);
         bossIndexList.Add(mapSettingSO.mapCnt - mapSettingSO.seroCnt);
-        bossIndexList.Add(mapSettingSO.mapCnt);
+        bossIndexList.Add(mapSettingSO.mapCnt - 1);
 
         int randomIdx = Random.Range(0, bossIndexList.Count);
 
         Debug.Log("보스랜덤위치" + randomIdx);
 
-        mapGridNodeList[bossIndexList[randomIdx]].gameObject.SetActive(true);
+        //mapGridNodeList[bossIndexList[randomIdx]].gameObject.SetActive(true);
         mapGridNodeList[bossIndexList[randomIdx]].isVisible = true;
         mapGridNodeList[bossIndexList[randomIdx]].SetGridActive();
 

@@ -24,6 +24,7 @@ public class MatchingCardEventManager : MonoSingleTon<MatchingCardEventManager>
     private void Start()
     {
         SetMatchingCardList();
+        CreateCard();
     }
 
     public void SetMatchingCardList()

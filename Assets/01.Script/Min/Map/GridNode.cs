@@ -56,12 +56,12 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
     {
         if (isVisible)
         {
-            Debug.Log("佃像");
+       //     Debug.Log("佃像");
             gameObject.SetActive(true);
         }
         else
         {
-            Debug.Log("襖像");
+         //   Debug.Log("襖像");
             gameObject.SetActive(false);
         }
     }
@@ -134,7 +134,7 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
     {
         if (sr != null)
         {
-            Debug.Log("けいいししいしいしいい");
+       //     Debug.Log("けいいししいしいしいい");
             sr.transform.DOKill();
             sr.transform.DOScale(initialScale * HoverScaleFactor, 0.3f);
         }
@@ -144,7 +144,7 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
     {
         if (sr != null)
         {
-            Debug.Log("けいいし");
+          //  Debug.Log("けいいし");
             sr.transform.DOKill();
             sr.transform.DOScale(initialScale, 0.3f);
         }
