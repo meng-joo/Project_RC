@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcceb4b382b8124fb660fdfbd78806f, type: 3}
   m_Name: 1Chapter
   m_EditorClassIdentifier: 
-  mapCnt: 8
-  battleMapCnt: 4
-  eventMapCnt: 3
-  shopMapCnt: 1
+  garoCnt: 5
+  seroCnt: 5
+  rowNodeMinCnt: 2
+  rowNodeMaxCnt: 5
+  nodeActiveMinCnt: 3
+  nodeActiveMaxCnt: 5
+  mapCnt: 25
+  battleMapCnt: 15
+  eventMapCnt: 7
+  shopMapCnt: 3

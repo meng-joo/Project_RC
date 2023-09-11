@@ -41,7 +41,7 @@ public class WeightRandomManger : MonoSingleTon<WeightRandomManger>
 
         double randomValue = Random.Range(0f, 1f);
 
-        Debug.Log("랜덤밸류" + randomValue);
+        //Debug.Log("랜덤밸류" + randomValue);
 
         randomValue *= totalWeight;
 
@@ -52,24 +52,10 @@ public class WeightRandomManger : MonoSingleTon<WeightRandomManger>
 
             if (randomValue <= 0f)
             {
-                Debug.Log("반환된 카드값" + item);
+          //      Debug.Log("반환된 카드값" + item);
                 return item;
             }
         }
         return null;
-
-        ////2. 주어진 가중치를 백분율로 치환 (가중치 / 총 가중치)
-
-        //List<double> l = new List<double>();
-        //foreach (var item in target)
-        //{
-        //    l.Add(item.randomWeight / totalWeight);
-        //}
-
-        //// 3. 가중치의 오름차순으로 정렬
-
-        //l.Sort();
-        ////WeightList = l;
-
     }
 }
