@@ -10,7 +10,31 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] private CharacterInfoSO characterInfoSO;
     [SerializeField] private Canvas unitUICanvas;
 
-    public List<BuffDataSO> buffDataList;
+    private Dictionary<BuffDataSO, int> buffDataList = new Dictionary<BuffDataSO, int>();
+    public Dictionary<BuffDataSO, int> BuffDataList
+    {
+        get
+        {
+            return buffDataList;
+        }
+        set
+        {
+            buffDataList = value;
+        }
+    }
+    public BuffUIUpdate BuffUIUpdate
+    {
+        get
+        {
+            buffUIUpdate ??= unitUICanvas.GetComponentInChildren<BuffUIUpdate>();
+            return buffUIUpdate;
+        }
+        set
+        {
+            buffUIUpdate ??= unitUICanvas.GetComponentInChildren<BuffUIUpdate>();
+            buffUIUpdate = value;
+        }
+    }
 
     protected int maxHp => characterInfoSO.hp;
 
@@ -31,6 +55,8 @@ public abstract class Unit : MonoBehaviour
 
     protected Animator animator;
     protected AnimatorOverrideController animatorOverrideController;
+
+    private BuffUIUpdate buffUIUpdate;
     
     protected GameObject visual;
 
@@ -45,7 +71,7 @@ public abstract class Unit : MonoBehaviour
         unitUICanvas.transform.SetParent(transform);
         unitUICanvas.transform.localPosition = Vector3.zero;
         unitUICanvas.transform.localScale = new Vector3(0.0021f, 0.0021f, 0.0021f);
-        
+
         CurrentHP = maxHp;
         
         animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
@@ -97,5 +123,18 @@ public abstract class Unit : MonoBehaviour
         animator.SetTrigger("Skill");
         
         return animatorOverrideController["Skill"].length;
+    }
+
+    public void AddBuff(BuffDataSO _buffDataSO, int _count)
+    {
+        if (BuffDataList.ContainsKey(_buffDataSO))
+        {
+            BuffDataList[_buffDataSO] += _count;
+            BuffUIUpdate.UpdateBuffUI(_buffDataSO, BuffDataList[_buffDataSO], false);
+            return;
+        }
+
+        BuffDataList.Add(_buffDataSO, _count);
+        BuffUIUpdate.UpdateBuffUI(_buffDataSO, _count, true);
     }
 }

@@ -116,6 +116,8 @@ public class BattleManager : MonoBehaviour
     {
         yield return new WaitForSeconds(turnChangeEffect.ChangingEffect("적", "턴"));
 
+        yield return new WaitForSeconds(2f);
+        
         yield return new WaitForSeconds(FindObjectOfType<Enemy>().Skill());
         
         TurnEnd("Player");
@@ -130,8 +132,7 @@ public class BattleManager : MonoBehaviour
         currentCardPickUpCount = cardPickUpCount;
         UpdatePickUpCountUI();
     }
-
-
+    
     IEnumerator UsePlayerCard()
     {
         //현재 풀에있는 카드 수와 전개 카드 수 비교하고 최소값 비교

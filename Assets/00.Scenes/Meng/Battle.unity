@@ -650,8 +650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterInfoSO: {fileID: 11400000, guid: 6c56f70a6c2e41241b9914ddce2da0c3, type: 2}
-  unitUICanvas: {fileID: 0}
-  buffDataList: []
+  unitUICanvas: {fileID: 794661570305610785, guid: 3ee67a2870f699246ba0c88aa7f68ede, type: 3}
   enemy: {fileID: 0}
 --- !u!1 &674187844
 GameObject:
@@ -4261,7 +4260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c1b229e39340c4d86876863ede0f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelDownDeley: 1
+  panelDownDeley: 0.6
 --- !u!1 &1044342651
 GameObject:
   m_ObjectHideFlags: 0
@@ -7471,6 +7470,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8904323322162887282, guid: 25726830781387d4b928e691986922cf, type: 3}
+      propertyPath: bufOrDebuf.array.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904323322162887282, guid: 25726830781387d4b928e691986922cf, type: 3}
+      propertyPath: bufOrDebuf.array.Array.data[0].Value
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e42fad90e6744947b82e9bbe23f3465, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

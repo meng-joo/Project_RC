@@ -40,14 +40,14 @@ public class TurnChangeEffect : MonoBehaviour
         });
 
         _seq.Append(turnChangePanel.transform.DOLocalMoveY(0, panelDownDeley));
-        _seq.Append(전.transform.DOLocalMoveX(-85, 1f));
-        _seq.Join(개.transform.DOLocalMoveX(85, 1f));
+        _seq.Append(전.transform.DOLocalMoveX(-85, 0.4f));
+        _seq.Join(개.transform.DOLocalMoveX(85, 0.4f));
 
         _seq.AppendInterval(0.4f);
 
-        _seq.Append(전.transform.DOLocalMoveX(-1100, .7f).SetEase(Ease.InQuart));
-        _seq.Join(개.transform.DOLocalMoveX(1100, .7f).SetEase(Ease.InQuart));
-        _seq.Append(turnChangePanel.transform.DOLocalMoveY(650, .7f).SetEase(Ease.InQuart));
+        _seq.Append(전.transform.DOLocalMoveX(-1100, .5f).SetEase(Ease.InQuart));
+        _seq.Join(개.transform.DOLocalMoveX(1100, .5f).SetEase(Ease.InQuart));
+        _seq.Append(turnChangePanel.transform.DOLocalMoveY(650, .4f).SetEase(Ease.InQuart));
 
         _seq.AppendCallback(ResetPosition);
         

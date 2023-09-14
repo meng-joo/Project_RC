@@ -28,8 +28,8 @@ public class TestCard2 : AbCard
         
         var _effect = PoolManager.Pop(cardSO.effect);
         _effect.transform.position = cardSO.effectPosition;
-        
-        DamageTextManager.CreateDamageText(0, Color.red);
+
+        DamageTextManager.CreateDamageText(FindObjectOfType<Enemy>().transform.position, 0, Color.red);
         
         BattleManager.CurrentActiveSlotCount--;
     }

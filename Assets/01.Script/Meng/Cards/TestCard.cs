@@ -32,7 +32,7 @@ public class TestCard : AbCard
         var _effect = PoolManager.Pop(cardSO.effect);
         _effect.transform.position = cardSO.effectPosition;
 
-        DamageTextManager.CreateDamageText(200, Color.red);
+        DamageTextManager.CreateDamageText(FindObjectOfType<Enemy>().transform.position,200, Color.red);
         
         BattleManager.CurrentActiveSlotCount--;
         DiscardCard(transform.parent.gameObject);
