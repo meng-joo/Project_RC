@@ -5,22 +5,27 @@ using UnityEngine;
 
 public class BuffUIUpdate : MonoBehaviour
 {
-    private Dictionary<BuffDataSO, BufDeBufIcon> bufTypeList = new Dictionary<BuffDataSO, BufDeBufIcon>();
+    private Dictionary<BufType, BufDeBufIcon> bufTypeList = new Dictionary<BufType, BufDeBufIcon>();
 
-    public void UpdateBuffUI(BuffDataSO _buffDataSO, int _count, bool _isNew)
+    public void UpdateBuffUI(BuffDataSO _buffDataSO, int _count)
     {
-        if (_isNew)
+        if (!bufTypeList.ContainsKey(_buffDataSO.bufType))
         {
             var _icon = PoolManager.Pop(PoolType.BuffIcon);
             _icon.transform.SetParent(transform);
             _icon.transform.localScale = Vector3.one;
             _icon.GetComponent<BufDeBufIcon>().SetBuffData(_buffDataSO, _count);
-            bufTypeList.Add(_buffDataSO, _icon.GetComponent<BufDeBufIcon>());
+            bufTypeList.Add(_buffDataSO.bufType, _icon.GetComponent<BufDeBufIcon>());
         }
 
         else
         {
-            bufTypeList[_buffDataSO].SetBuffData(_buffDataSO, _count);
+            bufTypeList[_buffDataSO.bufType].SetBuffData(_buffDataSO, _count);
         }
+    }
+
+    public void RemoveBuffUI(BufType _bufType)
+    {
+        bufTypeList[_bufType].RemoveBuff();
     }
 }

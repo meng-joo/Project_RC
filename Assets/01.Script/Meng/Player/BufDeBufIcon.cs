@@ -10,6 +10,7 @@ public enum BufType
 {
     POISON,
     STRONG,
+    WOUND,
     NONE
 }
 
@@ -21,6 +22,7 @@ public class BufDeBufIcon : PoolAbleObject, IPointerEnterHandler, IPointerExitHa
     
     public Image iconImage;
     public TextMeshProUGUI countText;
+    public string explainText;
 
     public override void Init_Pop()
     {
@@ -32,11 +34,22 @@ public class BufDeBufIcon : PoolAbleObject, IPointerEnterHandler, IPointerExitHa
     {
         iconImage.sprite = _buffDataSO.icon;
         countText.text = $"{_count}";
+        explainText = _buffDataSO.buffExp;
 
         bufType = _buffDataSO.bufType;
 
-        transform.DOShakeRotation(0.8f, 90, 180);
-        transform.DOShakePosition(0.8f, 90, 180);
+        transform.DOShakeRotation(1.2f, 30, 180);
+        transform.DOShakePosition(1.2f, 30, 180);
+    }
+
+    public void RemoveBuff()
+    {
+        Sequence _seq = DOTween.Sequence();
+
+        _seq.Append(transform.DOShakePosition(1.2f, 30, 180));
+        _seq.Join(transform.DOScale(0, 0.8f));
+
+        _seq.AppendCallback(() => PoolManager.Push(PoolType.BuffIcon, gameObject));
     }
     
     public override void Init_Push()
@@ -47,7 +60,13 @@ public class BufDeBufIcon : PoolAbleObject, IPointerEnterHandler, IPointerExitHa
     public void OnPointerEnter(PointerEventData eventData)
     {
         _explainBox = PoolManager.Pop(PoolType.BuffExplainBox);
-        _explainBox.transform.position = Vector3.zero;
+        _explainBox.GetComponent<BuffExplainBoxUpdate>().SetExplain(explainText);
+        
+        _explainBox.transform.SetParent(transform.parent.parent);
+        _explainBox.transform.localScale = Vector3.one;
+
+        /*_explainBox.transform.position =
+            Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x + 150, Input.mousePosition.y - 100, 5));*/
     }
 
     public void OnPointerExit(PointerEventData eventData)

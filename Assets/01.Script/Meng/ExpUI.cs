@@ -37,7 +37,7 @@ public class ExpUI : MonoBehaviour
 
                 _card.transform.SetParent(expImage);
 
-                _card.GetComponentInChildren<AbCard>().SetFontSize(12f);
+                _card.GetComponentInChildren<AbCard>().SetFontSize(18f);
                 _card.GetComponentInChildren<AbCard>().BreakthroughCard(i, false);
 
                 _card.transform.localScale = Vector3.one;
@@ -54,7 +54,7 @@ public class ExpUI : MonoBehaviour
         
         for (int i = _count - 1; i >= 0; i--)
         {
-            expImage.GetChild(i).GetComponentInChildren<AbCard>().SetFontSize(18);
+            expImage.GetChild(i).GetComponentInChildren<AbCard>().SetFontSize(12f);
             PoolManager.Push(_cardType, expImage.GetChild(i).gameObject);
         }
 

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3effbf26fd4c47549a3dfddcc178d128, type: 3}
+  m_Name: Attack_PunchSO
+  m_EditorClassIdentifier: 
+  cardInfo:
+    name: "\uD380\uCE58"
+    cardPoolType: 15
+    cardTier: 0
+    cardType: 0
+    cardExp: "\uC8FC\uBA39\uC744 \uB0A0\uB824 \uC0C1\uB300\uBC29\uC744 \uAC00\uACA9\uD569\uB2C8\uB2E4.
+      10\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4. \uCE74\uB4DC\uAC00 \uC18C\uBAA8\uB429\uB2C8\uB2E4."
+  upgradeCardInfo:
+    name: "\uC9C4\uC2EC\uD380\uCE58"
+    cardPoolType: 15
+    cardTier: 0
+    cardType: 0
+    cardExp: "\uC790\uC138\uB97C \uC7A1\uACE0 \uC81C\uB300\uB85C \uB41C \uD380\uCE58\uB97C
+      \uB0A0\uB9BD\uB2C8\uB2E4. \uCD1D 15\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
+      \uCE74\uB4DC\uAC00 \uC18C\uBAA8\uB429\uB2C8\uB2E4."
+  transcendenceCardInfo:
+    name: "\uC77C\uACA9\uD544\uC0B4"
+    cardPoolType: 15
+    cardTier: 1
+    cardType: 0
+    cardExp: "\uB354 \uC774\uC0C1 \uC774 \uC2A4\uD0AC\uC744 \uB9C9\uC744 \uC218\uB294
+      \uC5C6\uC2B5\uB2C8\uB2E4! 23\uC758 \uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4.
+      \uCE74\uB4DC\uAC00 \uC18C\uBA78\uB429\uB2C8\uB2E4."
+  cardIconImage: {fileID: 21300000, guid: cb79a9c8f74729c49bb0187ebf547eb4, type: 3}
+  effect: 17
+  effectPosition: {x: 6, y: 1.1}
+  randomWeight: 0

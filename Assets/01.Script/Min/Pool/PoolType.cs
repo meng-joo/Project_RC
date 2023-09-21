@@ -14,5 +14,10 @@ public enum PoolType/*풀링 타입(풀링할 에들이 많아지면 계속 추�
   UnitCanvas,
   BuffIcon,
   BuffExplainBox,
+  BloodEffect_1,
+  Card_Punch,
+  Card_Sting,
+  Effect_Punch,
+  Effect_Sting,
   NONE
 }

@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Poison
   m_EditorClassIdentifier: 
   bufType: 0
-  count: 0
   icon: {fileID: 21300056, guid: 30b68346a3d4af44899dec2e3576004b, type: 3}
+  buffExp: "\uC911\uB3C5\uB418\uC5C8\uC2B5\uB2C8\uB2E4! \uB9E4 \uC790\uC2E0\uC758
+    \uD134 \uC2DC\uC791\uC2DC \uC911\uB3C5\uB41C \uC2A4\uD14D\uB9CC\uD07C\uC758 \uD53C\uAC00
+    \uAE4E\uC785\uB2C8\uB2E4. \uD134\uC774 \uC9C0\uB0A0 \uB54C \uB9C8\uB2E4 1\uC529
+    \uC904\uC5B4\uB4ED\uB2C8\uB2E4."

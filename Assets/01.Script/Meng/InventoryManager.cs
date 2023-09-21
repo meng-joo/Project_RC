@@ -1,18 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoSingleTon<InventoryManager>
 {
-    public static InventoryManager instance;
-
-    public List<CardSO> inventoryCards;
     public List<CardSO> deckCards;
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
     }
 }

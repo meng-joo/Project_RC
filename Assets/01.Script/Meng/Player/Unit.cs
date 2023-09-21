@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,16 +12,16 @@ public abstract class Unit : MonoBehaviour
     [SerializeField] private CharacterInfoSO characterInfoSO;
     [SerializeField] private Canvas unitUICanvas;
 
-    private Dictionary<BuffDataSO, int> buffDataList = new Dictionary<BuffDataSO, int>();
-    public Dictionary<BuffDataSO, int> BuffDataList
+    private Dictionary<BufType, ABBuff> buffEffect = new Dictionary<BufType, ABBuff>();
+    public Dictionary<BufType, ABBuff> BuffEffect
     {
         get
         {
-            return buffDataList;
+            return buffEffect;
         }
         set
         {
-            buffDataList = value;
+            buffEffect = value;
         }
     }
     public BuffUIUpdate BuffUIUpdate
@@ -35,7 +37,6 @@ public abstract class Unit : MonoBehaviour
             buffUIUpdate = value;
         }
     }
-
     protected int maxHp => characterInfoSO.hp;
 
     protected int currentHp;
@@ -61,6 +62,50 @@ public abstract class Unit : MonoBehaviour
     protected GameObject visual;
 
     private string anme;
+
+    public float MyTurnStart()
+    {
+        float _time = BuffEffect.Sum(_variable => _variable.Value.TurnStart());
+        CheckBuff();
+        return _time;
+    }
+    public float MyTurnEnd()
+    {
+        float _time = BuffEffect.Sum(_variable => _variable.Value.TurnEnd());
+        CheckBuff();
+        return _time;
+    }
+    private int AttackEffect(int _damage)
+    {
+        int _addDamage = BuffEffect.Sum(_variable => _variable.Value.AttackEffect(_damage));
+        CheckBuff();
+        return _addDamage;
+    }
+
+    private int HitEffect(int _damage)
+    {
+        int _addDamage = BuffEffect.Sum(_variable => _variable.Value.HitEffect(_damage));
+        CheckBuff();
+        return _addDamage;
+    }
+
+    private void CheckBuff()
+    {
+        List<BufType> _removeBuf = (from _variable in BuffEffect where _variable.Value.Count <= 0 select _variable.Key).ToList();
+
+        for (int i = 0; i < _removeBuf.Count - 1; i++)
+        {
+            RemoveBuff(_removeBuf[i]);
+        }
+    }
+
+    private void Update()
+    {
+        foreach (var _variable in BuffEffect.Values)
+        {
+            _variable.Update();
+        }
+    }
 
     protected void SetInfo()
     {
@@ -99,6 +144,9 @@ public abstract class Unit : MonoBehaviour
     public virtual float Attack(int _damage)
     {
         animator.SetTrigger("Attack");
+
+        _damage += AttackEffect(_damage);
+        enemy.Hit(_damage);
         
         return animatorOverrideController["Attack"].length;
     }
@@ -106,10 +154,13 @@ public abstract class Unit : MonoBehaviour
     public virtual float Hit(int _damage)
     {
         animator.SetTrigger("Hit");
-        
+
+        _damage += HitEffect(_damage);
         int _hp = CurrentHP - _damage;
         CurrentHP = Mathf.Max(0, _hp);
-        
+
+        HitFeedback(_damage);
+
         if (CurrentHP <= 0)
         {
             
@@ -127,14 +178,26 @@ public abstract class Unit : MonoBehaviour
 
     public void AddBuff(BuffDataSO _buffDataSO, int _count)
     {
-        if (BuffDataList.ContainsKey(_buffDataSO))
+        if (BuffEffect.ContainsKey(_buffDataSO.bufType))
         {
-            BuffDataList[_buffDataSO] += _count;
-            BuffUIUpdate.UpdateBuffUI(_buffDataSO, BuffDataList[_buffDataSO], false);
+            BuffEffect[_buffDataSO.bufType].AddBuffCount(_count);
             return;
         }
 
-        BuffDataList.Add(_buffDataSO, _count);
-        BuffUIUpdate.UpdateBuffUI(_buffDataSO, _count, true);
+        BuffEffect.Add(_buffDataSO.bufType, BuffManager.Instance.BuffType(this, _buffDataSO, _count));
+    }
+
+    public void RemoveBuff(BufType _bufType)
+    {
+        if (!BuffEffect.ContainsKey(_bufType)) return;
+
+        buffUIUpdate.RemoveBuffUI(_bufType);
+        BuffEffect.Remove(_bufType);
+    }
+
+    private void HitFeedback(int _damage)
+    {
+        DamageTextManager.CreateDamageText(transform.position, _damage, Color.red);
+        visual.transform.DOShakePosition(0.8f, Mathf.Clamp(_damage / 80f, 0.04f, 0.5f), 70).SetUpdate(true);
     }
 }

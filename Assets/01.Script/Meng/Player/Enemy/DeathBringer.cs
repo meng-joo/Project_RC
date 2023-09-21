@@ -14,7 +14,6 @@ public class DeathBringer : Enemy
         switch (rand)
         {
             case 0:
-                Attack(10);
                 DamageEnemy(20);
                 break;
             case 1:
@@ -29,15 +28,14 @@ public class DeathBringer : Enemy
 
     public override float SpecialAbility()
     {
-        enemy.AddBuff(bufOrDebuf[BufType.POISON], 10);
+        enemy.AddBuff(bufOrDebuf[BufType.POISON], 5);
         
         return base.SpecialAbility();
     }
     
     private void DamageEnemy(int _damage)
     {
-        enemy.Hit(10);
-
-        DamageTextManager.CreateDamageText(enemy.transform.position, 10, Color.red);
+        Attack(_damage);
+        EffectManager.Instance.TimeSlowEffect(0.4f, 0.1f);
     }
 }

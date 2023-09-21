@@ -10,7 +10,7 @@ public class TurnChangeEffect : MonoBehaviour
     [SerializeField] private float panelDownDeley;
     
     private Image turnChangePanel;
-    private TextMeshProUGUI 전;    
+    private TextMeshProUGUI 전;
     private TextMeshProUGUI 개;
     
     void Start()

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class TestCard2 : AbCard
 {
+    [SerializeField] private BuffDataSO Poison;
+    
     public override float CardSkill()
     {
         Sequence _seq = DOTween.Sequence();
@@ -24,12 +26,15 @@ public class TestCard2 : AbCard
     private void AttackEnemy()
     {
         FindObjectOfType<Player>().Attack(0);
-        FindObjectOfType<Enemy>().Hit(0);
+        //FindObjectOfType<Enemy>().Hit(0);
         
         var _effect = PoolManager.Pop(cardSO.effect);
         _effect.transform.position = cardSO.effectPosition;
 
+        //FindObjectOfType<Enemy>().AddBuff(Poison, 1);
+
         DamageTextManager.CreateDamageText(FindObjectOfType<Enemy>().transform.position, 0, Color.red);
+        EffectManager.Instance.TimeSlowEffect(0.4f, 0.1f);
         
         BattleManager.CurrentActiveSlotCount--;
     }

@@ -100,9 +100,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4551952064919673425, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -2310425451620539667}
     - targetCorrespondingSourceObject: {fileID: 2702015246092055843, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8673038409242463747}
@@ -127,20 +124,4 @@ MonoBehaviour:
   cardSO: {fileID: 11400000, guid: 944600ebaa2577e42a1e1331ff825125, type: 2}
   screenImage: {fileID: 0}
   outLineImage: {fileID: 0}
---- !u!1 &6369219778101091047 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4551952064919673425, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
-  m_PrefabInstance: {fileID: 7444392930690662582}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-2310425451620539667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6369219778101091047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb3eed3bc4801614fa0bc9333ebea47a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  Poison: {fileID: 11400000, guid: 5e42fad90e6744947b82e9bbe23f3465, type: 2}

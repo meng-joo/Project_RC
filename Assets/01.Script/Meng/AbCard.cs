@@ -30,6 +30,8 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private Image cardBorderImage;
     public Image screenImage;
     public Image outLineImage;
+    public Image tierBorder_Lv2;
+    public Image tierBorder_Lv3;
     private TextMeshProUGUI cardExp;
     private GameObject cardTierEffect;
 
@@ -39,6 +41,8 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
     private BattleManager battleManager;
     private ExpUI expUI;
 
+    private CardTier currentCardTierEffect = CardTier.NONE;
+    
     protected BattleManager BattleManager
     {
         get
@@ -50,7 +54,7 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
     
     public void Init_Pop()
     {
-        transform.localScale = Vector3.zero;
+        transform.localScale = new Vector3(0, 0.1f, 0);
         transform.localPosition = Vector3.zero;
         mainCam ??= Camera.main;
         SetCardInfo(cardSO);
@@ -71,6 +75,8 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
         cardExp ??= transform.Find("Exp").GetComponent<TextMeshProUGUI>();
         screenImage ??= transform.Find("Screen").GetComponent<Image>();
         outLineImage ??= transform.Find("OutLine").GetComponent<Image>();
+        tierBorder_Lv2 ??= transform.Find("TierBorder_Lv2").GetComponent<Image>();
+        tierBorder_Lv3 ??= transform.Find("TierBorder_Lv3").GetComponent<Image>();
         expUI ??= FindObjectOfType<ExpUI>();
     }
 
@@ -87,12 +93,12 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
         level = 1;
 
         SetCashing();
+        
+        screenImage.color = Color.white;
 
         SetCardInfo(CardInfo);
 
         cardIconImage.sprite = _cardSO.cardIconImage;
-        
-        screenImage.color = new Color(1, 1, 1, 0);
 
         OutLineEffect(false);
     }
@@ -100,20 +106,33 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void SetCardInfo(CardInfo _cardInfo)
     {
         cardName.text = _cardInfo.name;
-        
+
         cardBackImage.color = SetColor(_cardInfo.cardType);
         cardBorderImage.color = SetColor(_cardInfo.cardTier);
-        if (cardTierEffect == null)
+        if (currentCardTierEffect != _cardInfo.cardTier)
         {
+            if (cardTierEffect != null)
+                PoolManager.Push(cardTierEffect.GetComponent<UIPoolEffect>().PoolType, cardTierEffect);
+
             if (_cardInfo.cardTier == CardTier.SR || _cardInfo.cardTier == CardTier.SSR)
             {
                 cardTierEffect = SetTierEffect(_cardInfo.cardTier);
                 cardTierEffect.transform.SetParent(transform);
                 cardTierEffect.transform.localPosition = Vector3.zero;
-                cardTierEffect.transform.localScale = new Vector3(95, 95, 95);
+                cardTierEffect.transform.localScale = new Vector3(96, 145, 96);
+
             }
         }
+
         cardExp.text = _cardInfo.cardExp;
+
+        tierBorder_Lv2.gameObject.SetActive(false);
+        tierBorder_Lv3.gameObject.SetActive(false);
+
+        if (Level == 2)
+            tierBorder_Lv2.gameObject.SetActive(true);
+        if (Level == 3)
+            tierBorder_Lv3.gameObject.SetActive(true);
     }
 
     public void SetNextCard()
@@ -129,12 +148,13 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 switch (level)
                 {
                     case 1:
-                        SetCardInfo(cardSO.upgradeCardInfo);
                         level = 2;
+                        SetCardInfo(cardSO.upgradeCardInfo);
+                        
                         break;
                     case 2:
-                        SetCardInfo(cardSO.transcendenceCardInfo);
                         level = 3;
+                        SetCardInfo(cardSO.transcendenceCardInfo);
                         break;
                     default:
                         break;
@@ -142,8 +162,8 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
                 break;
             case 2:
-                SetCardInfo(cardSO.transcendenceCardInfo);
                 level = 3;
+                SetCardInfo(cardSO.transcendenceCardInfo);
                 break;
             default:
                 break;
@@ -159,9 +179,9 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
     };
     private Color SetColor(CardTier _cardTire) => _cardTire switch
     {
-        CardTier.R => Color.red,
+        CardTier.R => Color.white,
         CardTier.SR => Color.blue,
-        CardTier.SSR => Color.green,
+        CardTier.SSR => Color.red,
         CardTier.NONE => Color.white
     };
 
@@ -230,9 +250,9 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {
         var _seq = DOTween.Sequence();
 
-        _seq.Append(transform.DOLocalMoveX(transform.localPosition.x + 170f, 0.5f).SetEase(Ease.InBack));
-        _seq.Join(transform.DOScale(0, 0.5f).SetEase(Ease.InBack));
-        _seq.Join(screenImage.DOFade(1, 0.1f));
+        _seq.Append(transform.DOLocalMoveX(transform.localPosition.x + 170f, 0.4f).SetEase(Ease.InBack));
+        _seq.Join(transform.DOScale(0, 0.4f).SetEase(Ease.InBack));
+        _seq.Join(screenImage.DOFade(1, 0.2f));
 
         return _seq.Duration();
     }
@@ -242,9 +262,14 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
         outLineImage.gameObject.SetActive(_isOn);
     }
 
-    public void PickEffect(float _size = 1, float _time = 0.2f)
+    public void PickEffect(float _size = 1, float _time = 0.6f)
     {
-        transform.DOScale(_size, _time);
+        Sequence _seq = DOTween.Sequence();
+        float _divideTime = _time / 10f;
+
+        _seq.Append(transform.DOScaleX(_size, _divideTime * 5));
+        _seq.Append(transform.DOScaleY(_size, _divideTime * 3f));
+        _seq.Append(screenImage.DOFade(0, _divideTime * 2f));
     }
 
     #endregion
@@ -259,11 +284,11 @@ public abstract class AbCard : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             Sequence _seq = DOTween.Sequence();
 
-            _seq.Append(transform.DOScale(1.2f, 0.4f).SetEase(Ease.InOutBack));
-            _seq.Join(screenImage.DOFade(1, 0.3f));
+            _seq.Append(transform.DOScale(1.2f, 0.2f).SetEase(Ease.InOutBack));
+            _seq.Join(screenImage.DOFade(1, 0.15f));
             _seq.AppendCallback(() => UpgradeCard(_upLevel));
 
-            _seq.Append(transform.DOScale(1, 0.8f));
+            _seq.Append(transform.DOScale(1, 0.3f));
             _seq.Join(screenImage.DOFade(0, 0.2f));
 
             return _seq.Duration();

@@ -12,6 +12,28 @@ using Random = UnityEngine.Random;
 
 public class BattleManager : MonoBehaviour
 {
+    [SerializeField] private Player player;
+    [SerializeField] private Enemy enemy;
+
+    public Player Player
+    {
+        get
+        {
+            player ??= FindObjectOfType<Player>();
+            return player;
+        }
+        set => player = value;
+    }
+    public Enemy Enemy
+    {
+        get
+        {
+            enemy ??= FindObjectOfType<Enemy>();
+            return enemy;
+        }
+        set => enemy = value;
+    }
+
     [SerializeField] private bool isPlayerTurn;
     
     private Dictionary<string, AbCard> playerCard;
@@ -83,11 +105,12 @@ public class BattleManager : MonoBehaviour
         currentSlotCount++;
             
         //여기에 가중치 랜덤 들어가야 합니다
-        var a = Random.Range(0, InventoryManager.instance.deckCards.Count);
-        var _card = PoolManager.Pop(InventoryManager.instance.deckCards[a].cardInfo.cardPoolType);
+        var a = Random.Range(0, InventoryManager.Instance.deckCards.Count);
+        var _card = PoolManager.Pop(InventoryManager.Instance.deckCards[a].cardInfo.cardPoolType);
         _card.transform.SetParent(deckUI.transform);
         _card.transform.localScale = Vector3.one;
         _card.GetComponentInChildren<AbCard>().PickEffect();
+        _card.GetComponentInChildren<AbCard>().SetFontSize(12f);
 
         arrange.UpdateChildren();
     }
@@ -116,9 +139,15 @@ public class BattleManager : MonoBehaviour
     {
         yield return new WaitForSeconds(turnChangeEffect.ChangingEffect("적", "턴"));
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(Enemy.MyTurnStart());
+
+        yield return new WaitForSeconds(1.2f);
         
-        yield return new WaitForSeconds(FindObjectOfType<Enemy>().Skill());
+        yield return new WaitForSeconds(Enemy.Skill());
+        
+        yield return new WaitForSeconds(1f);
+        
+        yield return new WaitForSeconds(Enemy.MyTurnEnd());
         
         TurnEnd("Player");
     }
@@ -126,6 +155,8 @@ public class BattleManager : MonoBehaviour
     IEnumerator PlayerTurn()
     {
         yield return new WaitForSeconds(turnChangeEffect.ChangingEffect("내", "턴"));
+
+        yield return new WaitForSeconds(Player.MyTurnStart());
         
         IsPlayerTurn = true;
         CurrentActiveSlotCount = activeSlotCount;
@@ -192,6 +223,8 @@ public class BattleManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1f);
+        
+        yield return new WaitForSeconds(Player.MyTurnEnd());
 
         activeSlot.Clear();
         TurnEnd("Enemy");

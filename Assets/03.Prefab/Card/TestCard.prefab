@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1875214692080746659, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3621011619620283138, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 461051268, guid: bdccefc692d678442b6eb43ee03d5597, type: 3}
+    - target: {fileID: 3971153115833082574, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1015512b5bcd9ff4ab9f21a2235164e4, type: 3}
     - target: {fileID: 4551952064919673425, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
       propertyPath: m_Name
       value: TestCard
@@ -100,9 +112,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4551952064919673425, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1873741217694678717}
     - targetCorrespondingSourceObject: {fileID: 2702015246092055843, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8195396991028925786}
@@ -127,20 +136,5 @@ MonoBehaviour:
   cardSO: {fileID: 11400000, guid: f322a23c66e7fab46b82765095c2f243, type: 2}
   screenImage: {fileID: 0}
   outLineImage: {fileID: 0}
---- !u!1 &4527724072071025684 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4551952064919673425, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
-  m_PrefabInstance: {fileID: 143689972705381957}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1873741217694678717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4527724072071025684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb3eed3bc4801614fa0bc9333ebea47a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  tierBorder: {fileID: 0}
+  Poison: {fileID: 11400000, guid: 5e42fad90e6744947b82e9bbe23f3465, type: 2}
