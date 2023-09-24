@@ -9,16 +9,19 @@ public class ExpUI : MonoBehaviour
     private Transform expImage;
 
     private PoolType poolType;
+
+    private bool _isOn;
     
     private void Start()
     {
         expImage = transform.Find("EXPImage");
-        
+        _isOn = false;
         expImage.transform.localScale = Vector3.zero;
     }
 
     public void PopupCardInfo(PoolType _cardType)
     {
+        if (_isOn) return;
         Sequence _seq = DOTween.Sequence();
 
         _seq.AppendCallback(() =>
@@ -44,6 +47,7 @@ public class ExpUI : MonoBehaviour
                 _card.GetComponentInChildren<AbCard>().PickEffect(1.5f);
             }
         });
+        _isOn = true;
     }
 
     public void FoldPopupCardInfo(PoolType _cardType)
@@ -58,6 +62,7 @@ public class ExpUI : MonoBehaviour
             PoolManager.Push(_cardType, expImage.GetChild(i).gameObject);
         }
 
+        _isOn = false;
         expImage.localScale = Vector3.zero;
     }
 }

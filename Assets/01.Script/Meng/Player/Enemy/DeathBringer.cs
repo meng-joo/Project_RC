@@ -7,6 +7,12 @@ public class DeathBringer : Enemy
 {
     [SerializeField] private SerializableDictionary<BufType, BuffDataSO> bufOrDebuf = new SerializableDictionary<BufType, BuffDataSO>();
 
+    public void Start()
+    {
+        base.Start();
+        ShieldCount = 0;
+    }
+
     public override float Skill()
     {
         int rand = Random.Range(0, 2);

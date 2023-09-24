@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3effbf26fd4c47549a3dfddcc178d128, type: 3}
+  m_Name: Debuff_WeakeningSO
+  m_EditorClassIdentifier: 
+  cardInfo:
+    name: "\uC57D\uD654"
+    cardPoolType: 25
+    cardTier: 0
+    cardType: 2
+    cardExp: "\uBAB8\uC5D0 \uD798\uC774 \uD480\uB9BD\uB2C8\uB2E4. \uC801\uC5D0\uAC8C
+      3\uC758 \uC57D\uD654\uB97C \uAC81\uB2C8\uB2E4. \uCE74\uB4DC\uAC00 \uC18C\uBAA8\uB429\uB2C8\uB2E4."
+  upgradeCardInfo:
+    name: "\uAC70\uBBF8\uC904"
+    cardPoolType: 25
+    cardTier: 0
+    cardType: 2
+    cardExp: "\uC801\uC774 \uC798 \uBABB\uC6C0\uC9C1\uC774\uAC8C \uB418\uC5C8\uC2B5\uB2C8\uB2E4!
+      \uC801\uC5D0\uAC8C \uC57D\uD654\uB97C 7\uAC81\uB2C8\uB2E4. \uCE74\uB4DC\uAC00
+      \uC18C\uBAA8\uB429\uB2C8\uB2E4."
+  transcendenceCardInfo:
+    name: "\uBE44\uBABD\uC0AC\uBABD"
+    cardPoolType: 25
+    cardTier: 1
+    cardType: 2
+    cardExp: "\uC801\uC740 \uC815\uC2E0\uC744 \uBABB\uCC28\uB9BD\uB2C8\uB2E4. \uBC85\uC5D0\uAC8C
+      15\uC758 \uC57D\uD654\uB97C \uAC81\uB2C8\uB2E4. \uCE74\uB4DC\uAC00 \uC18C\uBAA8\uB429\uB2C8\uB2E4."
+  cardIconImage: {fileID: 21300000, guid: c5f9080889fc4c347a7bfb69548b9f43, type: 3}
+  effect: 18
+  effectPosition: {x: 6, y: 1.1}
+  randomWeight: 0

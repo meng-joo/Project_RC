@@ -37,10 +37,36 @@ public abstract class Unit : MonoBehaviour
             buffUIUpdate = value;
         }
     }
+    public ShieldUI ShieldUI
+    {
+        get
+        {
+            shieldUI ??= unitUICanvas.GetComponentInChildren<ShieldUI>();
+            return shieldUI;
+        }
+        set
+        {
+            shieldUI ??= unitUICanvas.GetComponentInChildren<ShieldUI>();
+            shieldUI = value;
+        }
+    }
+    
     protected int maxHp => characterInfoSO.hp;
 
     protected int currentHp;
-
+    private int shieldCount = 0;
+    public int ShieldCount
+    {
+        get
+        {
+            return shieldCount;
+        }
+        set
+        {
+            shieldCount = Mathf.Max(value, 0);
+            ShieldUI.UpdateShieldCountUI(shieldCount);
+        }
+    }
     public int CurrentHP
     {
         get => currentHp;
@@ -58,11 +84,15 @@ public abstract class Unit : MonoBehaviour
     protected AnimatorOverrideController animatorOverrideController;
 
     private BuffUIUpdate buffUIUpdate;
+    private ShieldUI shieldUI;
     
     protected GameObject visual;
 
     private string anme;
 
+    #region TurnEffect
+
+    
     public float MyTurnStart()
     {
         float _time = BuffEffect.Sum(_variable => _variable.Value.TurnStart());
@@ -81,14 +111,18 @@ public abstract class Unit : MonoBehaviour
         CheckBuff();
         return _addDamage;
     }
-
     private int HitEffect(int _damage)
     {
         int _addDamage = BuffEffect.Sum(_variable => _variable.Value.HitEffect(_damage));
         CheckBuff();
         return _addDamage;
     }
-
+    private int HealEffect(int _amount)
+    {
+        int _addHeal = BuffEffect.Sum(_variable => _variable.Value.HealEffect(_amount));
+        CheckBuff();
+        return _addHeal;
+    }
     private void CheckBuff()
     {
         List<BufType> _removeBuf = (from _variable in BuffEffect where _variable.Value.Count <= 0 select _variable.Key).ToList();
@@ -99,6 +133,8 @@ public abstract class Unit : MonoBehaviour
         }
     }
 
+
+    #endregion
     private void Update()
     {
         foreach (var _variable in BuffEffect.Values)
@@ -151,11 +187,12 @@ public abstract class Unit : MonoBehaviour
         return animatorOverrideController["Attack"].length;
     }
 
-    public virtual float Hit(int _damage)
+    public virtual float Hit(int _damage, bool _trueDamage = false)
     {
         animator.SetTrigger("Hit");
 
-        _damage += HitEffect(_damage);
+        _damage = DamageCalculation(_damage, _trueDamage);
+
         int _hp = CurrentHP - _damage;
         CurrentHP = Mathf.Max(0, _hp);
 
@@ -167,6 +204,31 @@ public abstract class Unit : MonoBehaviour
         }
 
         return animatorOverrideController["Hit"].length;
+    }
+
+    public virtual float Heal(int _amount)
+    {
+        animator.SetTrigger("Skill");
+
+        _amount += HealEffect(_amount);
+        
+        int _healHp = Mathf.Min(maxHp, CurrentHP + _amount);
+        CurrentHP = _healHp;
+        
+        return animatorOverrideController["Skill"].length;
+    }
+    
+    public int DamageCalculation(int _damage, bool _trueDamage)
+    {
+        if (_trueDamage)
+            return _damage;
+        
+        _damage += HitEffect(_damage);
+
+        _damage -= ShieldCount;
+        ShieldCount -= _damage;
+
+        return _damage < 0 ? 0 : _damage;
     }
 
     public virtual float SpecialAbility()

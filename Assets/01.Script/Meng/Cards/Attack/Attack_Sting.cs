@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 public class Attack_Sting : AbCard
 {
-    [SerializeField] private BuffDataSO _wound;
+    [SerializeField] private BuffDataSO wound;
     public override float CardSkill()
     {
         Sequence _seq = DOTween.Sequence();
@@ -29,7 +29,7 @@ public class Attack_Sting : AbCard
     private void AttackEnemy()
     {
         int damage = 0;
-        int wound = 0;
+        int _wound = 0;
         
         switch (Level)
         {
@@ -38,11 +38,11 @@ public class Attack_Sting : AbCard
                 break;
             case 2:
                 damage = 20;
-                wound = 2;
+                _wound = 2;
                 break;
             case 3:
                 damage = 30;
-                wound = 5;
+                _wound = 5;
                 break;
             default:
                 damage = 0;
@@ -57,7 +57,7 @@ public class Attack_Sting : AbCard
         EffectManager.Instance.TimeSlowEffect(0.4f, 0.1f);
 
         if (Level > 1)
-            FindObjectOfType<Enemy>().AddBuff(_wound, wound);
+            FindObjectOfType<Enemy>().AddBuff(wound, _wound);
         
         BattleManager.CurrentActiveSlotCount--;
         DiscardCard(transform.parent.gameObject);

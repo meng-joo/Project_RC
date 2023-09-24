@@ -157,6 +157,7 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(turnChangeEffect.ChangingEffect("내", "턴"));
 
         yield return new WaitForSeconds(Player.MyTurnStart());
+        Player.ShieldCount = 0;
         
         IsPlayerTurn = true;
         CurrentActiveSlotCount = activeSlotCount;

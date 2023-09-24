@@ -23,6 +23,7 @@ public abstract class ABBuff
     public abstract float TurnEnd();
     public abstract int AttackEffect(int _damage);
     public abstract int HitEffect(int _damage);
+    public abstract int HealEffect(int _amount);
     public abstract void End();
 
     public void AddBuffCount(int _addCount)

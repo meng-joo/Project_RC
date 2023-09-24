@@ -15,7 +15,7 @@ public class Debuff_Poison : ABBuff
 
     public override float TurnStart()
     {
-        float _time = unit.Hit(Count);
+        float _time = unit.Hit(Count, true);
         
         return _time;
     }
@@ -37,6 +37,11 @@ public class Debuff_Poison : ABBuff
     }
 
     public override int HitEffect(int _damage)
+    {
+        return 0;
+    }
+
+    public override int HealEffect(int _amount)
     {
         return 0;
     }

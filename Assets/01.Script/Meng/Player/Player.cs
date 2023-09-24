@@ -10,7 +10,8 @@ public class Player : Unit
     public void Start()
     {
         SetInfo();
-        
+
+        ShieldCount = 0;
         enemy = FindObjectOfType<Enemy>();
     }
     

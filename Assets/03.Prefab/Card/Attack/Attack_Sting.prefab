@@ -124,5 +124,6 @@ MonoBehaviour:
   cardSO: {fileID: 11400000, guid: 57f9f096b03c7654c89a020bd2c99525, type: 2}
   screenImage: {fileID: 0}
   outLineImage: {fileID: 0}
-  tierBorder: {fileID: 0}
-  _wound: {fileID: 11400000, guid: f5fc50fb0584cd346b74782b35ca3363, type: 2}
+  tierBorder_Lv2: {fileID: 0}
+  tierBorder_Lv3: {fileID: 0}
+  wound: {fileID: 11400000, guid: f5fc50fb0584cd346b74782b35ca3363, type: 2}

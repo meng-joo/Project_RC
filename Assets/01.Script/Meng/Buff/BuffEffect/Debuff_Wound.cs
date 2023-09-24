@@ -39,6 +39,11 @@ public class Debuff_Wound : ABBuff
         return Mathf.RoundToInt(_damage * 0.3f);
     }
 
+    public override int HealEffect(int _amount)
+    {
+        return 0;
+    }
+
     public override void End()
     {
         

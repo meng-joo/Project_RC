@@ -38,6 +38,11 @@ public class Buff_Strong : ABBuff
         return 0;
     }
 
+    public override int HealEffect(int _amount)
+    {
+        return 0;
+    }
+
     public override void End()
     {
         
