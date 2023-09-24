@@ -35,7 +35,7 @@ MonoBehaviour:
     cardType: 0
     cardExp: "\uC0C1\uCC98\uB97C \uD30C\uACE0..\uD30C\uACE0..\uB610 \uD31D\uB2C8\uB2E4.
       \uC801\uC5D0\uAC8C 23\uC758 \uD53C\uD574\uB97C \uC8FC\uACE0 19\uC758 \uC0C1\uCC98\uB97C
-      \uB0A8\uAE41\uB2C8\uB2E4."
+      \uB0A8\uAE41\uB2C8\uB2E4. \uCE74\uB4DC\uAC00 \uC18C\uBAA8\uB429\uB2C8\uB2E4."
   cardIconImage: {fileID: 21300000, guid: b654a18b119453b46a5198a845cda52b, type: 3}
   effect: 17
   effectPosition: {x: 6, y: 1.1}

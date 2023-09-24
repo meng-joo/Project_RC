@@ -206,16 +206,17 @@ public abstract class Unit : MonoBehaviour
         return animatorOverrideController["Hit"].length;
     }
 
-    public virtual float Heal(int _amount)
+    public virtual float Heal(int _amount, bool _isAnim = true)
     {
-        animator.SetTrigger("Skill");
-
         _amount += HealEffect(_amount);
         
         int _healHp = Mathf.Min(maxHp, CurrentHP + _amount);
         CurrentHP = _healHp;
-        
+
+        if (!_isAnim) return 0;
+        animator.SetTrigger("Skill");
         return animatorOverrideController["Skill"].length;
+
     }
     
     public int DamageCalculation(int _damage, bool _trueDamage)
