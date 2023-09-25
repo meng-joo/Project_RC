@@ -35,9 +35,11 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
 
     public float initialScale;
     private const float HoverScaleFactor = 1.2f;
+
+    public GameObject nodeLine;
     private void OnEnable()
     {
-        connetionCount = Random.Range(2, 3);
+        connetionCount = 4;
         sr = transform.GetChild(0).GetComponent<SpriteRenderer>();
         if (sr != null) initialScale = sr.transform.localScale.x;
     }
@@ -76,7 +78,15 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
         {
             if (connectionNodeList.Count < connetionCount)
             {
-                connectionNodeList.Add(collision.GetComponent<GridNode>());
+                if (collision.GetComponent<GridNode>().nodeStates != NodeStates.Locked)
+                {
+                    Debug.Log("ㅇ안잠겨서리턴");
+                    return;
+                }
+                else
+                {
+                    connectionNodeList.Add(collision.GetComponent<GridNode>());
+                }
             }
         }
     }
