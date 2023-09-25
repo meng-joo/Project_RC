@@ -79,7 +79,7 @@ public class BattleManager : MonoBehaviour
     public Arrange arrange;
     public TurnChangeEffect turnChangeEffect;
 
-    private void Start()
+    public void StartBattle()
     {
         arrange = FindObjectOfType<Arrange>();
         currentCardPickUpCount = cardPickUpCount;
@@ -110,7 +110,7 @@ public class BattleManager : MonoBehaviour
         _card.transform.SetParent(deckUI.transform);
         _card.transform.localScale = Vector3.one;
         _card.GetComponentInChildren<AbCard>().PickEffect();
-        _card.GetComponentInChildren<AbCard>().SetFontSize(13f);
+        _card.GetComponentInChildren<AbCard>().SetFontSize(16f);
 
         arrange.UpdateChildren();
     }

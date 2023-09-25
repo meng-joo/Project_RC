@@ -46,7 +46,7 @@ public class MapGenerator : MonoSingleTon<MapGenerator>
         SetBossNode();
     }
 
-    public void CreateNode() ///»ý¼º
+    public void CreateNode() ///ï¿½ï¿½ï¿½ï¿½
     {
         for (int i = 0; i < mapSettingSO.garoCnt; i++)
         {
@@ -63,7 +63,7 @@ public class MapGenerator : MonoSingleTon<MapGenerator>
         }
     }
 
-    public void IndexSetting() ///°¡·Î ¼ö¸¸Å­ ¸®½ºÆ® ÀÎµ¦½º ¸¸µë
+    public void IndexSetting() ///ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         for (int i = 0; i < mapSettingSO.garoCnt; i++)
         {
@@ -87,7 +87,7 @@ public class MapGenerator : MonoSingleTon<MapGenerator>
             }
             else
             {
-               // Debug.Log("¸®½ºÆ®¿¡ Ãß°¡µÇ´Â ·£´ý³Ñ¹ö +  " + randomNumber);
+               // Debug.Log("ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½ +  " + randomNumber);
                 randomIndexList.Add(randomNumber);
                 i++;
             }
@@ -109,7 +109,8 @@ public class MapGenerator : MonoSingleTon<MapGenerator>
         mapGridNodeList[centerIndex].SetGridActive();
 
         mapGridNodeList[centerIndex].mapSO = battleMap;
-
+        mapGridNodeList[centerIndex].SetGridInfo();
+        
         mapGridNodeList[centerIndex].SetState(NodeStates.Attainable);
     }
     
@@ -123,7 +124,7 @@ public class MapGenerator : MonoSingleTon<MapGenerator>
 
         int randomIdx = Random.Range(0, bossIndexList.Count);
 
-        Debug.Log("º¸½º·£´ýÀ§Ä¡" + randomIdx);
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡" + randomIdx);
 
         //mapGridNodeList[bossIndexList[randomIdx]].gameObject.SetActive(true);
         mapGridNodeList[bossIndexList[randomIdx]].isVisible = true;

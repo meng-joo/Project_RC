@@ -12,4 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590384d907e8c5940971c12e8652d14b, type: 3}
   m_Name: R
   m_EditorClassIdentifier: 
-  tierCardList: []
+  tierCardList:
+  - {fileID: 11400000, guid: b3156a2d6d1c037409752e86570767f5, type: 2}
+  - {fileID: 11400000, guid: b633d3348c6cee74c9c08963ce16fa52, type: 2}
+  - {fileID: 11400000, guid: ab3d9e4c8e4f23943b72112c5d01d40c, type: 2}
+  - {fileID: 11400000, guid: a111c2b9410638f41aa2df6595a2c022, type: 2}
+  - {fileID: 11400000, guid: 3ef5d66d94a5b4547b3286dfb28594e0, type: 2}
+  - {fileID: 11400000, guid: ed86843e945805e4d990d2bc5c4d4755, type: 2}
+  - {fileID: 11400000, guid: 6fb67f5d8d05454469eb41da0a7781eb, type: 2}
+  - {fileID: 11400000, guid: 4e767cc91b69da54db574275887cd3c1, type: 2}
+  - {fileID: 11400000, guid: 75629ca46ba3f0648a07f564d4909d46, type: 2}
+  - {fileID: 11400000, guid: e4891381b04cbc647b524552868fc393, type: 2}

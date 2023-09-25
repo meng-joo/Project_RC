@@ -29,12 +29,12 @@ public class Buff_Thorn : ABBuff
 
     public override int AttackEffect(int _damage)
     {
-        unit.enemy.Hit(Count);
         return 0;
     }
 
     public override int HitEffect(int _damage)
     {
+        unit.enemy.Hit(Count);
         return 0;
     }
 

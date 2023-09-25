@@ -102,14 +102,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2702015246092055843, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8879453811186854514}
+      addedObject: {fileID: 2634547828567924978}
   m_SourcePrefab: {fileID: 100100000, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
 --- !u!1 &4104126318483188610 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2702015246092055843, guid: 6ab124bfb3b189340a7420e8a392ac09, type: 3}
   m_PrefabInstance: {fileID: 2128994985100713633}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8879453811186854514
+--- !u!114 &2634547828567924978
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4104126318483188610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c10bacfa72dabe04dbbd5f5b69ec2017, type: 3}
+  m_Script: {fileID: 11500000, guid: d55e3898c09441543816711df00a4f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardSO: {fileID: 11400000, guid: bf68b6a5a1b21b746adc7fe74dd6d117, type: 2}
@@ -126,3 +126,4 @@ MonoBehaviour:
   outLineImage: {fileID: 0}
   tierBorder_Lv2: {fileID: 0}
   tierBorder_Lv3: {fileID: 0}
+  ironArmor: {fileID: 11400000, guid: 0391af91388ec1e4ab71cecedfbe9735, type: 2}

@@ -15,6 +15,7 @@ public class ShieldUI : MonoBehaviour
 
     public void UpdateShieldCountUI(int _count)
     {
+        shieldCount ??= GetComponentInChildren<TextMeshProUGUI>();
         if (_count > 0)
         {
             gameObject.SetActive(true);

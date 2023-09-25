@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3effbf26fd4c47549a3dfddcc178d128, type: 3}
+  m_Name: Attack_RushSO
+  m_EditorClassIdentifier: 
+  cardInfo:
+    name: "\uB3CC\uC9C4"
+    cardPoolType: 34
+    cardTier: 2
+    cardType: 0
+    cardExp: "\uB2E8\uB2E8\uD574\uC838\uC11C 150\uC758 \uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4.
+      \uCE74\uB4DC\uAC00 \uC18C\uBAA8\uB429\uB2C8\uB2E4."
+  upgradeCardInfo:
+    name: "\uD37D\uCE58\uAE30"
+    cardPoolType: 34
+    cardTier: 2
+    cardType: 0
+    cardExp: "300\uC758 \uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4. \uCE74\uB4DC\uAC00
+      \uC18C\uBAA8\uAC00 \uB429\uB2C8\uB2E4."
+  transcendenceCardInfo:
+    name: "\uC0AC"
+    cardPoolType: 34
+    cardTier: 2
+    cardType: 0
+    cardExp: "\uC989\uC0AC\uC2DC\uD0B5\uB2C8\uB2E4. \uCE74\uB4DC\uAC00 \uC18C\uBAA8\uAC00
+      \uB429\uB2C8\uB2E4."
+  cardIconImage: {fileID: 21300000, guid: 1015512b5bcd9ff4ab9f21a2235164e4, type: 3}
+  effect: 18
+  effectPosition: {x: 6, y: 1.1}
+  randomWeight: 1

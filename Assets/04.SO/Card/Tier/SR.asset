@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590384d907e8c5940971c12e8652d14b, type: 3}
   m_Name: SR
   m_EditorClassIdentifier: 
-  tierCardList: []
+  tierCardList:
+  - {fileID: 11400000, guid: 57f9f096b03c7654c89a020bd2c99525, type: 2}
+  - {fileID: 11400000, guid: e428ff3d29bcc434bb8ca54aca20bfc0, type: 2}
+  - {fileID: 11400000, guid: 6892745eab23a264fa3c13c198b2b1b3, type: 2}
+  - {fileID: 11400000, guid: 76a353ba532401047a959a11fcd02963, type: 2}
+  - {fileID: 11400000, guid: bf68b6a5a1b21b746adc7fe74dd6d117, type: 2}
+  - {fileID: 11400000, guid: 80d1edf458e1fb0479b7d14915b64f04, type: 2}

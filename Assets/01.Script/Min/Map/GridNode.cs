@@ -58,12 +58,12 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
     {
         if (isVisible)
         {
-       //     Debug.Log("ƒ—¡¸");
+       //     Debug.Log("ÏºúÏßê");
             gameObject.SetActive(true);
         }
         else
         {
-         //   Debug.Log("≤®¡¸");
+         //   Debug.Log("Í∫ºÏßê");
             gameObject.SetActive(false);
         }
     }
@@ -80,7 +80,7 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
             {
                 if (collision.GetComponent<GridNode>().nodeStates != NodeStates.Locked)
                 {
-                    Debug.Log("§∑æ»¿·∞‹º≠∏Æ≈œ");
+                    Debug.Log("„ÖáÏïàÏû†Í≤®ÏÑúÎ¶¨ÌÑ¥");
                     return;
                 }
                 else
@@ -144,7 +144,7 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
     {
         if (sr != null)
         {
-       //     Debug.Log("§±§§§§§∑§∑§§§∑§§§∑§§§§");
+       //     Debug.Log("„ÖÅ„Ñ¥„Ñ¥„Öá„Öá„Ñ¥„Öá„Ñ¥„Öá„Ñ¥„Ñ¥");
             sr.transform.DOKill();
             sr.transform.DOScale(initialScale * HoverScaleFactor, 0.3f);
         }
@@ -154,7 +154,7 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
     {
         if (sr != null)
         {
-          //  Debug.Log("§±§§§§§∑");
+          //  Debug.Log("„ÖÅ„Ñ¥„Ñ¥„Öá");
             sr.transform.DOKill();
             sr.transform.DOScale(initialScale, 0.3f);
         }
@@ -162,7 +162,7 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("≈¨∏Ø");
+        Debug.Log("ÌÅ¥Î¶≠");
         MapPlayerTracker.Instance.SelectNode(this);
     }
 

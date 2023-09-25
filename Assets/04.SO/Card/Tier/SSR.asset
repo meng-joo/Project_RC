@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: SSR
   m_EditorClassIdentifier: 
   tierCardList:
-  - {fileID: 11400000, guid: 8e85518fd164cfe4a8e5db13a1defef6, type: 2}
-  - {fileID: 11400000, guid: ee7166c8ef1e9934c9acd0448c407fbe, type: 2}
-  - {fileID: 11400000, guid: 0c00f4ec6689f6142a48f4c0a1753213, type: 2}
+  - {fileID: 11400000, guid: c5a2268c8e003164e93dc73567840c2a, type: 2}

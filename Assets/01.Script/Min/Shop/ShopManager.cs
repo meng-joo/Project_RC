@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
-    #region »óÁ¡ °ü·Ã º¯¼ö
+    #region ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private readonly int SSRcnt = 1;
     private readonly int SRcnt = 2;
     private readonly int Rcnt = 3;
@@ -34,7 +34,7 @@ public class ShopManager : MonoBehaviour
     public void OpenShop()
     {
         SettingCardTier();
-        CreateCardUI();
+       CreateCardUI();
         SetCardRandomsInfo();
     }
     public void SettingCardTier()
@@ -66,9 +66,13 @@ public class ShopManager : MonoBehaviour
             obj.transform.localScale = Vector3.one;
 
             obj.GetComponent<ShopCard>().CardTier = cardTierList[i];
-
+            
+            
             shopCardList.Add(obj.GetComponent<ShopCard>());
+            
+            obj.SetActive((false));
         }
+
     }
 
 
@@ -93,6 +97,13 @@ public class ShopManager : MonoBehaviour
                     break;
             }
 
+            
+            
+            GameObject obj = PoolManager.Pop(shopCardList[i].CardSO.cardInfo.cardPoolType);
+            obj.transform.SetParent(shopCardParentTrm);
+            obj.transform.localScale = Vector3.one;
+            obj.GetComponentInChildren<AbCard>().PickEffect();
+            obj.GetComponentInChildren<AbCard>().SetFontSize(16f);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class Unit : MonoBehaviour
 {
@@ -200,7 +201,7 @@ public abstract class Unit : MonoBehaviour
 
         if (CurrentHP <= 0)
         {
-            
+            SceneManager.LoadScene("Battle");
         }
 
         return animatorOverrideController["Hit"].length;

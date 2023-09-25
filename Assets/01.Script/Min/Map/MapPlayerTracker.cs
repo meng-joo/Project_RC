@@ -48,11 +48,17 @@ public class MapPlayerTracker : MonoSingleTon<MapPlayerTracker>
     }
     private static void EnterNode(GridNode node)
     {
+        Debug.Log(node.mapSO.mapType);
         switch (node.mapSO.mapType)
         {
             case MapType.Battle:
+                Debug.Log("배틀맵");
+
+                FindObjectOfType<BattleManager>().StartBattle();
+                MapUIManager.Instance.OnBattle();
                 break;
             case MapType.Event:
+                Debug.Log("이벤트맵");
                 break;
             case MapType.Shop:
                 break;

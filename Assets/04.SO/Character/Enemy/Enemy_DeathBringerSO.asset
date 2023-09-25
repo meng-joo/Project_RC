@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914a997179771c14fa83b44099d9cebb, type: 3}
   m_Name: Enemy_DeathBringerSO
   m_EditorClassIdentifier: 
-  hp: 1000
+  hp: 500
   cardPoolCount: 1
   skillName: 
   dieAnim: {fileID: 7400000, guid: ad55f241b5aeab54eb829e9c0450671c, type: 2}

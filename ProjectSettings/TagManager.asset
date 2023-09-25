@@ -45,9 +45,6 @@ TagManager:
   - name: BackGround
     uniqueID: 247254633
     locked: 0
-  - name: Map
-    uniqueID: 634579393
-    locked: 0
   - name: Far
     uniqueID: 2140109457
     locked: 0
@@ -65,4 +62,7 @@ TagManager:
     locked: 0
   - name: UIParticle
     uniqueID: 355697633
+    locked: 0
+  - name: Map
+    uniqueID: 634579393
     locked: 0
