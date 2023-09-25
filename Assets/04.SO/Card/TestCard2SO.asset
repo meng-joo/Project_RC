@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestCard2SO
   m_EditorClassIdentifier: 
   cardInfo:
-    name: "\uD14C\uC2A4\uD2B82\uCE74\uB4DC"
+    name: "2\uCE74"
     cardPoolType: 2
     cardTier: 3
     cardType: 3

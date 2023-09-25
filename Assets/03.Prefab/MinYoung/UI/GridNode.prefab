@@ -136,7 +136,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 634579393
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &594643823876686794
@@ -237,6 +237,7 @@ MonoBehaviour:
   visitedCircle: {fileID: 2389456438681039994}
   circleImage: {fileID: 1510837392570973771}
   visitedCircleImage: {fileID: 1510837392570973771}
+  initialScale: 0
 --- !u!58 &1484273955507221999
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -271,7 +272,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 14
+  m_Radius: 20
 --- !u!50 &292271926593081107
 Rigidbody2D:
   serializedVersion: 4
@@ -369,8 +370,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 634579393
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1c39ac1def91f10409d0ae17e46188ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -454,8 +455,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 634579393
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 71cc6a123601cfb4a900b8fbc771374f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
