@@ -11,11 +11,18 @@ public class BuffUIUpdate : MonoBehaviour
     {
         if (!bufTypeList.ContainsKey(_buffDataSO.bufType))
         {
-            var _icon = PoolManager.Pop(PoolType.BuffIcon);
-            _icon.transform.SetParent(transform);
-            _icon.transform.localScale = Vector3.one;
-            _icon.GetComponent<BufDeBufIcon>().SetBuffData(_buffDataSO, _count);
-            bufTypeList.Add(_buffDataSO.bufType, _icon.GetComponent<BufDeBufIcon>());
+            if (_count > 0)
+            {
+                var _icon = PoolManager.Pop(PoolType.BuffIcon);
+                _icon.transform.SetParent(transform);
+                _icon.transform.localScale = Vector3.one;
+                _icon.GetComponent<BufDeBufIcon>().SetBuffData(_buffDataSO, _count);
+                bufTypeList.Add(_buffDataSO.bufType, _icon.GetComponent<BufDeBufIcon>());
+            }
+            else
+            {
+                RemoveBuffUI(_buffDataSO.bufType);
+            }
         }
 
         else
@@ -27,5 +34,6 @@ public class BuffUIUpdate : MonoBehaviour
     public void RemoveBuffUI(BufType _bufType)
     {
         bufTypeList[_bufType].RemoveBuff();
+        bufTypeList.Remove(_bufType);
     }
 }

@@ -17,7 +17,7 @@ public class DamageTextManager : MonoBehaviour
         _damageText.GetComponent<TextMeshPro>().color = _color;
         _damageText.GetComponent<TextMeshPro>().DOColor(Color.white, 0.8f);
 
-        _damageText.transform.DOLocalMoveY(3.7f, 1f);
+        _damageText.transform.DOLocalMoveY(_damageText.transform.localPosition.y + 0.3f, 1f);
         _damageText.transform.DOScale(0.4f, 1);
     }
 }

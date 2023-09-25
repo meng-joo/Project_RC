@@ -7,7 +7,7 @@ public class StartUI : MonoBehaviour
 {
     public void StartButton()
     {
-        SceneManager.LoadScene("InGame");
+        SceneManager.LoadScene("Battle");
     }
 
     public void EndButton()

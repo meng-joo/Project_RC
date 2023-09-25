@@ -41,15 +41,15 @@ public class BufDeBufIcon : PoolAbleObject, IPointerEnterHandler, IPointerExitHa
 
         bufType = _buffDataSO.bufType;
 
-        transform.DOShakeRotation(1.2f, 30, 180);
-        transform.DOShakePosition(1.2f, 30, 180);
+        transform.DOShakeRotation(1f, 20, 180);
+        transform.DOShakePosition(1f, 20, 180);
     }
 
     public void RemoveBuff()
     {
         Sequence _seq = DOTween.Sequence();
 
-        _seq.Append(transform.DOShakePosition(1.2f, 30, 180));
+        _seq.Append(transform.DOShakePosition(1f, 15, 180));
         _seq.Join(transform.DOScale(0, 0.8f));
 
         _seq.AppendCallback(() => PoolManager.Push(PoolType.BuffIcon, gameObject));
