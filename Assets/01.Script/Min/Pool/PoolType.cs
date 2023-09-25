@@ -32,7 +32,7 @@ public enum PoolType/*풀링 타입(풀링할 에들이 많아지면 계속 추�
   Card_RecklessRush,
   Card_Steel,
   Card_Armed,
-  Card_Defencse,
+  Card_Defense,
   Card_ShieldCharge,
   Card_Rush,
   Card_BeneficialEffects,

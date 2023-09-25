@@ -67,6 +67,45 @@ MonoBehaviour:
   - poolType: 20
     initCount: 30
     poolAbleObject: {fileID: 1602086962890625626, guid: e5dfac16859c292468f9849e419af1fc, type: 3}
+  - poolType: 21
+    initCount: 30
+    poolAbleObject: {fileID: 7835134902063626301, guid: 4770911916906f643be961b54aed368a, type: 3}
+  - poolType: 22
+    initCount: 30
+    poolAbleObject: {fileID: 7835134902063626301, guid: c35cd02f60d1877478f92cab97b12d76, type: 3}
+  - poolType: 23
+    initCount: 30
+    poolAbleObject: {fileID: 7017709408743725603, guid: d62d3b7c260fb8648b69010300259915, type: 3}
+  - poolType: 24
+    initCount: 30
+    poolAbleObject: {fileID: 7835134902063626301, guid: b842830387c6cf04cbd2349d00d73fbb, type: 3}
+  - poolType: 25
+    initCount: 30
+    poolAbleObject: {fileID: 7835134902063626301, guid: ef3ad6a06e0307d45b7d1d511badb7ac, type: 3}
+  - poolType: 26
+    initCount: 30
+    poolAbleObject: {fileID: 7017709408743725603, guid: e562ef53cf7d9e24182ebd6b8ca02ff2, type: 3}
+  - poolType: 27
+    initCount: 30
+    poolAbleObject: {fileID: 7017709408743725603, guid: bc7f0fd828121d04b9f02c10de31a25a, type: 3}
+  - poolType: 28
+    initCount: 30
+    poolAbleObject: {fileID: 7017709408743725603, guid: 9e43fba33e462244096c8ef35a41aaaf, type: 3}
+  - poolType: 29
+    initCount: 30
+    poolAbleObject: {fileID: 7017709408743725603, guid: f45b239c669c5b94a81d49fe16e04c96, type: 3}
+  - poolType: 30
+    initCount: 30
+    poolAbleObject: {fileID: 7835134902063626301, guid: 63ea00cf60a933c4e9a25e1bee348793, type: 3}
+  - poolType: 31
+    initCount: 30
+    poolAbleObject: {fileID: 7835134902063626301, guid: 2249a67ddfb65b2488484683338c9f79, type: 3}
+  - poolType: 32
+    initCount: 30
+    poolAbleObject: {fileID: 7835134902063626301, guid: 09b656e1abfee924aa92051236496c84, type: 3}
+  - poolType: 33
+    initCount: 30
+    poolAbleObject: {fileID: 7017709408743725603, guid: cec30451729d61a47b21160d1ae89f5d, type: 3}
   - poolType: 19
     initCount: 30
     poolAbleObject: {fileID: 7835134902063626301, guid: 5ed05e03eb763e7408d246413962fe25, type: 3}

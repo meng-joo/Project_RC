@@ -45,7 +45,7 @@ public class Buff_Strength : AbCard
                 break;
         }
 
-        FindObjectOfType<Enemy>().AddBuff(strength, _buffCount);
+        FindObjectOfType<Player>().AddBuff(strength, _buffCount);
 
         var _effect = PoolManager.Pop(cardSO.effect);
         _effect.transform.position = cardSO.effectPosition;

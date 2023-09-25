@@ -24,7 +24,6 @@ public class Buff_Strong : ABBuff
 
     public override float TurnEnd()
     {
-        AddBuffCount(-1);
         return 0;
     }
 

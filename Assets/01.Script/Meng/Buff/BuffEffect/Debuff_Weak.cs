@@ -31,7 +31,7 @@ public class Debuff_Weak : ABBuff
 
     public override int AttackEffect(int _damage)
     {
-        _damage /= 4;
+        _damage = Mathf.RoundToInt(_damage * 0.25f);
         return -_damage;
     }
 

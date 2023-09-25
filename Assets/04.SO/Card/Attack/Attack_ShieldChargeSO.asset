@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardInfo:
     name: "\uBC29\uD328\uB3CC\uC9C4"
-    cardPoolType: 32
+    cardPoolType: 33
     cardTier: 0
     cardType: 0
     cardExp: "\uAC80\uC774 \uC5C6\uC73C\uB2C8 \uBC29\uD328\uB77C\uB3C4 \uC368\uC57C\uC8E0?
@@ -22,7 +22,7 @@ MonoBehaviour:
       \uACF5\uACA9\uD569\uB2C8\uB2E4. \uCE74\uB4DC\uAC00 \uC18C\uBAA8\uB429\uB2C8\uB2E4."
   upgradeCardInfo:
     name: "\uB364\uD504\uD2B8\uB7ED"
-    cardPoolType: 32
+    cardPoolType: 33
     cardTier: 0
     cardType: 0
     cardExp: "\uC774 \uB3CC\uC9C4\uC744 \uBA48\uCD9C \uC218 \uC5C6\uC2B5\uB2C8\uB2E4!
@@ -30,7 +30,7 @@ MonoBehaviour:
       \uCE74\uB4DC\uAC00 \uC18C\uBAA8\uB429\uB2C8\uB2E4."
   transcendenceCardInfo:
     name: "\uCF85!"
-    cardPoolType: 32
+    cardPoolType: 33
     cardTier: 1
     cardType: 0
     cardExp: "\uC5C4\uCCAD\uB09C \uCDA9\uB3CC\uC774 \uC77C\uC5B4\uB0AC\uC2B5\uB2C8\uB2E4.

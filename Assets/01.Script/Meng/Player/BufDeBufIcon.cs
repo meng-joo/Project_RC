@@ -11,6 +11,9 @@ public enum BufType
     POISON,
     STRONG,
     WOUND,
+    IRONARMOR,
+    THORN,
+    WEAK,
     NONE
 }
 

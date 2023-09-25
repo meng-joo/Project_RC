@@ -40,7 +40,7 @@ public class ExpUI : MonoBehaviour
 
                 _card.transform.SetParent(expImage);
 
-                _card.GetComponentInChildren<AbCard>().SetFontSize(18f);
+                _card.GetComponentInChildren<AbCard>().SetFontSize(16.2f);
                 _card.GetComponentInChildren<AbCard>().BreakthroughCard(i, false);
 
                 _card.transform.localScale = Vector3.one;
