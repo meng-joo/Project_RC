@@ -110,7 +110,7 @@ public class BattleManager : MonoBehaviour
         _card.transform.SetParent(deckUI.transform);
         _card.transform.localScale = Vector3.one;
         _card.GetComponentInChildren<AbCard>().PickEffect();
-        _card.GetComponentInChildren<AbCard>().SetFontSize(12f);
+        _card.GetComponentInChildren<AbCard>().SetFontSize(13f);
 
         arrange.UpdateChildren();
     }
