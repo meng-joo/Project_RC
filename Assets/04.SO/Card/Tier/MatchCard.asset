@@ -13,8 +13,20 @@ MonoBehaviour:
   m_Name: MatchCard
   m_EditorClassIdentifier: 
   tierCardList:
-  - {fileID: 11400000, guid: 8e85518fd164cfe4a8e5db13a1defef6, type: 2}
-  - {fileID: 11400000, guid: ee7166c8ef1e9934c9acd0448c407fbe, type: 2}
-  - {fileID: 11400000, guid: 0c00f4ec6689f6142a48f4c0a1753213, type: 2}
-  - {fileID: 11400000, guid: f322a23c66e7fab46b82765095c2f243, type: 2}
-  - {fileID: 11400000, guid: 944600ebaa2577e42a1e1331ff825125, type: 2}
+  - {fileID: 11400000, guid: bf68b6a5a1b21b746adc7fe74dd6d117, type: 2}
+  - {fileID: 11400000, guid: 3ef5d66d94a5b4547b3286dfb28594e0, type: 2}
+  - {fileID: 11400000, guid: ed86843e945805e4d990d2bc5c4d4755, type: 2}
+  - {fileID: 11400000, guid: 6fb67f5d8d05454469eb41da0a7781eb, type: 2}
+  - {fileID: 11400000, guid: 4e767cc91b69da54db574275887cd3c1, type: 2}
+  - {fileID: 11400000, guid: 80d1edf458e1fb0479b7d14915b64f04, type: 2}
+  - {fileID: 11400000, guid: 75629ca46ba3f0648a07f564d4909d46, type: 2}
+  - {fileID: 11400000, guid: e4891381b04cbc647b524552868fc393, type: 2}
+  - {fileID: 11400000, guid: 76a353ba532401047a959a11fcd02963, type: 2}
+  - {fileID: 11400000, guid: 6892745eab23a264fa3c13c198b2b1b3, type: 2}
+  - {fileID: 11400000, guid: b3156a2d6d1c037409752e86570767f5, type: 2}
+  - {fileID: 11400000, guid: b633d3348c6cee74c9c08963ce16fa52, type: 2}
+  - {fileID: 11400000, guid: c5a2268c8e003164e93dc73567840c2a, type: 2}
+  - {fileID: 11400000, guid: ab3d9e4c8e4f23943b72112c5d01d40c, type: 2}
+  - {fileID: 11400000, guid: a111c2b9410638f41aa2df6595a2c022, type: 2}
+  - {fileID: 11400000, guid: e428ff3d29bcc434bb8ca54aca20bfc0, type: 2}
+  - {fileID: 11400000, guid: 57f9f096b03c7654c89a020bd2c99525, type: 2}

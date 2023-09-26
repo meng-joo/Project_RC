@@ -37,6 +37,9 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
     private const float HoverScaleFactor = 1.2f;
 
     public GameObject nodeLine;
+
+    public bool isAttainable;
+
     private void OnEnable()
     {
         connetionCount = 4;
@@ -53,25 +56,24 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
         isVisible = false;
         SetGridActive();
     }
-   
+
     public void SetGridActive()
     {
         if (isVisible)
         {
-       //     Debug.Log("켜짐");
             gameObject.SetActive(true);
         }
         else
         {
-         //   Debug.Log("꺼짐");
             gameObject.SetActive(false);
         }
     }
 
     public void SetGridInfo()
     {
-        sr.sprite =  mapSO.mapSprite;
+        sr.sprite = mapSO.mapSprite;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("GridNode"))
@@ -85,18 +87,22 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
                 }
                 else
                 {
-                    connectionNodeList.Add(collision.GetComponent<GridNode>());
+                    Debug.Log("몇번실행됨");
+                  
+                        connectionNodeList.Add(collision.GetComponent<GridNode>());
+                    
                 }
             }
         }
     }
-
+    public void CreateLine(GameObject obj, int index)
+    {
+        this.GetComponent<BezierCurve>().GetMiddlePoint(transform.position, obj.transform.position);
+        this.GetComponent<BezierCurve>().DrawBezierCurve(index);
+    }
     public void SetState(NodeStates state)
     {
         nodeStates = state;
-
-      //  if (visitedCircle != null) visitedCircle.gameObject.SetActive(false);
-        //if (circleImage != null) circleImage.gameObject.SetActive(false);
 
         switch (state)
         {
@@ -125,6 +131,7 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
                     sr.DOKill();
                     sr.DOColor(MapGenerator.Instance.visitedColor, 0.5f).SetLoops(-1, LoopType.Yoyo);
                 }
+                isAttainable = true;
                 break;
         }
     }
@@ -144,7 +151,6 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
     {
         if (sr != null)
         {
-       //     Debug.Log("ㅁㄴㄴㅇㅇㄴㅇㄴㅇㄴㄴ");
             sr.transform.DOKill();
             sr.transform.DOScale(initialScale * HoverScaleFactor, 0.3f);
         }
@@ -154,7 +160,6 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
     {
         if (sr != null)
         {
-          //  Debug.Log("ㅁㄴㄴㅇ");
             sr.transform.DOKill();
             sr.transform.DOScale(initialScale, 0.3f);
         }
@@ -163,7 +168,17 @@ public class GridNode : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
     public void OnPointerUp(PointerEventData eventData)
     {
         Debug.Log("클릭");
+
         MapPlayerTracker.Instance.SelectNode(this);
+
+        int i = 0;
+        foreach (var item in connectionNodeList)
+        {
+            CreateLine(item.gameObject, i);
+
+
+            i += 3;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)

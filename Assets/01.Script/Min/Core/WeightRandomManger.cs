@@ -21,7 +21,7 @@ public class WeightRandomManger : MonoSingleTon<WeightRandomManger>
         }
     }
 
-    public CardSO WeightRandom(CardTierListSO target)//List<CardSO> target)
+    public CardSO WeightRandom(CardTierListSO target)
     {
         if (target == null)
         {
@@ -41,10 +41,7 @@ public class WeightRandomManger : MonoSingleTon<WeightRandomManger>
 
         double randomValue = Random.Range(0f, 1f);
 
-        //Debug.Log("·£´ý¹ë·ù" + randomValue);
-
         randomValue *= totalWeight;
-
 
         foreach (var item in target.tierCardList)
         {
@@ -52,7 +49,6 @@ public class WeightRandomManger : MonoSingleTon<WeightRandomManger>
 
             if (randomValue <= 0f)
             {
-          //      Debug.Log("¹ÝÈ¯µÈ Ä«µå°ª" + item);
                 return item;
             }
         }

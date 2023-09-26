@@ -50,8 +50,6 @@ public class MatchCard : MonoBehaviour
             Debug.Log("이벤트끝남");
         }
 
-        Debug.Log("파킹클릭");
-
         if (Click.isSelected)
         {
 
@@ -62,18 +60,7 @@ public class MatchCard : MonoBehaviour
                 return;
             }
 
-
             MatchingCardEventManager.Instance.tryCnt--;
-
-            //if (isClick == true)
-            //{
-            //    isClick = false;
-            //    Click.clickCardSO = null;
-            //    Debug.Log("같은거 2번누름");
-            //    return;
-
-            //}
-
 
             if (Click.clickCardSO == matchCard.cardSO)
             {
@@ -83,7 +70,7 @@ public class MatchCard : MonoBehaviour
             else
             {
                 isClick = false;
-                Debug.Log("틀리셨습니다 대가리가 빡이시군요");
+                Debug.Log("틀리셨습니다");
             }
         }
         else
@@ -96,6 +83,5 @@ public class MatchCard : MonoBehaviour
         isClick = !isClick;
         Debug.Log("isCLick:     "+isClick);
         Click.isSelected = !Click.isSelected;
-       // Debug.Log("jhjhjhjh:     "+Click.isSelected);
     }
 }
