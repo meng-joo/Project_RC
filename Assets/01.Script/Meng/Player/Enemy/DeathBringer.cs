@@ -7,8 +7,6 @@ public class DeathBringer : Enemy
 {
     [SerializeField] private SerializableDictionary<BufType, BuffDataSO> bufOrDebuf = new SerializableDictionary<BufType, BuffDataSO>();
 
-    private int rand = 0;
-    
     public void Start()
     {
         base.Start();
@@ -17,7 +15,7 @@ public class DeathBringer : Enemy
 
     public override float Skill()
     {
-        rand = Random.Range(0, 5);
+        int rand = Random.Range(0, 2);
 
         switch (rand)
         {
@@ -34,6 +32,7 @@ public class DeathBringer : Enemy
 
     public override float SpecialAbility()
     {
+        int rand = Random.Range(1, 5);
         switch (rand)
         {
             case 1:

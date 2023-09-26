@@ -110,7 +110,7 @@ public class BattleManager : MonoBehaviour
         _card.transform.SetParent(deckUI.transform);
         _card.transform.localScale = Vector3.one;
         _card.GetComponentInChildren<AbCard>().PickEffect();
-        _card.GetComponentInChildren<AbCard>().SetFontSize(16f);
+        _card.GetComponentInChildren<AbCard>().SetFontSize(15f);
 
         arrange.UpdateChildren();
     }
@@ -138,14 +138,15 @@ public class BattleManager : MonoBehaviour
     IEnumerator EnemyTurn()
     {
         yield return new WaitForSeconds(turnChangeEffect.ChangingEffect("적", "턴"));
+        Enemy.ShieldCount = 0;
 
         yield return new WaitForSeconds(Enemy.MyTurnStart());
 
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.6f);
         
         yield return new WaitForSeconds(Enemy.Skill());
         
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.6f);
         
         yield return new WaitForSeconds(Enemy.MyTurnEnd());
         
@@ -185,11 +186,14 @@ public class BattleManager : MonoBehaviour
             if (cardNum <= arrange.Children.Count - 2)
             {
                 //혹시 현재 카드가 3레벨인가? 그럼 건너뛰기
-                if (arrange.Children[cardNum].GetComponentInChildren<AbCard>().Level >= 3 || arrange.Children.Count <= 1)
+                if (arrange.Children[cardNum].GetComponentInChildren<AbCard>().Level >= 3 ||
+                    arrange.Children.Count <= 1 ||
+                    arrange.Children[cardNum + 1].GetComponentInChildren<AbCard>().Level >= 3)
                 {
                     cardNum++;
                     continue;
                 }
+
                 //현재카드와 다음카드가 같은 종류라면...? 뒤에카드 업그레이드 후 현재카드 지우기
                 if (arrange.Children[cardNum].GetComponentInChildren<AbCard>().CardInfo.cardPoolType == arrange.Children[cardNum + 1].GetComponentInChildren<AbCard>().CardInfo.cardPoolType)
                 {
@@ -223,7 +227,7 @@ public class BattleManager : MonoBehaviour
             yield return new WaitForSeconds(_delay);
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.6f);
         
         yield return new WaitForSeconds(Player.MyTurnEnd());
 

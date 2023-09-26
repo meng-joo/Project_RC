@@ -126,11 +126,12 @@ public abstract class Unit : MonoBehaviour
     }
     private void CheckBuff()
     {
-        List<BufType> _removeBuf = (from _variable in BuffEffect where _variable.Value.Count <= 0 select _variable.Key).ToList();
+        List<BufType> _removeBuf = BuffEffect.Keys.ToList();
 
-        for (int i = 0; i < _removeBuf.Count - 1; i++)
+        for (int i = 0; i < _removeBuf.Count; i++)
         {
-            RemoveBuff(_removeBuf[i]);
+            if (BuffEffect[_removeBuf[i]].Count <= 0)
+                RemoveBuff(_removeBuf[i]);
         }
     }
 
@@ -228,7 +229,8 @@ public abstract class Unit : MonoBehaviour
         _damage += HitEffect(_damage);
 
         _damage -= ShieldCount;
-        ShieldCount -= _damage;
+        if (_damage >= 0)
+            ShieldCount -= _damage;
 
         return _damage < 0 ? 0 : _damage;
     }
