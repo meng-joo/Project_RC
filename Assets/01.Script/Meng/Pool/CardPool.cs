@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class CardPool : PoolAbleObject
 {
-    private AbCard card => GetComponentInChildren<AbCard>();
+    private AbCard abCard;
     
     public override void Init_Pop()
     {
-        card.Init_Pop();
+        abCard ??= GetComponentInChildren<AbCard>();
+        abCard.InitializationTransform();
     }
 
     public override void Init_Push()
     {
-        card.Init_Push();
+    }
+    
+    public void SetCardInfo(CardSO _cardSO)
+    {
+        abCard ??= GetComponentInChildren<AbCard>();
+        abCard.CardSO = _cardSO;
     }
 }

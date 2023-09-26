@@ -15,4 +15,5 @@ public class CardSO : ScriptableObject
     public Vector2 effectPosition;
 
     public int randomWeight;
+    public int cost = 1;
 }

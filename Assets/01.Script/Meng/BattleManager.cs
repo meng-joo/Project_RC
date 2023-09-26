@@ -36,9 +36,9 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] private bool isPlayerTurn;
     
-    private Dictionary<string, AbCard> playerCard;
-    private Dictionary<string, AbCard> enemyCard;
-    private List<AbCard> activeSlot = new List<AbCard>();
+    private Dictionary<string, BattleCardBase> playerCard;
+    private Dictionary<string, BattleCardBase> enemyCard;
+    private List<BattleCardBase> activeSlot = new List<BattleCardBase>();
 
     public Image deckUI;
 
@@ -109,8 +109,9 @@ public class BattleManager : MonoBehaviour
         var _card = PoolManager.Pop(InventoryManager.Instance.deckCards[a].cardInfo.cardPoolType);
         _card.transform.SetParent(deckUI.transform);
         _card.transform.localScale = Vector3.one;
-        _card.GetComponentInChildren<AbCard>().PickEffect();
-        _card.GetComponentInChildren<AbCard>().SetFontSize(15f);
+        _card.GetComponent<CardPool>().SetCardInfo(InventoryManager.Instance.deckCards[a]);
+        _card.GetComponentInChildren<BattleCardBase>().PickEffect();
+        _card.GetComponentInChildren<BattleCardBase>().SetFontSize(15f);
 
         arrange.UpdateChildren();
     }
@@ -186,22 +187,22 @@ public class BattleManager : MonoBehaviour
             if (cardNum <= arrange.Children.Count - 2)
             {
                 //혹시 현재 카드가 3레벨인가? 그럼 건너뛰기
-                if (arrange.Children[cardNum].GetComponentInChildren<AbCard>().Level >= 3 ||
+                if (arrange.Children[cardNum].GetComponentInChildren<BattleCardBase>().Level >= 3 ||
                     arrange.Children.Count <= 1 ||
-                    arrange.Children[cardNum + 1].GetComponentInChildren<AbCard>().Level >= 3)
+                    arrange.Children[cardNum + 1].GetComponentInChildren<BattleCardBase>().Level >= 3)
                 {
                     cardNum++;
                     continue;
                 }
 
                 //현재카드와 다음카드가 같은 종류라면...? 뒤에카드 업그레이드 후 현재카드 지우기
-                if (arrange.Children[cardNum].GetComponentInChildren<AbCard>().CardInfo.cardPoolType == arrange.Children[cardNum + 1].GetComponentInChildren<AbCard>().CardInfo.cardPoolType)
+                if (arrange.Children[cardNum].GetComponentInChildren<BattleCardBase>().CardInfo.cardPoolType == arrange.Children[cardNum + 1].GetComponentInChildren<BattleCardBase>().CardInfo.cardPoolType)
                 {
-                   yield return new WaitForSeconds(arrange.Children[cardNum].GetComponentInChildren<AbCard>().ConsumptionEffect());
-                   yield return new WaitForSeconds(arrange.Children[cardNum + 1].GetComponentInChildren<AbCard>()
-                       .BreakthroughCard(arrange.Children[cardNum].GetComponentInChildren<AbCard>().Level));
+                   yield return new WaitForSeconds(arrange.Children[cardNum].GetComponentInChildren<BattleCardBase>().ConsumptionEffect());
+                   yield return new WaitForSeconds(arrange.Children[cardNum + 1].GetComponentInChildren<BattleCardBase>()
+                       .BreakthroughCard(arrange.Children[cardNum].GetComponentInChildren<BattleCardBase>().Level));
                    
-                   arrange.Children[cardNum].GetComponentInChildren<AbCard>().DiscardCard(arrange.Children[cardNum].gameObject);
+                   arrange.Children[cardNum].GetComponentInChildren<BattleCardBase>().DiscardCard(arrange.Children[cardNum].gameObject);
                     yield return new WaitForSeconds(0.3f);
                     //_activeCount;
                 }
@@ -217,7 +218,7 @@ public class BattleManager : MonoBehaviour
         foreach (var VARIABLE in arrange.Children)
         {
             if (activeCount >= _activeCount) break;
-            activeSlot.Add(VARIABLE.GetComponentInChildren<AbCard>());
+            activeSlot.Add(VARIABLE.GetComponentInChildren<BattleCardBase>());
             activeCount++;
         }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class Debuff_Weakening : AbCard
+public class Debuff_Weakening : BattleCardBase
 {
     [SerializeField] private BuffDataSO weak;
     public override float CardSkill()
@@ -47,8 +47,8 @@ public class Debuff_Weakening : AbCard
 
         FindObjectOfType<Enemy>().AddBuff(weak, _weakCount);
 
-        var _effect = PoolManager.Pop(cardSO.effect);
-        _effect.transform.position = cardSO.effectPosition;
+        var _effect = PoolManager.Pop(CardSO.effect);
+        _effect.transform.position = CardSO.effectPosition;
         
         BattleManager.CurrentActiveSlotCount--;
         DiscardCard(transform.parent.gameObject);

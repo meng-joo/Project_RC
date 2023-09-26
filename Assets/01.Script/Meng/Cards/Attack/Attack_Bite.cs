@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Attack_Bite : AbCard
+public class Attack_Bite : BattleCardBase
 {
     [SerializeField] private BuffDataSO _wound;
     public override float CardSkill()
@@ -53,14 +53,14 @@ public class Attack_Bite : AbCard
         FindObjectOfType<Player>().Attack(_damage);
         FindObjectOfType<Player>().Heal(_heal, false);
 
-        var _effect = PoolManager.Pop(cardSO.effect);
-        _effect.transform.position = cardSO.effectPosition;
+        var _effect = PoolManager.Pop(CardSO.effect);
+        _effect.transform.position = CardSO.effectPosition;
 
         EffectManager.Instance.TimeSlowEffect(0.4f, 0.1f);
         if (Level >= 3)
             FindObjectOfType<Enemy>().AddBuff(_wound, 2);
 
-        BattleManager.CurrentActiveSlotCount--;
+        BattleManager.CurrentActiveSlotCount -= CardSO.cost;
         DiscardCard(transform.parent.gameObject);
     }
 }

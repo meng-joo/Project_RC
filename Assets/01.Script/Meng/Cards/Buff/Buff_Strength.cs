@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class Buff_Strength : AbCard
+public class Buff_Strength : BattleCardBase
 {
     [SerializeField] private BuffDataSO strength;
     public override float CardSkill()
@@ -47,8 +47,8 @@ public class Buff_Strength : AbCard
 
         FindObjectOfType<Player>().AddBuff(strength, _buffCount);
 
-        var _effect = PoolManager.Pop(cardSO.effect);
-        _effect.transform.position = cardSO.effectPosition;
+        var _effect = PoolManager.Pop(CardSO.effect);
+        _effect.transform.position = CardSO.effectPosition;
         
         BattleManager.CurrentActiveSlotCount--;
         if (Level <= 2)

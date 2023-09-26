@@ -19,26 +19,23 @@ public class ExpUI : MonoBehaviour
         expImage.transform.localScale = Vector3.zero;
     }
 
-    public void PopupCardInfo(PoolType _cardType)
+    public void PopupCardInfo(CardSO _cardSO)
     {
         if (_isOn) return;
         Sequence _seq = DOTween.Sequence();
 
-        _seq.AppendCallback(() =>
-            FoldPopupCardInfo(poolType)
+        _seq.AppendCallback(FoldPopupCardInfo
         );
-
-        _seq.AppendCallback(() => poolType = _cardType);
-
         _seq.Append(expImage.DOScale(1, 0.2f));
 
         _seq.AppendCallback(() =>
         {
             for (int i = 0; i < 3; i++)
             {
-                var _card = PoolManager.Pop(_cardType);
+                var _card = PoolManager.Pop(PoolType.VisualCard);
 
                 _card.transform.SetParent(expImage);
+                _card.GetComponent<CardPool>().SetCardInfo(_cardSO);
 
                 _card.GetComponentInChildren<AbCard>().SetFontSize(16.2f);
                 _card.GetComponentInChildren<AbCard>().BreakthroughCard(i, false);
@@ -50,7 +47,7 @@ public class ExpUI : MonoBehaviour
         _isOn = true;
     }
 
-    public void FoldPopupCardInfo(PoolType _cardType)
+    public void FoldPopupCardInfo()
     {
         if (expImage.childCount <= 0) return;
 
@@ -59,7 +56,7 @@ public class ExpUI : MonoBehaviour
         for (int i = _count - 1; i >= 0; i--)
         {
             expImage.GetChild(i).GetComponentInChildren<AbCard>().SetFontSize(12f);
-            PoolManager.Push(_cardType, expImage.GetChild(i).gameObject);
+            PoolManager.Push(PoolType.VisualCard, expImage.GetChild(i).gameObject);
         }
 
         _isOn = false;

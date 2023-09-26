@@ -102,8 +102,8 @@ public class ShopManager : MonoBehaviour
             GameObject obj = PoolManager.Pop(shopCardList[i].CardSO.cardInfo.cardPoolType);
             obj.transform.SetParent(shopCardParentTrm);
             obj.transform.localScale = Vector3.one;
-            obj.GetComponentInChildren<AbCard>().PickEffect();
-            obj.GetComponentInChildren<AbCard>().SetFontSize(16f);
+            obj.GetComponentInChildren<BattleCardBase>().PickEffect();
+            obj.GetComponentInChildren<BattleCardBase>().SetFontSize(16f);
         }
     }
 }

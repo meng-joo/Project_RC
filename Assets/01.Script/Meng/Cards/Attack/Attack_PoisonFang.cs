@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Attack_PoisonFang : AbCard
+public class Attack_PoisonFang : BattleCardBase
 {
     [SerializeField] private BuffDataSO poison;
     public override float CardSkill()
@@ -52,8 +52,8 @@ public class Attack_PoisonFang : AbCard
 
         FindObjectOfType<Player>().Attack(damage);
 
-        var _effect = PoolManager.Pop(cardSO.effect);
-        _effect.transform.position = cardSO.effectPosition;
+        var _effect = PoolManager.Pop(CardSO.effect);
+        _effect.transform.position = CardSO.effectPosition;
 
         EffectManager.Instance.TimeSlowEffect(0.4f, 0.1f);
 

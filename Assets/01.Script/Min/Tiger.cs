@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tiger : AbCard
+public class Tiger : BattleCardBase
 {
     public override float CardSkill()
     {

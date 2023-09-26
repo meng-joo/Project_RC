@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class Attack_ShieldCharge : AbCard
+public class Attack_ShieldCharge : BattleCardBase
 {
     public override float CardSkill()
     {
@@ -51,12 +51,12 @@ public class Attack_ShieldCharge : AbCard
         _player.ShieldCount += _shieldCount;
         _player.Attack(Mathf.RoundToInt(_player.ShieldCount * _weight));
 
-        var _effect = PoolManager.Pop(cardSO.effect);
-        _effect.transform.position = cardSO.effectPosition;
+        var _effect = PoolManager.Pop(CardSO.effect);
+        _effect.transform.position = CardSO.effectPosition;
         
         EffectManager.Instance.TimeSlowEffect(0.4f, 0.1f);
-        
-        BattleManager.CurrentActiveSlotCount--;
+
+        BattleManager.CurrentActiveSlotCount -= CardSO.cost;
         DiscardCard(transform.parent.gameObject);
     }
 }

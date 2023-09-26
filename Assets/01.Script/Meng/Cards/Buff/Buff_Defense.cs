@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class Buff_Defense : AbCard
+public class Buff_Defense : BattleCardBase
 {
     [SerializeField] private BuffDataSO thorn;
 
@@ -54,8 +54,8 @@ public class Buff_Defense : AbCard
             FindObjectOfType<Player>().AddBuff(thorn, _buffCount);
         FindObjectOfType<Player>().ShieldCount += _shieldCount;
 
-        var _effect = PoolManager.Pop(cardSO.effect);
-        _effect.transform.position = cardSO.effectPosition;
+        var _effect = PoolManager.Pop(CardSO.effect);
+        _effect.transform.position = CardSO.effectPosition;
 
         BattleManager.CurrentActiveSlotCount--;
         DiscardCard(transform.parent.gameObject);

@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Attack_Sting : AbCard
+public class Attack_Sting : BattleCardBase
 {
     [SerializeField] private BuffDataSO wound;
     public override float CardSkill()
@@ -51,8 +51,8 @@ public class Attack_Sting : AbCard
 
         FindObjectOfType<Player>().Attack(damage);
 
-        var _effect = PoolManager.Pop(cardSO.effect);
-        _effect.transform.position = cardSO.effectPosition;
+        var _effect = PoolManager.Pop(CardSO.effect);
+        _effect.transform.position = CardSO.effectPosition;
 
         EffectManager.Instance.TimeSlowEffect(0.4f, 0.1f);
 

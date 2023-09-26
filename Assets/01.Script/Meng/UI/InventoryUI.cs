@@ -11,9 +11,10 @@ public class InventoryUI : MonoBehaviour
         {
             foreach (var _variable in InventoryManager.Instance.deckCards)
             {
-                GameObject _card = PoolManager.Pop(_variable.cardInfo.cardPoolType);
+                GameObject _card = PoolManager.Pop(PoolType.VisualCard);
                 _card.transform.SetParent(transform);
 
+                _card.GetComponent<CardPool>().SetCardInfo(_variable);
                 _card.GetComponentInChildren<AbCard>().SetFontSize(16.2f);
                 
                 _card.transform.localScale = Vector3.one;
@@ -27,7 +28,7 @@ public class InventoryUI : MonoBehaviour
             for (int i = _count - 1; i >= 0; i--)
             {
                 transform.GetChild(i).GetComponentInChildren<AbCard>().SetFontSize(12f);
-                PoolManager.Push(transform.GetChild(i).GetComponentInChildren<AbCard>().CardInfo.cardPoolType, transform.GetChild(i).gameObject);
+                PoolManager.Push(PoolType.VisualCard, transform.GetChild(i).gameObject);
             }
         }
     }

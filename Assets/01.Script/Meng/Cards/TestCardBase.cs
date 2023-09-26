@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class TestCard : AbCard
+public class TestCardBase : BattleCardBase
 {
     [SerializeField] private BuffDataSO Poison;
     
@@ -31,11 +31,11 @@ public class TestCard : AbCard
         FindObjectOfType<Player>().Attack(200);
         //FindObjectOfType<Enemy>().Hit(200);
 
-        var _effect = PoolManager.Pop(cardSO.effect);
-        _effect.transform.position = cardSO.effectPosition;
+        var _effect = PoolManager.Pop(CardSO.effect);
+        _effect.transform.position = CardSO.effectPosition;
 
         var _effect2 = PoolManager.Pop(PoolType.BloodEffect_1);
-        _effect2.transform.position = cardSO.effectPosition;
+        _effect2.transform.position = CardSO.effectPosition;
         
         FindObjectOfType<Enemy>().AddBuff(Poison, 1);
 

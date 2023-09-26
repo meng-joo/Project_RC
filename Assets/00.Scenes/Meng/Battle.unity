@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000917a8f7f67ef1cc77fe7fb3be1833315010662767dfa4616c1e9d225
+  m_ApplyToSortingLayers: 00000000917a8f7f67ef1cc77fe7fb3be1833315010662767dfa4616c1e9d225edfe83b6
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -4275,8 +4275,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 1006364543
-  m_SortingOrder: 100
+  m_SortingLayerID: -1232863507
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &981425664
 RectTransform:

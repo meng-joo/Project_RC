@@ -112,3 +112,6 @@ MonoBehaviour:
   - poolType: 34
     initCount: 30
     poolAbleObject: {fileID: 7017709408743725603, guid: 5f4ff0888c58ee640ad096cabbcda71f, type: 3}
+  - poolType: 36
+    initCount: 80
+    poolAbleObject: {fileID: 3196066155036075161, guid: 393a6eb153074014ea0dc11075e1301f, type: 3}

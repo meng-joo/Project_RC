@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class Debuff_Curse : AbCard
+public class Debuff_Curse : BattleCardBase
 {
     [SerializeField] private BuffDataSO poison;
     [SerializeField] private BuffDataSO wound;
@@ -61,8 +61,8 @@ public class Debuff_Curse : AbCard
         _enemy.AddBuff(wound, _woundCount);
         _enemy.AddBuff(weak, _weakCount);
 
-        var _effect = PoolManager.Pop(cardSO.effect);
-        _effect.transform.position = cardSO.effectPosition;
+        var _effect = PoolManager.Pop(CardSO.effect);
+        _effect.transform.position = CardSO.effectPosition;
         
         BattleManager.CurrentActiveSlotCount--;
         DiscardCard(transform.parent.gameObject);

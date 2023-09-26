@@ -7,111 +7,219 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
-public abstract class AbCard : TopCard, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+public abstract class AbCard : MonoBehaviour
 {
-    private Transform root;
-    
-    private Camera mainCam;
-    private BattleManager battleManager;
-    private ExpUI expUI;
+    public CardInfo CardInfo { get; set; }
 
-    private bool onDraging = false;
-    
-    protected BattleManager BattleManager
+    public CardSO CardSO
     {
         get
         {
-            battleManager ??= FindObjectOfType<BattleManager>();
-            return battleManager;
+            return cardSO;
+        }
+        set
+        {
+            cardSO = value;
+            SetCardInfo(value);
         }
     }
+    private CardSO cardSO;
     
-    public override void Init_Pop()
+
+    private int level = 1;
+    public int Level
     {
-        mainCam ??= Camera.main;
-        expUI ??= FindObjectOfType<ExpUI>();
-        base.Init_Pop();
+        get
+        {
+            return level;
+        }
     }
 
-    public override void Init_Push()
+    private TextMeshProUGUI cardName;
+    private Image cardIconImage;
+    private Image cardBackImage;
+    private Image cardBorderImage;
+    protected Image screenImage;
+    protected Image outLineImage;
+    protected Image tierBorder_Lv2;
+    protected Image tierBorder_Lv3;
+    private TextMeshProUGUI cardExp;
+    private GameObject cardTierEffect;
+
+    private CardTier currentCardTierEffect = CardTier.NONE;
+
+    public virtual void InitializationTransform()
+    {
+        transform.localScale = new Vector3(0, 0.1f, 0);
+        transform.localPosition = Vector3.zero;
+    }
+
+    public virtual void Init_Push()
     {
         
     }
 
-    #region Card Effect
+    private void SetCashing()
+    {
+        cardName ??= transform.Find("Name").GetComponent<TextMeshProUGUI>();
+        cardIconImage ??= transform.Find("Image").GetComponent<Image>();
+        cardBackImage ??= GetComponent<Image>();
+        cardBorderImage ??= transform.Find("Border").GetComponent<Image>();
+        cardExp ??= transform.Find("Exp").GetComponent<TextMeshProUGUI>();
+        screenImage ??= transform.Find("Screen").GetComponent<Image>();
+        outLineImage ??= transform.Find("OutLine").GetComponent<Image>();
+        tierBorder_Lv2 ??= transform.Find("TierBorder_Lv2").GetComponent<Image>();
+        tierBorder_Lv3 ??= transform.Find("TierBorder_Lv3").GetComponent<Image>();
+    }
+
+    public void SetFontSize(float _size)
+    {
+        cardExp.fontSize = _size;
+    }
     
-    public void OnPointerEnter(PointerEventData eventData)
+    public void SetCardInfo(CardSO _cardSO)
     {
+        CardInfo = _cardSO.cardInfo;
+
+        level = 1;
+
+        SetCashing();
         
+        screenImage.color = Color.white;
+
+        SetCardInfo(CardInfo);
+
+        cardIconImage.sprite = _cardSO.cardIconImage;
+
+        OutLineEffect(false);
     }
-    public void OnPointerExit(PointerEventData eventData)
+
+    public void SetCardInfo(CardInfo _cardInfo)
     {
-        if (BattleManager.IsPlayerTurn)
+        cardName.text = _cardInfo.name;
+
+        cardBackImage.color = SetColor(_cardInfo.cardType);
+        cardBorderImage.color = SetColor(_cardInfo.cardTier);
+        if (currentCardTierEffect != _cardInfo.cardTier)
         {
-            transform.localScale = Vector3.one;
-            OutLineEffect(false);
-            expUI.FoldPopupCardInfo(CardInfo.cardPoolType);
-        }
-    }
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        if (!BattleManager.IsPlayerTurn) return;
-        root ??= transform.root;
-        onDraging = true;
-        transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        root.BroadcastMessage("BeginDrag", transform.parent, SendMessageOptions.DontRequireReceiver);
-    }
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            if (BattleManager.IsPlayerTurn || !onDraging)
+            if (cardTierEffect != null)
+                PoolManager.Push(cardTierEffect.GetComponent<UIPoolEffect>().PoolType, cardTierEffect);
+
+            if (_cardInfo.cardTier == CardTier.SR || _cardInfo.cardTier == CardTier.SSR)
             {
-                OutLineEffect(true);
-                expUI.PopupCardInfo(CardInfo.cardPoolType);
+                cardTierEffect = SetTierEffect(_cardInfo.cardTier);
+                cardTierEffect.transform.SetParent(transform);
+                cardTierEffect.transform.localPosition = Vector3.zero;
+                cardTierEffect.transform.localScale = new Vector3(96, 145, 96);
+                ParticleSystemRenderer[] _effects = cardTierEffect.GetComponentsInChildren<ParticleSystemRenderer>();
+                int _id = transform.root.GetComponent<Canvas>().sortingLayerID;
+                foreach (var _variable in _effects)
+                {
+                    _variable.sortingLayerID = _id;
+                }
             }
         }
-    }
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (!BattleManager.IsPlayerTurn) return;
-        var screenPoint = Input.mousePosition;
-        screenPoint.z = 10.0f;
-        transform.parent.position = mainCam.ScreenToWorldPoint(screenPoint);
-        root.BroadcastMessage("Drag", transform.parent, SendMessageOptions.DontRequireReceiver);
-    }
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        root.BroadcastMessage("EndDrag", transform.parent, SendMessageOptions.DontRequireReceiver);
-        onDraging = false;
-    }
-    public float ConsumptionEffect()
-    {
-        var _seq = DOTween.Sequence();
 
-        _seq.Append(transform.DOLocalMoveX(transform.localPosition.x + 170f, 0.4f).SetEase(Ease.InBack));
-        _seq.Join(transform.DOScale(0, 0.4f).SetEase(Ease.InBack));
-        _seq.Join(screenImage.DOFade(1, 0.2f));
+        cardExp.text = _cardInfo.cardExp;
 
-        return _seq.Duration();
+        tierBorder_Lv2.gameObject.SetActive(false);
+        tierBorder_Lv3.gameObject.SetActive(false);
+
+        if (Level == 2)
+            tierBorder_Lv2.gameObject.SetActive(true);
+        if (Level == 3)
+            tierBorder_Lv3.gameObject.SetActive(true);
     }
 
-    #endregion
-    
-    #region Card Function
-    public abstract float CardSkill();
-    public abstract void Passive();
-
-    public void DiscardCard(params GameObject[] _card)
+    private void UpgradeCard(int _upLevel)
     {
-        foreach (var VARIABLE in _card)
+        switch (_upLevel)
         {
-            PoolManager.Push(VARIABLE.GetComponentInChildren<AbCard>().CardInfo.cardPoolType, VARIABLE);
-            BattleManager.arrange.Children.Remove(VARIABLE.transform);
-            BattleManager.currentSlotCount--;
+            case 1:
+                switch (level)
+                {
+                    case 1:
+                        level = 2;
+                        SetCardInfo(CardSO.upgradeCardInfo);
+                        
+                        break;
+                    case 2:
+                        level = 3;
+                        SetCardInfo(CardSO.transcendenceCardInfo);
+                        break;
+                    default:
+                        break;
+                }
+
+                break;
+            case 2:
+                level = 3;
+                SetCardInfo(CardSO.transcendenceCardInfo);
+                break;
+            default:
+                break;
         }
     }
 
-    #endregion
+    private Color SetColor(CardType _cardType) => _cardType switch
+    {
+        CardType.ATK => Color.red,
+        CardType.DEF => Color.blue,
+        CardType.BUF => Color.green,
+        CardType.NONE => Color.white
+    };
+    private Color SetColor(CardTier _cardTire) => _cardTire switch
+    {
+        CardTier.R => Color.white,
+        CardTier.SR => Color.blue,
+        CardTier.SSR => Color.red,
+        CardTier.NONE => Color.white
+    };
+
+    private GameObject SetTierEffect(CardTier _cardTier) => _cardTier switch
+    {
+        CardTier.R => PoolManager.Pop(PoolType.REffect),
+        CardTier.SR => PoolManager.Pop(PoolType.SREffect),
+        CardTier.SSR => PoolManager.Pop(PoolType.SSREffect),
+        CardTier.NONE => PoolManager.Pop(PoolType.CEffect)
+    };
+
+    public void OutLineEffect(bool _isOn)
+    {
+        outLineImage.gameObject.SetActive(_isOn);
+    }
+
+    public void PickEffect(float _size = 1, float _time = 0.6f)
+    {
+        Sequence _seq = DOTween.Sequence();
+        float _divideTime = _time / 10f;
+
+        _seq.Append(transform.DOScaleX(_size, _divideTime * 5));
+        _seq.Append(transform.DOScaleY(_size, _divideTime * 3f));
+        _seq.Append(screenImage.DOFade(0, _divideTime * 2f));
+    }
+
+    public float BreakthroughCard(int _upLevel, bool _isEffectOn = true)
+    {
+        if (_isEffectOn)
+        {
+            Sequence _seq = DOTween.Sequence();
+
+            _seq.Append(transform.DOScale(1.2f, 0.2f).SetEase(Ease.InOutBack));
+            _seq.Join(screenImage.DOFade(1, 0.15f));
+            _seq.AppendCallback(() => UpgradeCard(_upLevel));
+
+            _seq.Append(transform.DOScale(1, 0.3f));
+            _seq.Join(screenImage.DOFade(0, 0.2f));
+
+            return _seq.Duration();
+        }
+        else
+        {
+            UpgradeCard(_upLevel);
+            return 0.5f;
+        }
+    }
 }

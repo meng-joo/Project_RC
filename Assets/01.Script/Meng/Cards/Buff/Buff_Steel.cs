@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class Buff_Steel : AbCard
+public class Buff_Steel : BattleCardBase
 {
     public override float CardSkill()
     {
@@ -46,8 +46,8 @@ public class Buff_Steel : AbCard
 
         FindObjectOfType<Player>().ShieldCount += _buffCount;
 
-        var _effect = PoolManager.Pop(cardSO.effect);
-        _effect.transform.position = cardSO.effectPosition;
+        var _effect = PoolManager.Pop(CardSO.effect);
+        _effect.transform.position = CardSO.effectPosition;
 
         BattleManager.CurrentActiveSlotCount--;
         DiscardCard(transform.parent.gameObject);
