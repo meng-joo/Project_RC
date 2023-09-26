@@ -150,13 +150,6 @@ public abstract class Unit : MonoBehaviour
         animator ??= GetComponentInChildren<Animator>();
         visual ??= transform.Find("Visual").gameObject;
 
-        unitUICanvas = PoolManager.Pop(PoolType.UnitCanvas).GetComponent<Canvas>();
-        unitUICanvas.transform.SetParent(transform);
-        unitUICanvas.transform.localPosition = Vector3.zero;
-        unitUICanvas.transform.localScale = new Vector3(0.0021f, 0.0021f, 0.0021f);
-
-        CurrentHP = maxHp;
-        
         animatorOverrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
         animator.runtimeAnimatorController = animatorOverrideController;
 
@@ -166,6 +159,16 @@ public abstract class Unit : MonoBehaviour
         }
 
         SetAnim();
+    }
+
+    public void SetUnitCanvas()
+    {
+        unitUICanvas = PoolManager.Pop(PoolType.UnitCanvas).GetComponent<Canvas>();
+        unitUICanvas.transform.SetParent(transform);
+        unitUICanvas.transform.localPosition = Vector3.zero;
+        unitUICanvas.transform.localScale = new Vector3(0.0021f, 0.0021f, 0.0021f);
+
+        CurrentHP = maxHp;
     }
 
     private void SetAnim()
@@ -202,7 +205,8 @@ public abstract class Unit : MonoBehaviour
 
         if (CurrentHP <= 0)
         {
-            SceneManager.LoadScene("Battle");
+            animator.SetTrigger("Die");
+            MapPlayerTracker.Instance.StartBattleCoru(false, 1.5f);
         }
 
         return animatorOverrideController["Hit"].length;
@@ -218,7 +222,16 @@ public abstract class Unit : MonoBehaviour
         if (!_isAnim) return 0;
         animator.SetTrigger("Skill");
         return animatorOverrideController["Skill"].length;
+    }
 
+    public void Run()
+    {
+        animator.SetTrigger("Run");
+    }
+
+    public void Idle()
+    {
+        animator.SetTrigger("Idle");
     }
     
     public int DamageCalculation(int _damage, bool _trueDamage)
@@ -265,5 +278,6 @@ public abstract class Unit : MonoBehaviour
     {
         DamageTextManager.CreateDamageText(transform.position, _damage, Color.red);
         visual.transform.DOShakePosition(0.8f, Mathf.Clamp(_damage / 80f, 0.04f, 0.5f), 70).SetUpdate(true);
+        EffectManager.Instance.TriggerShake(0.2f, 0.2f, 0.2f);
     }
 }

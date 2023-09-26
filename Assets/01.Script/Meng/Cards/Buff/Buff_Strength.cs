@@ -9,12 +9,8 @@ public class Buff_Strength : BattleCardBase
     public override float CardSkill()
     {
         Sequence _seq = DOTween.Sequence();
-
-        _seq.Append(transform.DOLocalMoveY(transform.position.y + 90, 0.6f));
         _seq.Insert(0f,screenImage.DOFade(1, 0.6f));
 
-        _seq.Append(transform.DOScale(0, 0.4f).SetEase(Ease.InBack));
-        
         _seq.AppendCallback(BuffPlayer);
 
         return _seq.Duration() + 0.2f;

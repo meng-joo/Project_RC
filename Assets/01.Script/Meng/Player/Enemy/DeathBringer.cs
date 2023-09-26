@@ -10,7 +10,6 @@ public class DeathBringer : Enemy
     public void Start()
     {
         base.Start();
-        ShieldCount = 0;
     }
 
     public override float Skill()

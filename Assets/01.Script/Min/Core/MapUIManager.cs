@@ -7,9 +7,9 @@ public class MapUIManager : MonoSingleTon<MapUIManager>
 {
     public GameObject mapPanel;
 
-   public void OnBattle()
+   public void OnBattle(bool _isOn)
     {
-        mapPanel.SetActive((false));        
+        mapPanel.SetActive(!_isOn);        
     }
     
 }

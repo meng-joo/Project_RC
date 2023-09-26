@@ -207,12 +207,12 @@ public abstract class AbCard : MonoBehaviour
         {
             Sequence _seq = DOTween.Sequence();
 
-            _seq.Append(transform.DOScale(1.2f, 0.2f).SetEase(Ease.InOutBack));
-            _seq.Join(screenImage.DOFade(1, 0.15f));
+           // _seq.Append(transform.DOScale(1.2f, 0.2f).SetEase(Ease.InOutBack));
+            _seq.Append(screenImage.DOFade(1, 0.1f));
             _seq.AppendCallback(() => UpgradeCard(_upLevel));
 
-            _seq.Append(transform.DOScale(1, 0.3f));
-            _seq.Join(screenImage.DOFade(0, 0.2f));
+            //_seq.Append(transform.DOScale(1, 0.3f));
+            _seq.Append(screenImage.DOFade(0, 0.2f));
 
             return _seq.Duration();
         }

@@ -9,6 +9,7 @@ using UnityEngine.Events;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using Sequence = DG.Tweening.Sequence;
 
 public class BattleManager : MonoBehaviour
 {
@@ -35,9 +36,8 @@ public class BattleManager : MonoBehaviour
     }
 
     [SerializeField] private bool isPlayerTurn;
+    [SerializeField] private bool isBattle;
     
-    private Dictionary<string, BattleCardBase> playerCard;
-    private Dictionary<string, BattleCardBase> enemyCard;
     private List<BattleCardBase> activeSlot = new List<BattleCardBase>();
 
     public Image deckUI;
@@ -81,13 +81,44 @@ public class BattleManager : MonoBehaviour
 
     public void StartBattle()
     {
+        Sequence _seq = DOTween.Sequence();
         arrange = FindObjectOfType<Arrange>();
         currentCardPickUpCount = cardPickUpCount;
         CurrentActiveSlotCount = activeSlotCount;
-        UpdatePickUpCountUI();
         IsPlayerTurn = false;
+        isBattle = true;
 
-        StartCoroutine(PlayerTurn());
+        _seq.AppendCallback(() =>
+        {
+            Player.transform.position = new Vector3(-10, Player.transform.position.y, Player.transform.position.z);
+            Enemy.transform.position = new Vector3(10, Enemy.transform.position.y, Enemy.transform.position.z);
+
+            Player.Run();
+            Enemy.Run();
+        });
+
+        _seq.Append(Player.transform.DOLocalMoveX(-6, 3));
+        _seq.Join(Enemy.transform.DOLocalMoveX(6, 3));
+
+        _seq.AppendCallback(() =>
+        {
+            Player.Idle();
+            Enemy.Idle();
+        });
+
+        _seq.AppendInterval(0.5f);
+        _seq.AppendCallback(() =>
+        {
+            Player.SetUnitCanvas();
+            Enemy.SetUnitCanvas();
+        });
+        _seq.AppendInterval(0.5f);
+        
+        _seq.AppendCallback(() =>
+        {
+            UpdatePickUpCountUI();
+            StartCoroutine(PlayerTurn());
+        });
     }
 
     public void ClickPickUpBTN()
@@ -142,14 +173,17 @@ public class BattleManager : MonoBehaviour
         Enemy.ShieldCount = 0;
 
         yield return new WaitForSeconds(Enemy.MyTurnStart());
+        if (!isBattle) yield break;
 
         yield return new WaitForSeconds(0.6f);
         
         yield return new WaitForSeconds(Enemy.Skill());
+        if (!isBattle) yield break;
         
         yield return new WaitForSeconds(0.6f);
         
         yield return new WaitForSeconds(Enemy.MyTurnEnd());
+        if (!isBattle) yield break;
         
         TurnEnd("Player");
     }
@@ -198,7 +232,7 @@ public class BattleManager : MonoBehaviour
                 //현재카드와 다음카드가 같은 종류라면...? 뒤에카드 업그레이드 후 현재카드 지우기
                 if (arrange.Children[cardNum].GetComponentInChildren<BattleCardBase>().CardInfo.cardPoolType == arrange.Children[cardNum + 1].GetComponentInChildren<BattleCardBase>().CardInfo.cardPoolType)
                 {
-                   yield return new WaitForSeconds(arrange.Children[cardNum].GetComponentInChildren<BattleCardBase>().ConsumptionEffect());
+                   yield return new WaitForSeconds(arrange.Children[cardNum].GetComponentInChildren<BattleCardBase>().ConsumptionEffect() - 0.1f);
                    yield return new WaitForSeconds(arrange.Children[cardNum + 1].GetComponentInChildren<BattleCardBase>()
                        .BreakthroughCard(arrange.Children[cardNum].GetComponentInChildren<BattleCardBase>().Level));
                    
@@ -225,12 +259,14 @@ public class BattleManager : MonoBehaviour
         foreach (var VARIABLE in activeSlot)
         {
             float _delay = VARIABLE.CardSkill();
+            if (!isBattle) yield break;
             yield return new WaitForSeconds(_delay);
         }
 
         yield return new WaitForSeconds(0.6f);
         
         yield return new WaitForSeconds(Player.MyTurnEnd());
+        if (!isBattle) yield break;
 
         activeSlot.Clear();
         TurnEnd("Enemy");
@@ -241,5 +277,17 @@ public class BattleManager : MonoBehaviour
         cardPickUpCountText.text = $"{currentCardPickUpCount}/{cardPickUpCount}";
 
         cardPickUpCountGageBar.fillAmount = (float)currentCardPickUpCount / cardPickUpCount;
+    }
+
+    public void EndBattle()
+    {
+        IsPlayerTurn = false;
+        isBattle = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+            Enemy.Hit(1000);
     }
 }
