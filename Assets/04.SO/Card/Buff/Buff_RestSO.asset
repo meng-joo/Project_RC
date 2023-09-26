@@ -36,4 +36,4 @@ MonoBehaviour:
   cardIconImage: {fileID: 21300000, guid: 14713c4133a327f4783ae2b502c463d0, type: 3}
   effect: 17
   effectPosition: {x: -6, y: 0.5}
-  randomWeight: 0
+  randomWeight: 3

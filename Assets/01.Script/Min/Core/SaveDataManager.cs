@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SaveDataManager : MonoSingleTon<SaveDataManager>
 {
+
+
     //private PlayerData _playerData;
     //public PlayerData PlayerData => _playerData;
 

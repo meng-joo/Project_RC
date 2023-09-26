@@ -54,8 +54,8 @@ public class MapPlayerTracker : MonoSingleTon<MapPlayerTracker>
             case MapType.Battle:
                 Debug.Log("배틀맵");
 
-                FindObjectOfType<BattleManager>().StartBattle();
-                MapUIManager.Instance.OnBattle();
+                //FindObjectOfType<BattleManager>().StartBattle();
+                //MapUIManager.Instance.OnBattle();
                 break;
             case MapType.Event:
                 Debug.Log("이벤트맵");

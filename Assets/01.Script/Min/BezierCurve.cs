@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BezierCurve : MonoBehaviour
 {
-    public Transform startPoint, middlePoint, endPoint;
+    public Vector2 startVec;
+    public Vector2 middleVec;
+    public Vector2 endVec;
+
+    public Transform startPoint;
+        public Transform middlePoint, endPoint;
     public LineRenderer lineRenderer;
 
 
@@ -13,20 +19,46 @@ public class BezierCurve : MonoBehaviour
     {
         lineRenderer = GetComponent<LineRenderer>(); 
     }
-
-    void DrawBezierCurve()
+    public void SetTrms(Vector2 start, Vector2 middle, Vector2 end)
     {
-        lineRenderer.positionCount = 20; // 선의 해상도를 설정합니다.
-
-        for (int i = 0; i < lineRenderer.positionCount; i++)
-        {
-            float t = i / (float)(lineRenderer.positionCount - 1);
-            Vector3 pointOnCurve = CalculateBezierPoint(t, startPoint.position, middlePoint.position, endPoint.position);
-
-            lineRenderer.SetPosition(i, pointOnCurve);
-        }
+        startVec = start;
+        middleVec = middle;
+        endVec = end;
     }
-        Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
+
+    public void GetMiddlePoint(Vector2 start, Vector2 end)
+    {
+        Vector2 valueVec;
+
+        Vector2 vec = new Vector2(start.x / end.x, start.y / end.y);
+        valueVec = vec;
+        middleVec = valueVec;
+       SetTrms(start, middleVec, end);
+    }
+
+    public void DrawBezierCurve(int index)
+    {
+        //lineRenderer.positionCount = 20; // 선의 해상도를 설정합니다.
+        //lineRenderer.startWidth = 0.f;
+        //lineRenderer.endWidth = 0.1f;
+
+        lineRenderer.positionCount += 3; 
+
+        lineRenderer.SetPosition(index, startVec);
+        lineRenderer.SetPosition(index+1, endVec);
+        lineRenderer.SetPosition(index + 2, startVec);
+
+
+        //for (int i = 0; i < lineRenderer.positionCount; i++)
+        //{
+        //    float t = i / (float)(lineRenderer.positionCount - 1);
+        //    Vector3 pointOnCurve = CalculateBezierPoint(t, startVec, middleVec, endVec);
+
+        //    lineRenderer.SetPosition(i, pointOnCurve);
+        //    Debug.Log("Sdds");
+        //}
+    }
+    Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
     {
         float u = 1 - t;
         float tt = t * t;

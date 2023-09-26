@@ -46,7 +46,7 @@ public class MapGenerator : MonoSingleTon<MapGenerator>
         SetBossNode();
     }
 
-    public void CreateNode() ///����
+    public void CreateNode()
     {
         for (int i = 0; i < mapSettingSO.garoCnt; i++)
         {
@@ -124,9 +124,6 @@ public class MapGenerator : MonoSingleTon<MapGenerator>
 
         int randomIdx = Random.Range(0, bossIndexList.Count);
 
-        Debug.Log("����������ġ" + randomIdx);
-
-        //mapGridNodeList[bossIndexList[randomIdx]].gameObject.SetActive(true);
         mapGridNodeList[bossIndexList[randomIdx]].isVisible = true;
         mapGridNodeList[bossIndexList[randomIdx]].SetGridActive();
 

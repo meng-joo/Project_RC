@@ -9326,6 +9326,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeathBringer
       objectReference: {fileID: 0}
+    - target: {fileID: 2424314654476667621, guid: 25726830781387d4b928e691986922cf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4141441995400361791, guid: 25726830781387d4b928e691986922cf, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -9852,7 +9856,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 50
     m_Right: 0
-    m_Top: 250
+    m_Top: 400
     m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 50
