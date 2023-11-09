@@ -17,6 +17,7 @@ public class MapPlayerTracker : MonoSingleTon<MapPlayerTracker>
 
         if (node.nodeStates == NodeStates.Attainable)
         {
+            Debug.Log("눌렀어어ㅓ어");
             SendPlayerToNode(node);
         }
         else

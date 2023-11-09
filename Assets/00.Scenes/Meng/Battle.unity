@@ -5294,6 +5294,7 @@ MonoBehaviour:
   player: {fileID: 0}
   enemy: {fileID: 0}
   isPlayerTurn: 0
+  isBattle: 0
   deckUI: {fileID: 1076940953}
   cardPickUpCountText: {fileID: 158883979}
   cardPickUpCountGageBar: {fileID: 96744344}

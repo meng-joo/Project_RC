@@ -34,6 +34,7 @@ MonoBehaviour:
     cardExp: "\uC989\uC0AC\uC2DC\uD0B5\uB2C8\uB2E4. \uCE74\uB4DC\uAC00 \uC18C\uBAA8\uAC00
       \uB429\uB2C8\uB2E4."
   cardIconImage: {fileID: 21300000, guid: 1015512b5bcd9ff4ab9f21a2235164e4, type: 3}
-  effect: 18
+  effect: 38
   effectPosition: {x: 6, y: 1.1}
   randomWeight: 1
+  cost: 1

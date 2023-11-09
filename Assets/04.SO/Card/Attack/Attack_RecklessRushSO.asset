@@ -37,6 +37,7 @@ MonoBehaviour:
       \uC801\uC5D0\uAC8C 30\uC758 \uD53C\uD574\uB97C \uC785\uD788\uACE0 10\uC758
       \uC0C1\uCC98\uB97C \uC5BB\uC2B5\uB2C8\uB2E4. \uCE74\uB4DC\uAC00 \uC18C\uBAA8\uB429\uB2C8\uB2E4."
   cardIconImage: {fileID: 21300000, guid: 28833eb632d77bd4c949d16fb767a02d, type: 3}
-  effect: 17
+  effect: 38
   effectPosition: {x: 6, y: 1.1}
   randomWeight: 3
+  cost: 1

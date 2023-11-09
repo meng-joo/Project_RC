@@ -16,7 +16,9 @@ public class Debuff_Poison : ABBuff
     public override float TurnStart()
     {
         float _time = unit.Hit(Count, true);
-        
+
+        PoolManager.Pop(PoolType.Effect_Poison).transform.position = unit.transform.position + new Vector3(0, 0.3f, 0);
+
         return _time;
     }
 

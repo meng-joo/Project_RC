@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
@@ -87,6 +88,7 @@ public class BattleManager : MonoBehaviour
         CurrentActiveSlotCount = activeSlotCount;
         IsPlayerTurn = false;
         isBattle = true;
+        Enemy.Heal(1000);
 
         _seq.AppendCallback(() =>
         {
@@ -175,12 +177,12 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(Enemy.MyTurnStart());
         if (!isBattle) yield break;
 
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(1.3f);
         
         yield return new WaitForSeconds(Enemy.Skill());
         if (!isBattle) yield break;
         
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(1.2f);
         
         yield return new WaitForSeconds(Enemy.MyTurnEnd());
         if (!isBattle) yield break;
@@ -259,8 +261,8 @@ public class BattleManager : MonoBehaviour
         foreach (var VARIABLE in activeSlot)
         {
             float _delay = VARIABLE.CardSkill();
-            if (!isBattle) yield break;
             yield return new WaitForSeconds(_delay);
+            if (!isBattle) yield break;
         }
 
         yield return new WaitForSeconds(0.6f);
@@ -283,6 +285,17 @@ public class BattleManager : MonoBehaviour
     {
         IsPlayerTurn = false;
         isBattle = false;
+
+        Player.RemoveAllBuff();
+        Enemy.RemoveAllBuff();
+
+        Player.ShieldCount = 0;
+        Enemy.ShieldCount = 0;
+
+        for (int i = 0; i < arrange.Children.Count; i++)
+        {
+            arrange.Children[i].GetComponentInChildren<BattleCardBase>().DiscardCard(arrange.Children[i].gameObject);
+        }
     }
 
     private void Update()

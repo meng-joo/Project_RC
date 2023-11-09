@@ -241,9 +241,10 @@ public abstract class Unit : MonoBehaviour
         
         _damage += HitEffect(_damage);
 
+        int _originDamage = _damage;
+        
         _damage -= ShieldCount;
-        if (_damage >= 0)
-            ShieldCount -= _damage;
+        ShieldCount -= _originDamage;
 
         return _damage < 0 ? 0 : _damage;
     }
@@ -272,6 +273,16 @@ public abstract class Unit : MonoBehaviour
 
         buffUIUpdate.RemoveBuffUI(_bufType);
         BuffEffect.Remove(_bufType);
+    }
+
+    public void RemoveAllBuff()
+    {
+        foreach (var variable in BuffEffect)
+        {
+            buffUIUpdate.RemoveBuffUI(variable.Key);
+        }
+
+        BuffEffect.Clear();
     }
 
     private void HitFeedback(int _damage)
